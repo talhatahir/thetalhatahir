@@ -1,12 +1,12 @@
-import Link from "@/components/Link";
-import PageTitle from "@/components/PageTitle";
-import SectionContainer from "@/components/SectionContainer";
-import { BlogSEO } from "@/components/SEO";
-import Image from "@/components/Image";
-import Tag from "@/components/Tag";
-import siteMetadata from "@/data/siteMetadata";
-import Comments from "@/components/comments";
-import ScrollTopAndComment from "@/components/ScrollTopAndComment";
+import Link from '@/components/Link';
+import PageTitle from '@/components/PageTitle';
+import SectionContainer from '@/components/SectionContainer';
+import { BlogSEO } from '@/components/SEO';
+import Image from '@/components/Image';
+import Tag from '@/components/Tag';
+import siteMetadata from '@/data/siteMetadata';
+import Comments from '@/components/comments';
+import ScrollTopAndComment from '@/components/ScrollTopAndComment';
 
 const editUrl = (fileName) =>
   `${siteMetadata.siteRepo}/blob/master/data/blog/${fileName}`;
@@ -16,10 +16,10 @@ const discussUrl = (slug) =>
   )}`;
 
 const postDateTemplate = {
-  weekday: "long",
-  year: "numeric",
-  month: "long",
-  day: "numeric",
+  weekday: 'long',
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
 };
 
 export default function PostLayout({
@@ -63,7 +63,7 @@ export default function PostLayout({
           </header>
           <div
             className="divide-y divide-gray-200 pb-8 dark:divide-gray-700 xl:grid xl:grid-cols-4 xl:gap-x-6 xl:divide-y-0"
-            style={{ gridTemplateRows: "auto 1fr" }}
+            style={{ gridTemplateRows: 'auto 1fr' }}
           >
             <dl className="pt-6 pb-10 xl:border-b xl:border-gray-200 xl:pt-11 xl:dark:border-gray-700">
               <dt className="sr-only">Authors</dt>
@@ -96,8 +96,8 @@ export default function PostLayout({
                               className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
                             >
                               {author.twitter.replace(
-                                "https://twitter.com/",
-                                "@"
+                                'https://twitter.com/',
+                                '@'
                               )}
                             </Link>
                           )}
@@ -114,10 +114,10 @@ export default function PostLayout({
               </div>
               <div className="pt-6 pb-6 text-sm text-gray-700 dark:text-gray-300">
                 <Link href={discussUrl(slug)} rel="nofollow">
-                  {"Discuss on Twitter"}
+                  {'Discuss on Twitter'}
                 </Link>
                 {` • `}
-                <Link href={editUrl(fileName)}>{"View on GitHub"}</Link>
+                <Link href={editUrl(fileName)}>{'View on GitHub'}</Link>
               </div>
               <Comments frontMatter={frontMatter} />
             </div>
