@@ -1,16 +1,17 @@
 ---
-name: Tails Azimuth
+name: Talha Tahir
 avatar: /static/images/avatar.png
-occupation: Professor of Atmospheric Science
-company: Stanford University
-email: address@yoursite.com
-twitter: https://twitter.com/Twitter
-linkedin: https://www.linkedin.com
-github: https://github.com
+occupation: Software Engineer
+email: talhatahir4050@gmail.com
+twitter: https://twitter.com/thetalhatahir
+linkedin: https://www.linkedin.com/in/talha-tahir-8a514975/
+github: https://github.com/talhatahir
 ---
 
-Tails Azimuth is a professor of atmospheric sciences at the Stanford AI Lab. His research interests includes complexity modelling of tailwinds, headwinds and crosswinds.
+Talha Tahir is an accomplished Engineer with a deep passion for software development. With a wealth of experience spanning over a decade in the software industry, Talha has cultivated a strong appreciation for constructing innovative products.
 
-He leads the clean energy group which develops 3D air pollution-climate models, writes differential equation solvers, and manufactures titanium plated air ballons. In his free time he bakes raspberry pi.
+He has had the privilege of collaborating with diverse startups. From early-stage ventures securing Series A funding to well-established companies backed by Series D funding of 500 million USD, he has witnessed firsthand the evolution and maturation of products.
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed neque elit, tristique placerat feugiat ac, facilisis vitae arcu. Proin eget egestas augue. Praesent ut sem nec arcu pellentesque aliquet. Duis dapibus diam vel metus tempus vulputate.
+Outside of work, Talha indulges in a variety of hobbies and interests. A passionate chess enthusiast, playing or spectating games on chess.com. When it comes to sports, tennis takes center stage, eagerly following the legendary player Roger Federer, widely regarded as the original Greatest of All Time (GOAT).
+
+He finds solace and joy in nature. Exploring mountains is a cherished pastime, where he can immerse himself in the serene beauty of the natural world. Physical fitness is also important, so hitting the gym is also a good time pass.

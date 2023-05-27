@@ -12,7 +12,7 @@ const siteMetadata = {
   socialBanner: '/static/images/twitter-card.png',
   email: 'talhatahir4050@gmail.com',
   github: 'https://github.com/talhatahir',
-  twitter: 'https://twitter.com/Twitter',
+  twitter: 'https://twitter.com/thetalhatahir',
   linkedin: 'https://www.linkedin.com/in/talha-tahir-8a514975',
   locale: 'en-US',
   analytics: {
