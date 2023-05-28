@@ -50,7 +50,10 @@ export default function Home({ posts }) {
                 ⏳ Esbuild
               </span>
               <span className="mr-3 inline-block whitespace-nowrap pt-3">
-                🔥 HTML
+                🧊 HTML
+              </span>
+              <span className="mr-3 inline-block whitespace-nowrap pt-3">
+                🍡 CSS
               </span>
               <span className="mr-3 inline-block whitespace-nowrap pt-3">
                 🕰️ Git
@@ -71,7 +74,7 @@ export default function Home({ posts }) {
                 🎢 Redux
               </span>
               <span className="mr-3 inline-block whitespace-nowrap pt-3">
-                📃 MySQL
+                🍤 Zustand
               </span>
               <span className="mr-3 inline-block whitespace-nowrap pt-3">
                 🍽️ APIs
