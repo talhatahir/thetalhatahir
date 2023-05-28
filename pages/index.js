@@ -24,10 +24,64 @@ export default function Home({ posts }) {
       />
       <div className="divide-y divide-gray-200 dark:divide-gray-700">
         <div className="space-y-2 pt-6 pb-8 md:space-y-5">
-          <h1 className="text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">
-            Latest
+          <h1 className="text-2xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-5xl md:leading-14">
+            I'm{' '}
+            <span className="dark:from-secondary-700 dark:to-secondary-400 mt-10 bg-gradient-to-r from-primary-700 to-primary-400 bg-clip-text text-center text-4xl font-extrabold tracking-tight text-transparent sm:text-5xl lg:text-6xl">
+              Talha Tahir
+            </span>{' '}
+            👋
           </h1>
-          <p className="text-lg leading-7 text-gray-500 dark:text-gray-400">
+          <div className="dark:text-grey text-gray mb-8  mt-4 text-base">
+            <p>A passionate Engineer at heart who likes to build products.</p>
+            <p className="dark:text-grey text-gray mb-8   mt-4 text-sm">
+              <span className="mr-3 inline-block whitespace-nowrap pt-3">
+                ❤️ React.js
+              </span>
+              <span className="mr-3 inline-block whitespace-nowrap pt-3">
+                🛠️ Javascript
+              </span>
+              <span className="mr-3 inline-block whitespace-nowrap pt-3">
+                📦 NodeJS
+              </span>
+              <span className="mr-3 inline-block whitespace-nowrap pt-3">
+                🧱 Material UI
+              </span>
+              <span className="mr-3 inline-block whitespace-nowrap pt-3">
+                ⏳ Esbuild
+              </span>
+              <span className="mr-3 inline-block whitespace-nowrap pt-3">
+                🔥 HTML
+              </span>
+              <span className="mr-3 inline-block whitespace-nowrap pt-3">
+                🕰️ Git
+              </span>
+              <span className="mr-3 inline-block whitespace-nowrap pt-3">
+                🚃 Npm
+              </span>
+              <span className="mr-3 inline-block whitespace-nowrap pt-3">
+                🧶 Yarn
+              </span>
+              <span className="mr-3 inline-block whitespace-nowrap pt-3">
+                📜 MongoDB
+              </span>
+              <span className="mr-3 inline-block whitespace-nowrap pt-3">
+                📃 MySQL
+              </span>
+              <span className="mr-3 inline-block whitespace-nowrap pt-3">
+                🎢 Redux
+              </span>
+              <span className="mr-3 inline-block whitespace-nowrap pt-3">
+                📃 MySQL
+              </span>
+              <span className="mr-3 inline-block whitespace-nowrap pt-3">
+                🍽️ APIs
+              </span>
+              <span className="mr-3 inline-block whitespace-nowrap pt-3">
+                ❤️‍🩹 AngularJS
+              </span>
+            </p>
+          </div>
+          <p className="text-lg leading-7 text-gray-500 dark:text-white">
             {siteMetadata.description}
           </p>
         </div>
