@@ -11,7 +11,7 @@ images: ['/static/images/git.jpg']
 
 Version control is one of the basic arsenal found in the toolset of a programmer. Git is one of the most _popular_ version control systems. GitHub being the hub of all repositories including Google, Apple, Facebook.
 
-Its an essential skill which every programmer has to learn, but one should go a step ahead. Why not exceed in writing these daily commands?
+Its an essential skill which every programmer has to learn, but one should go a step ahead, Why not exceed in writing these daily commands?
 
 Be honest, how many times a day you have to do this?
 
