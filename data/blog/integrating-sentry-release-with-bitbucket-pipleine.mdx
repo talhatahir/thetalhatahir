@@ -94,7 +94,7 @@ SENTRY_FRONTEND_PROJECT = your - sentry - project - name;
 SENTRY_BACKEND_PROJECT = your - sentry - project - name;
 ```
 
-**Note:** If you have a single Project in Sentry to which you want to send errors then simply add SENTRY_PROJECT . I am using two Sentry projects, one to log backend/API errors and the other to log Frontend/React Errors.\*
+**Note:** If you have a single Project in Sentry to which you want to send errors then simply add SENTRY_PROJECT . I am using two Sentry projects, one to log backend/API errors and the other to log Frontend/React Errors.
 
 ## 4. Add Sentry-cli commands to your Bitbucket Pipeline.
 
@@ -107,9 +107,11 @@ In your pipeline, add the below step, which should be the first step in your pip
       script:
        - sentry-cli releases -o "${SENTRY_ORG}" new -p "${SENTRY_BACKEND_PROJECT}" -p "${SENTRY_FRONTEND_PROJECT}" "${BITBUCKET_BUILD_NUMBER}"
        - sentry-cli releases -o "${SENTRY_ORG}" set-commits --auto "${BITBUCKET_BUILD_NUMBER}"
+```
 
-Now the next step is to pass the auto-generated BITBUCKET*BUILD_NUMBER to your React build compile command. In this way you are able to provide the bitbucket build number to your \_Sentry.init* function.
+Now the next step is to pass the auto-generated BITBUCKET _BUILD_NUMBER_ to your React build compile command. In this way you are able to provide the bitbucket build number to your _Sentry.init_ function.
 
+```js
     - step:
     name: Build React
     image: node:10.16.3
@@ -119,9 +121,11 @@ Now the next step is to pass the auto-generated BITBUCKET*BUILD_NUMBER to your R
        - cd frontend/
        - yarn install
        - REACT_APP_BITBUCKET_BUILD_NUMBER=${BITBUCKET_BUILD_NUMBER} yarn build
+```
 
 Now we need to finalize the Sentry Release by adding this step to the last section of our pipeline script.
 
+```js
     - step:
     name: Finalize and Deploy Sentry Release
     image: getsentry/sentry-cli
@@ -132,7 +136,7 @@ Now we need to finalize the Sentry Release by adding this step to the last secti
 
 _and thats it!_
 
-**Note:** \_argument\_ is used to define the environment : production, staging, development.
+**Note:** <code>argument</code> is used to define the environment : production, staging, development.
 
 Viewing releases in Sentry:
 
