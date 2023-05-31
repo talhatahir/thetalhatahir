@@ -7,7 +7,7 @@ import formatDate from '@/lib/utils/formatDate';
 
 import NewsletterForm from '@/components/NewsletterForm';
 
-const MAX_DISPLAY = 5;
+const MAX_DISPLAY = 7;
 
 export async function getStaticProps() {
   const posts = await getAllFilesFrontMatter('blog');
@@ -93,7 +93,7 @@ export default function Home({ posts }) {
           {posts.slice(0, MAX_DISPLAY).map((frontMatter) => {
             const { slug, date, title, summary, tags } = frontMatter;
             return (
-              <li key={slug} className="py-12">
+              <li key={slug} className="py-4">
                 <article>
                   <div className="space-y-2 xl:grid xl:grid-cols-4 xl:items-baseline xl:space-y-0">
                     <dl>
@@ -102,8 +102,8 @@ export default function Home({ posts }) {
                         <time dateTime={date}>{formatDate(date)}</time>
                       </dd>
                     </dl>
-                    <div className="space-y-5 xl:col-span-3">
-                      <div className="space-y-6">
+                    <div className="space-y-4 xl:col-span-3">
+                      <div className="space-y-4">
                         <div>
                           <h2 className="text-2xl font-bold leading-8 tracking-tight">
                             <Link
@@ -113,7 +113,7 @@ export default function Home({ posts }) {
                               {title}
                             </Link>
                           </h2>
-                          <div className="flex flex-wrap">
+                          <div className="flex  flex-wrap pt-2">
                             {tags.map((tag) => (
                               <Tag key={tag} text={tag} />
                             ))}
