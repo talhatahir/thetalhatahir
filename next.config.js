@@ -12,6 +12,7 @@ const ContentSecurityPolicy = `
   connect-src *;
   font-src 'self';
   frame-src https://disqus.com;
+  fetch-src 'self' 'no-cors';
 `;
 
 const securityHeaders = [
@@ -49,10 +50,6 @@ const securityHeaders = [
   {
     key: 'Permissions-Policy',
     value: 'camera=(), microphone=(), geolocation=()',
-  },
-  {
-    key: 'Sec-Fetch-Mode',
-    value: 'no-cors',
   },
 ];
 
