@@ -16,6 +16,7 @@ const ContentSecurityPolicy = `
 
 const securityHeaders = [
   // https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP
+  { key: 'Access-Control-Allow-Origin', value: '*' },
   {
     key: 'Content-Security-Policy',
     value: ContentSecurityPolicy.replace(/\n/g, ''),
