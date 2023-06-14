@@ -11,8 +11,7 @@ const ContentSecurityPolicy = `
   media-src 'none';
   connect-src *;
   font-src 'self';
-  frame-src https://www-thetalhatahir-com.disqus.com;
-  fetch-src 'self' 'no-cors';
+  frame-src 'self' 'unsafe-eval' 'unsafe-inline' https://disqus.com https://c.disquscdn.com https://www-thetalhatahir-com.disqus.com;
 `;
 
 const securityHeaders = [
