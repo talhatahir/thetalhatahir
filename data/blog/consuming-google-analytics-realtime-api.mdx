@@ -1,0 +1,76 @@
+---
+title: 'Consuming Google Analytics Realtime API'
+date: '2017-07-10'
+tags: ['analytics', 'tech', 'programming']
+summary: 'Consuming Google Analytics Realtime API to show live data in PHP'
+images:
+  [
+    'https://images.unsplash.com/photo-1573804633927-bfcbcd909acd?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80',
+  ]
+---
+
+![Google](https://images.unsplash.com/photo-1573804633927-bfcbcd909acd?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80)
+
+The Google Analytics Dashboard contains a RealTime Analytics module, which is used to monitor real-time traffic on your website. The RealTime Analytics tool is highly useful for administrators, as it provides real-time insights, including:
+
+- The number of currently active users on your site in real-time.
+- The specific page each user is on.
+- The geographic location of each user.
+- The reference source from which users landed on your site.
+
+(Note: Google tracks a real-time session for up to 5 minutes, so the data shown is accurate to the nearest 5 minutes.)
+
+To access this data, Google launched the Realtime Reporting API, allowing users to utilize the exact data shown in the Google Analytics Realtime dashboard. For detailed information, you can refer to the
+[Overview | Analytics Real Time Reporting API | Google Developers page](https://developers.google.com/analytics/devguides/reporting/realtime/v3/)
+
+### How to Consume the API
+
+Utilizing this API can be a bit tricky, but after several attempts, I have concluded the following steps to retrieve data from the RealTime Reporting API:
+
+#### 1: Create a Google Analytics account for your website.
+
+Setting up a Google Analytics account is a fairly simple process. Once you have set it up, you will start seeing traffic data and real-time data for your site.
+
+#### 2: Register your application in the Google API console.
+
+Once your dashboard is set, you need to go to the [Google API Console](https://console.cloud.google.com/apis/dashboard). In the API Manager, click on "Create Project." Enter your site name as the project name.
+
+#### 3: Enable the Google RealTime API.
+
+Enable the Google Realtime API, and in some cases, it might ask you to enable other APIs as well.
+
+#### 4: Create a service account key.
+
+This allows for server-to-server app-level authentication, which is verified using the key. It enables us to access the Realtime API and receive data if we have the authentic keys. Click on "Create Credentials" > "Service Account Key" > "JSON" > "Create." The JSON file containing the keys will be downloaded to your desktop. Keep this file in a safe place as it grants access to Realtime Reporting data.
+
+#### 5: Implement the PHP Client library.
+
+You need to implement the PHP client library for using Google Analytics.
+
+Link -> [PHP Client Library] (https://github.com/googleapis/google-api-php-client)
+
+#### 6: Obtain your View ID from Google Analytics.
+
+Go to "Admin Settings" > "View Settings" > "View ID." This View ID will be used by the API calls to retrieve real-time data for your site.
+
+#### 7: Run your code
+
+Congratulations, you have completed the integration part. Now, check if you are receiving data via API.
+
+Go to [Real Time Data: get | Analytics Real Time Reporting API | Google Developers](https://developers.google.com/analytics/devguides/reporting/realtime/v3/reference/data/realtime/get#examples) and use the PHP example to call the API and see what it returns.
+
+```php
+$optParams = array('dimensions' => 'rt:medium');
+try {
+    $results = $analytics->data_realtime->get('ga:56789', 'rt:activeUsers', $optParams);
+    echo $results;
+    // Success.
+} catch (apiServiceException $e) {
+    // Handle API service exceptions.
+    $error = $e->getMessage();
+}
+```
+
+#### 8: Using Realtime API for complex reporting
+
+For complex reporting, you can create your own functions and call them. For a reference of all the features available using the API, you can use the link provided in the documentation.

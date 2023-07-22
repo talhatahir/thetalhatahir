@@ -1,7 +1,7 @@
 ---
 title: Git on steroids
 date: '2023-05-29'
-tags: ['git', 'programming']
+tags: ['git', 'programming', 'tech']
 draft: false
 summary: Super power your git competency by using git alias for your daily git commands
 images: ['/static/images/git.jpg']
