@@ -15,3 +15,5 @@ I have had the privilege of collaborating with diverse startups. From early-stag
 Outside of work, I indulge in a variety of hobbies and interests. I am a passionate chess enthusiast, playing or spectating games on chess.com. When it comes to sports, tennis takes center stage, i eagerly follow the legendary player Roger Federer, widely regarded as the original Greatest of All Time (GOAT).
 
 I find solace and joy in nature. Exploring mountains is a cherished pastime, where I can immerse myself in the serene beauty of the natural world. Physical fitness is also important, so hitting the gym is also a good time pass for me.
+
+I do pro bono consulting for Software Projects, [you reach out to me](https://forms.gle/uoanBhUu2ubAkJyv5)

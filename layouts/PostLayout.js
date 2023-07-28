@@ -110,11 +110,25 @@ export default function PostLayout({
               <div className="prose max-w-none pt-10 pb-8 dark:prose-dark">
                 {children}
               </div>
-              <div className="pt-6 pb-6 text-sm text-gray-700 dark:text-gray-300">
-                <Link href={discussUrl(slug)} rel="nofollow">
-                  {'Discuss on Twitter'}
-                </Link>
+              <div className="pt-2 pb-4 text-sm text-gray-700 dark:text-gray-300">
+                <div className="pt-2">
+                  <Link
+                    href="https://forms.gle/iQYfDF6KZLzCGdaa7"
+                    rel="nofollow"
+                  >
+                    {'Provide feedback for this article'}
+                  </Link>
+                </div>
+                <div className="pt-2">
+                  <Link
+                    href="https://forms.gle/uoanBhUu2ubAkJyv5"
+                    rel="nofollow"
+                  >
+                    {'Consult me for free'}
+                  </Link>
+                </div>
               </div>
+
               <Comments frontMatter={frontMatter} />
             </div>
             <footer>
