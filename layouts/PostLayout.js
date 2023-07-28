@@ -115,16 +115,18 @@ export default function PostLayout({
                   <Link
                     href="https://forms.gle/iQYfDF6KZLzCGdaa7"
                     rel="nofollow"
+                    className="mr-3 text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
                   >
-                    {'Provide feedback for this article'}
+                    {'📜 Provide feedback for this article'}
                   </Link>
                 </div>
                 <div className="pt-2">
                   <Link
                     href="https://forms.gle/uoanBhUu2ubAkJyv5"
                     rel="nofollow"
+                    className="mr-3 text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
                   >
-                    {'Consult me for free'}
+                    {'🛠️ Consult me for free'}
                   </Link>
                 </div>
               </div>

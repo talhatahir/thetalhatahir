@@ -32,7 +32,7 @@ export default function Home({ posts }) {
             👋
           </h1>
           <div className="dark:text-grey text-gray mb-8  mt-4 text-base">
-            <p>A passionate Engineer at heart who likes to build products.</p>
+            <p>A passionate Engineer who likes to build products.</p>
             <p className="dark:text-grey text-gray mb-8   mt-4 text-sm">
               <span className="mr-3 inline-block whitespace-nowrap pt-3">
                 ❤️ React.js
