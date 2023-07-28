@@ -16,4 +16,4 @@ Outside of work, I indulge in a variety of hobbies and interests. I am a passion
 
 I find solace and joy in nature. Exploring mountains is a cherished pastime, where I can immerse myself in the serene beauty of the natural world. Physical fitness is also important, so hitting the gym is also a good time pass for me.
 
-I do pro bono consulting for Software Projects, [you reach out to me](https://forms.gle/uoanBhUu2ubAkJyv5)
+I do pro bono consulting for Software Projects, [you can reach out to me](https://forms.gle/uoanBhUu2ubAkJyv5)
