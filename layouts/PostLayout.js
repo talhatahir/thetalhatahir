@@ -6,6 +6,7 @@ import Image from '@/components/Image';
 import Tag from '@/components/Tag';
 import siteMetadata from '@/data/siteMetadata';
 import Comments from '@/components/comments';
+import SocialIcon from '@/components/social-icons';
 import ScrollTopAndComment from '@/components/ScrollTopAndComment';
 
 const discussUrl = (slug) =>
@@ -86,17 +87,25 @@ export default function PostLayout({
                         <dd className="text-gray-900 dark:text-gray-100">
                           {author.name}
                         </dd>
-                        <dt className="sr-only">Twitter</dt>
+                        <dt className="sr-only">LinkedIn</dt>
                         <dd>
-                          {author.twitter && (
+                          {author.linkedin && (
                             <Link
-                              href={author.twitter}
-                              className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
+                              href={author.linkedin}
+                              className="flex items-center pt-2 text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
                             >
-                              {author.twitter.replace(
-                                'https://twitter.com/',
-                                '@'
-                              )}
+                              <SocialIcon
+                                kind="linkedin"
+                                href={siteMetadata.linkedin}
+                                size="6"
+                              />
+                              <span className="ml-2">
+                                {' '}
+                                {author.linkedin.replace(
+                                  'https://www.linkedin.com/in/',
+                                  '@'
+                                )}
+                              </span>
                             </Link>
                           )}
                         </dd>

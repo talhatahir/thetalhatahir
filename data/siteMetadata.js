@@ -12,7 +12,7 @@ const siteMetadata = {
   email: 'talhatahir4050@gmail.com',
   github: 'https://github.com/talhatahir',
   twitter: 'https://twitter.com/thetalhatahir',
-  linkedin: 'https://www.linkedin.com/in/talha-tahir-8a514975',
+  linkedin: 'https://www.linkedin.com/in/thetalhatahir',
   locale: 'en-US',
   analytics: {
     // If you want to use an analytics provider you have to add it to the

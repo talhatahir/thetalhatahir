@@ -4,7 +4,7 @@ avatar: /static/images/avatar.png
 occupation: Software Engineer
 email: talhatahir4050@gmail.com
 twitter: https://twitter.com/thetalhatahir
-linkedin: https://www.linkedin.com/in/talha-tahir-8a514975/
+linkedin: https://www.linkedin.com/in/thetalhatahir
 github: https://github.com/talhatahir
 ---
 
