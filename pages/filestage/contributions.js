@@ -6,7 +6,7 @@ export default function Contributions() {
   return (
     <>
       <PageSEO
-        title={`Github Contributions to Filestage repo - ${siteMetadata.author}`}
+        title={`Github Contributions to Filestage repo - ${siteMetadata.authorLong}`}
         description={siteMetadata.description}
       />
       <div className="flex flex-col items-start justify-start md:mt-24 md:flex-col md:items-center md:justify-center md:space-x-6">

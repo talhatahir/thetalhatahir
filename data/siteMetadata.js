@@ -1,8 +1,12 @@
 const siteMetadata = {
   title: 'Talha Tahir',
   author: 'Talha Tahir',
+  authorLong:
+    'Talha Tahir - An experienced Full Stack Engineer working remotely',
   headerTitle: 'Talha Tahir',
   description: 'My chatter about life and the tech realm',
+  descriptionLong:
+    'My chatter about working remotely as an Engineer in ReactJS, NextJS, NodeJS, Javascript, AngularJS, Material UI, Webpack, MongoDB, MySQL',
   language: 'en-us',
   theme: 'system', // system, dark or light
   siteUrl: 'https://www.thetalhatahir.com',
@@ -27,7 +31,7 @@ const siteMetadata = {
   newsletter: {
     // supports mailchimp, buttondown, convertkit, klaviyo, revue, emailoctopus
     // Please add your .env file and modify it according to your selection
-    provider: '',
+    provider: 'mailchimp',
   },
   comment: {
     // If you want to use a commenting system other than giscus you have to add it to the

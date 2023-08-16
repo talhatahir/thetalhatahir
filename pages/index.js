@@ -19,8 +19,8 @@ export default function Home({ posts }) {
   return (
     <>
       <PageSEO
-        title={siteMetadata.title}
-        description={siteMetadata.description}
+        title={siteMetadata.titleLong}
+        description={siteMetadata.descriptionLong}
       />
       <div className="divide-y divide-gray-200 dark:divide-gray-700">
         <div className="space-y-2 pt-6 pb-8 md:space-y-5">
@@ -149,11 +149,6 @@ export default function Home({ posts }) {
           >
             All Posts &rarr;
           </Link>
-        </div>
-      )}
-      {siteMetadata.newsletter.provider !== '' && (
-        <div className="flex items-center justify-center pt-4">
-          <NewsletterForm />
         </div>
       )}
     </>
