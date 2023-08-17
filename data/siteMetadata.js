@@ -5,6 +5,8 @@ const siteMetadata = {
     'Talha Tahir - An experienced Full Stack Engineer working remotely',
   headerTitle: 'Talha Tahir',
   description: 'My chatter about life and the tech realm',
+  skills:
+    'ReactJS, NextJS, NodeJS, Javascript, AngularJS, Material UI, Webpack, MongoDB, MySQL',
   descriptionLong:
     'My chatter about working remotely as an Engineer in ReactJS, NextJS, NodeJS, Javascript, AngularJS, Material UI, Webpack, MongoDB, MySQL',
   language: 'en-us',

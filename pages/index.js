@@ -20,7 +20,7 @@ export default function Home({ posts }) {
     <>
       <PageSEO
         title={siteMetadata.title}
-        description={siteMetadata.descriptionLong}
+        description={`${siteMetadata.title} - ${siteMetadata.skills}`}
       />
       <div className="divide-y divide-gray-200 dark:divide-gray-700">
         <div className="space-y-2 pt-6 pb-8 md:space-y-5">
