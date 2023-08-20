@@ -3,7 +3,7 @@ title: Git on steroids
 date: '2023-05-29'
 tags: ['git', 'programming', 'tech']
 draft: false
-summary: Super power your git competency by using git alias for your daily git commands
+summary: 'Super power your git competency by using git alias for your daily git commands which can help you do more by typing less. Increase productivity!'
 images: ['/static/images/git.jpg']
 ---
 

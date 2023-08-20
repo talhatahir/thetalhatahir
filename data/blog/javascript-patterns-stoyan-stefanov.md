@@ -3,7 +3,7 @@ title: 'Book Highlights : JavaScript patterns by Stoyan Stefanov'
 date: '2023-06-01'
 tags: ['writings', 'books']
 layout: 'PostSimple'
-summary: 'My selected highlights and thoughts on the book by Stoyan Stefanov about Javascript patterns'
+summary: 'My selected highlights and thoughts on the book by Stoyan Stefanov about Javascript patterns generated using highlightextractor.com'
 images:
   ['https://cdn.waterstones.com/bookjackets/large/9780/5968/9780596806750.jpg']
 ---
