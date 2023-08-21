@@ -3,17 +3,17 @@ title: Git on steroids
 date: '2023-05-29'
 tags: ['git', 'programming', 'tech']
 draft: false
-summary: 'Super power your git competency by using git alias for your daily git commands which can help you do more by typing less. Increase productivity!'
+summary: 'Superpower your git competency by using git alias for your daily git commands which can help you do more by typing less. Increase productivity!'
 images: ['/static/images/git.jpg']
 ---
 
 ![Hello Git!](/static/images/git.jpg)
 
-Version control is one of the basic arsenal found in the toolset of a programmer. Git is one of the most _popular_ version control systems. GitHub being the hub of all repositories including Google, Apple, Facebook.
+Version control is one of the basic arsenal found in the toolset of a programmer. Git is one of the most _popular_ version control systems. GitHub being the hub of all repositories including Google, Apple, and Facebook.
 
-Its an essential skill which every programmer has to learn, but one should go a step ahead, Why not exceed in writing these daily commands?
+It's an essential skill that every programmer has to learn, but one should go a step ahead, Why not exceed in writing these daily commands?
 
-Be honest, how many times a day you have to do this?
+Be honest, how many times a day do you have to do this?
 
 ```bash
 npm run lint --fix
@@ -49,7 +49,7 @@ There are two ways to set up aliases for Git.
 
 ### Using git config
 
-You can leverage <code>git config</code> command to setup aliases for your Git.
+You can leverage <code>git config</code> command to set up aliases for your Git.
 
 Example:
 
@@ -84,7 +84,7 @@ And to use it, simply type in the terminal:
 > gs
 ```
 
-Using these directly on the terminal allows you to even shorten non git commands, for example if your project has a lint and format command which you manually have to run all the time, or if you have some test commands which you are required to run every other hour.
+Using these directly on the terminal allows you to even shorten non-git commands, for example, if your project has a lint and format command which you manually have to run all the time, or if you have some test commands that you are required to run every other hour.
 
 ```js
 alias lint='npm run lint  --fix'

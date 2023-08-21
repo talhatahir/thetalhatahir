@@ -41,6 +41,9 @@ export default function Home({ posts }) {
                 🛠️ Javascript
               </span>
               <span className="mr-3 inline-block whitespace-nowrap pt-3">
+                🥇 Next.js
+              </span>
+              <span className="mr-3 inline-block whitespace-nowrap pt-3">
                 📦 NodeJS
               </span>
               <span className="mr-3 inline-block whitespace-nowrap pt-3">
