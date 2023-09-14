@@ -4,6 +4,7 @@ import siteMetadata from '@/data/siteMetadata';
 import { useState } from 'react';
 import Pagination from '@/components/Pagination';
 import formatDate from '@/lib/utils/formatDate';
+import Image from '@/components/Image';
 
 export default function ListLayout({
   posts,
@@ -58,7 +59,7 @@ export default function ListLayout({
         <ul>
           {!filteredBlogPosts.length && 'No posts found.'}
           {displayPosts.map((frontMatter) => {
-            const { slug, date, title, summary, tags } = frontMatter;
+            const { slug, date, title, images, summary, tags } = frontMatter;
             return (
               <li key={slug} className="py-4">
                 <article className="space-y-2 xl:grid xl:grid-cols-4 xl:items-baseline xl:space-y-0">
@@ -66,6 +67,16 @@ export default function ListLayout({
                     <dt className="sr-only">Published on</dt>
                     <dd className="text-base font-medium leading-6 text-gray-500 dark:text-gray-400">
                       <time dateTime={date}>{formatDate(date)}</time>
+                      <div className="py-1 pr-3">
+                        <Image
+                          alt={title}
+                          src={images[0]}
+                          className="mt-10 object-cover object-center p-5"
+                          width={215}
+                          height={150}
+                          layout="responsive"
+                        />
+                      </div>
                     </dd>
                   </dl>
                   <div className="space-y-3 xl:col-span-3">

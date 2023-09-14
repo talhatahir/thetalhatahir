@@ -1,5 +1,5 @@
 ---
-title: 'Book Highlights : JavaScript patterns by Stoyan Stefanov'
+title: 'Book Highlights: JavaScript patterns by Stoyan Stefanov'
 date: '2023-06-01'
 tags: ['writings', 'books']
 layout: 'PostSimple'
@@ -8,27 +8,27 @@ images:
   ['https://cdn.waterstones.com/bookjackets/large/9780/5968/9780596806750.jpg']
 ---
 
-![JavaScript patterns by Stoyan Stefanov](https://cdn.waterstones.com/bookjackets/large/9780/5968/9780596806750.jpg)
+![JavaScript Patterns by Stoyan Stefanov](https://cdn.waterstones.com/bookjackets/large/9780/5968/9780596806750.jpg)
 
 **Completed Book on : 12th August 2021**
 
-Highlights extracted using [highlightextractor.com](https://www.highlightextractor.com/)
+Highlights were extracted using [highlightextractor.com](https://www.highlightextractor.com/)
 
 ---
 
 ### Main Summary
 
-This book highlights some of the patterns which you should use in Javascript code. Keeping in mind that how flexible Javascript is since its weakly typed language and it gives the developer full liberty to do one thing in 10 ways. At times, the best thing when using Javascript is to follow a consistent approach. Other than approach, there are some good and bad parts of Javascript since its almost as old as Web itself. This book highlights and cautions you to use the good parts and avoid some of the bad parts of this dynamic typed language.
+This book highlights some of the patterns which you should use in Javascript code. Keep in mind how flexible Javascript is since it's a weakly typed language and it gives the developer full liberty to do one thing in 10 ways. At times, the best thing when using Javascript is to follow a consistent approach. Other than approach, there are some good and bad parts of Javascript since it's almost as old as Web itself. This book highlights and cautions you to use the good parts and avoid some of the bad parts of this dynamically typed language.
 
 ## Highlights
 
 **If you spot the use of eval() in your code, remember the mantra “eval() is evil.” This function takes an arbitrary string and executes it as JavaScript code. When the code in question is known beforehand (not determined at runtime), there’s no reason to use eval().**
 
-Eval is evil because it is vulnerable to XSS aka cross site scripting. You can find tons of articles online on the disadvantage using eval(). In most cases, if you are at a situation where you have to use eval() then it means your code is not that good. Better refactor it rather than using eval. eval() is EVIL!
+Eval is evil because it is vulnerable to XSS aka cross-site scripting. You can find tons of articles online on the disadvantage of using eval(). In most cases, if you are in a situation where you have to use eval() then it means your code is not that good. Better refactor it rather than using eval. eval() is EVIL!
 
 **It’s also important to remember that passing strings to setInterval(), setTimeout(), and the Function() constructor is, for the most part, similar to using eval() and therefore should be avoided.**
 
-Another anti-pattern which you should avoid. Its pretty similar to eval and you should avoid it.
+Another anti-pattern which you should avoid. Its pretty similar to eval and you should avoid it. Seemlessly
 
 **_antipatterns_**
 
@@ -141,7 +141,7 @@ Always use semi-colons.
 
 **When you have multiple words in a variable or a function name, it’s a good idea to follow a convention as to how the words will be separated. A common convention is to use the so-called camel case. Following the camel case convention, you type the words in lowercase, only capitalizing the first letter in each word. For your constructors, you can use upper camel case, as in MyConstructor(), and for function and method names, you can use lower camel case, as in myFunction(), calculateArea() and getFirstName().**
 
-Use camelCase for functions and for constructor, use Pascal Case. The main thing is to keep things consistent so there is a pattern seen in how you are naming your variables and functions.
+Use camelCase for functions and for constructors, use Pascal Case. The main thing is to keep things consistent so there is a pattern seen in how you are naming your variables and functions.
 
 **there is no way to define constants in JavaScript (although there are some built-in such as Number.MAX_VALUE), so developers have adopted the convention of using all-caps for naming variables that shouldn’t change values during the life of the program, like: // precious constants, please don't touch var PI = 3.14,**
 
@@ -153,11 +153,11 @@ Similarly like constants, to denote the usage of a private method, we use \_ bef
 
 **You shouldn’t go overboard commenting the obvious: every single variable or every single line. But you usually need to document all functions, their arguments and return values, and also any interesting or unusual algorithm or technique. Think of the comments as hints to the future readers of the code; the readers need to understand what your code does without reading much more than just the comments and the function and property names.**
 
-Comments are helpful in case what you are commenting about isn’t obvious. Its a good idea to leave a comment or two for your future readers.
+Comments are helpful in case what you are commenting about isn’t obvious. It's a good idea to leave a comment or two for your future readers.
 
 **Most developers consider writing documentation a boring and unrewarding task. But that doesn’t have to be the case. API documentation can be auto-generated from comments in the code. This way you can have the documentation written without actually writing it. Most programmers find this idea fascinating, because auto-generating a readable reference from specific keywords and specially formatted “commands” looks much like actual programming. for JavaScript there are two excellent tools, both free and open source: the JSDoc Toolkit ( http://code.google.com/p/jsdoc-toolkit/) and YUIDoc ( http://yuilibrary.com/projects/yuidoc).**
 
-ascript gi You can and you should document your APIs especially, since the task of writing it manually is arduous , there are tools available like JSDoc Toolkit or simply JSDocs and many other which can be easily used if you follow their syntax in defining your API functions.
+You can and you should document your APIs especially since the task of writing it manually is arduous, there are tools available like JSDoc Toolkit or simply JSDocs and many other which can be easily used if you follow their syntax in defining your API functions.
 
 **Another way to make your code better is to have it peer reviewed. Peer reviews could be formal and standardized, even aided by specialized tools, and this is a great way to make the reviews a streamlined part of the development process. But not having the time to research and adopt review tools shouldn’t be in the way. You can simply ask the developer next to you to take a look at your code or you can walk her through it.**
 
@@ -192,7 +192,7 @@ car.goes = 'far';
 
 **As you can see from this example, an obvious benefit of the literal notation is that it’s shorter to type. Another reason why the literal is the preferred pattern for object creation is that it emphasizes that objects are simply mutable hashes and not something that needs to be baked from a “recipe” (from a class). Another reason for using literals as opposed to the Object constructor is that there is no scope resolution. Because it’s possible that you have created a local constructor with the same name, the interpreter needs to look up the scope chain from the place you are calling Object() all the way up until it finds the global Object constructor.**
 
-In short, always use Object literals or Array literals for declaration and initialization of objects. Once advantage is speed since the literal defines it on the spot while incase of using built-in constructor, the interpreter would first look it up if there is a global object within that scope of the same name.
+In short, always use Object literals or Array literals for the declaration and initialization of objects. One advantage is speed since the literal defines it on the spot while in case of using a built-in constructor, the interpreter would first look it up if there is a global object within that scope of the same name.
 
 **What happens if you forget new when you invoke a constructor? This is not going to cause syntax or runtime errors but might lead to logical errors and unexpected behavior. That’s because when you forget new, this inside the constructor will point to the global object. (In browsers this will point to window.)**
 
@@ -227,7 +227,7 @@ Like in case of Arrays and Objects, Regular expressions are also objects at hear
 
 **JavaScript has five primitive value types: number, string, boolean, null, and undefined. With the exception of null and undefined, the other three have the so-called primitive wrapper objects. The wrapper objects can be created using the built-in constructors Number(), String(), and Boolean().**
 
-Out of the five primitive types, the three are primitive wrapper objects.
+Out of the five primitive types, three are primitive wrapper objects.
 
 **It's better to avoid wrapper object built-in constructors like:**
 
@@ -249,7 +249,7 @@ var b = true;
 
 **One reason to use the wrapper objects is when you want to augment the value and persist state. Because primitives are not objects, they cannot be augmented with properties.**
 
-Always use the literal approach and only use constructor when you have to later augment the value and persist state.
+Always use the literal approach and only use the constructor when you have to later augment the value and persist state.
 
 **functions are first-class objects and the second is that they provide scope. Functions are objects that:**
 
