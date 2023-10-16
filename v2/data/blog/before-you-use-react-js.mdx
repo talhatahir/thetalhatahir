@@ -1,0 +1,146 @@
+---
+title: 'Before you start using ReactJS'
+date: '2021-02-21'
+tags: ['ReactJS', 'Javascript', 'tech']
+summary: 'Before you start using ReactJS, learn the following fundamentals so that you are fully aware of how to utilise it to its maximum capacity.'
+images:
+  [
+    'https://images.unsplash.com/photo-1593720219276-0b1eacd0aef4?auto=format&fit=crop&w=1161&q=80',
+  ]
+---
+
+![Photo by [Ferenc Almasi](https://unsplash.com/@flowforfrank?utm_source=medium&utm_medium=referral) on [Unsplash](https://unsplash.com?utm_source=medium&utm_medium=referral)](https://images.unsplash.com/photo-1593720219276-0b1eacd0aef4?auto=format&fit=crop&w=1161&q=80)
+
+This article highlights all the basic concepts of **Web** and **React** which you need to have an understanding of before you get hands-on with React.
+
+_Note: The author assumes that you have a basic understanding of programming and Javascript and Web related concepts like DOM._
+
+## Javascript
+
+When i say javascript, i do not mean DOM manipulation using Javascript. What i mean is specifically **ES6** or **ECMA 2015 Script**.
+
+React requires that you have a skilled level understanding of all ES6 Javascript concepts. I am mentioning some of the ones which you would regularly use in your React codebase.
+
+- Classes
+
+- Objects and Object operations: _Object.keys,Object.entries,Object.values_
+
+- Array and Array operations : _Map, reduce, filter, forEach_
+
+- Variable types : _var, let, const_
+
+- Spread and rest operator
+
+- Functions : _Anonymous functions, inline functions, variable functions_
+
+- Hoisting
+
+- Import and default export statements
+
+- Polyfills
+
+- Async functions and Promises
+
+- Ternary operators
+
+- Logical && (AND) || (OR) ! (NOT) operators
+
+The best source recommended by **Professionals** to learn all these concepts is [Mozilla Javascript Docs](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
+
+## Package managers
+
+There are two popular package managers.
+
+_npm (node package manager_)
+
+This is a very common package manager used in every node application to manage (add, remove, update) packages or plugins required for your application.
+
+_yarn_
+
+This is the recommended package manager by facebook to use with react and managed by facebook itself. its similar to node and the only difference is the way you execute commands using _yarn._
+
+_Note : Do not confuse Node with npm, even if you use yarn, React still requires Node to be installed on your system._
+
+## Bundlers
+
+Bundlers in simple words are tools which bundle up your css/sass/jss/js files and churns out .js .css files to be executed on your local or production server. They take up the responsibility of intelligently minifying and compressing your written code along with the third party libraries into small chunks with a very small footprint.
+
+_Webpack_
+
+This is the most popular bundler at the moment providing all above facilities including tree shaking, optimised production build and lazy loading.
+
+_Browersify_
+
+Another popular bundler and a rival of Webpack, it offers similar features to Webpack but has a less steeper learning curve.
+
+Configuring a bundler is a completely different arena with its own domain and knowledge. Thankfully if you use *CRA ( Create React App ) *to setup your React Application, you will not be required to setup Webpack because it would be preconfigured and encapsulated behind CRA.
+
+## Transpiler
+
+All browsers have a built in Javascript Engine. Chrome has _V8_ , FireFox has *SpiderMonkey, *Internet Explorer has *Chakra. *While you think that the javascript you are writing should be able to run smoothly on all the browsers but it is truly not the case. Each Javascript Engine interprets the code you write in a slightly different way and Engines on older browsers like Internet Explorer might not even be able to interpret your Javascript ES6 syntax like _Classes, async or even object literals._
+
+To tackle this, there are _transpilers_ or _souce-to-source_ compilers which transpile your code into vanilla Javascript which is able to run on almost any new or old browser. The most popular transpiler is **Babel.**
+
+Another advantage of a transpiler is that it allows you to write Javascript with type definition like *typeScript *which is then compiled to basic vanilla Javascript.
+
+## React
+
+React has a steeper learning curve as compared to other SPA Frameworks/libraries out there but once you get a hang of the basic concepts, it becomes easier to understand the complex concepts.
+
+I am dividing the list of React concepts in two parts , _Basic_ and _Advanced:_
+
+**Basic**
+
+- How React works?
+
+- JSX and alternates to JSX
+
+- State and Props
+
+- Class components and Functional components
+
+- Component Life cycle methods in Class components
+
+- Event handling
+
+- Conditional Rendering
+
+- Rendering and component updates
+
+- Callback functions and render Props
+
+- Child components
+
+- Fragments
+
+- using React Hooks
+
+- useEffect, useState
+
+- Error Boundaries
+
+**Advanced**
+
+- useCallback, useMemo
+
+- Higher Ordered Components
+
+- useRef
+
+- Context api
+
+- Code splitting techniques
+
+- Writing custom Hooks
+
+- React Portals
+
+- Pure Components
+
+- Lazy and Suspense
+
+- Bundle optimisation using Webpack
+
+- Dynamic loading
+
+- Strict mode
