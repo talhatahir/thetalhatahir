@@ -23,7 +23,7 @@ export const metadata: Metadata = {
     default: siteMetadata.title,
     template: `%s | ${siteMetadata.title}`,
   },
-  description: siteMetadata.description,
+  description: siteMetadata.descriptionLong,
   openGraph: {
     title: siteMetadata.title,
     description: siteMetadata.description,
