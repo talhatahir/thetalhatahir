@@ -1,22 +1,23 @@
 /** @type {import("pliny/config").PlinyConfig } */
 const siteMetadata = {
-  title: 'Next.js Starter Blog',
-  author: 'Tails Azimuth',
-  headerTitle: 'TailwindBlog',
-  description: 'A blog created with Next.js and Tailwind.css',
+  title: 'Talha Tahir',
+  author: 'Talha Tahir',
+  authorLong: 'Talha Tahir - An experienced Full Stack Engineer working remotely',
+  headerTitle: 'talha tahir',
+  description: 'My chatter about life and the tech realm',
+  skills: 'ReactJS, NextJS, NodeJS, Javascript, AngularJS, Material UI, Webpack, MongoDB, MySQL',
+  descriptionLong:
+    'My chatter about working remotely as an Engineer in ReactJS, NextJS, NodeJS, Javascript, AngularJS, Material UI, Webpack, MongoDB, MySQL',
   language: 'en-us',
   theme: 'system', // system, dark or light
-  siteUrl: 'https://tailwind-nextjs-starter-blog.vercel.app',
-  siteRepo: 'https://github.com/timlrx/tailwind-nextjs-starter-blog',
+  siteUrl: 'https://www.thetalhatahir.com',
   siteLogo: '/static/images/logo.png',
-  socialBanner: '/static/images/twitter-card.png',
-  mastodon: 'https://mastodon.social/@mastodonuser',
-  email: 'address@yoursite.com',
-  github: 'https://github.com',
-  twitter: 'https://twitter.com/Twitter',
-  facebook: 'https://facebook.com',
-  youtube: 'https://youtube.com',
-  linkedin: 'https://www.linkedin.com',
+  image: '/static/images/avatar.png',
+  socialBanner: '/static/images/logo.png',
+  email: 'talhatahir4050@gmail.com',
+  github: 'https://github.com/talhatahir',
+  twitter: 'https://twitter.com/thetalhatahir',
+  linkedin: 'https://www.linkedin.com/in/thetalhatahir',
   locale: 'en-US',
   analytics: {
     // If you want to use an analytics provider you have to add it to the
@@ -36,18 +37,21 @@ const siteMetadata = {
     // googleAnalytics: {
     //   googleAnalyticsId: '', // e.g. G-XXXXXXX
     // },
+    googleAnalytics: {
+      googleAnalyticsId: 'G-TVD4T8Q6FC',
+    },
   },
   newsletter: {
     // supports mailchimp, buttondown, convertkit, klaviyo, revue, emailoctopus
     // Please add your .env file and modify it according to your selection
-    provider: 'buttondown',
+    provider: 'emailoctopus',
   },
   comments: {
     // If you want to use an analytics provider you have to add it to the
     // content security policy in the `next.config.js` file.
     // Select a provider and use the environment variables associated to it
     // https://vercel.com/docs/environment-variables
-    provider: 'giscus', // supported providers: giscus, utterances, disqus
+    provider: '', // supported providers: giscus, utterances, disqus
     giscusConfig: {
       // Visit the link below, and follow the steps in the 'configuration' section
       // https://giscus.app/
