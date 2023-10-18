@@ -7,13 +7,12 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 // You might need to insert additional domains in script-src if you are using external services
 const ContentSecurityPolicy = `
   default-src 'self';
-  script-src 'self' 'unsafe-eval' 'unsafe-inline' giscus.app analytics.umami.is;
+  script-src 'self' 'unsafe-eval' 'unsafe-inline' *.googletagmanager.com *.google-analytics.com;
   style-src 'self' 'unsafe-inline';
   img-src * blob: data:;
-  media-src *.s3.amazonaws.com;
+  media-src 'none';
   connect-src *;
   font-src 'self';
-  frame-src giscus.app
 `
 
 const securityHeaders = [
@@ -52,6 +51,7 @@ const securityHeaders = [
     key: 'Permissions-Policy',
     value: 'camera=(), microphone=(), geolocation=()',
   },
+  { key: 'Access-Control-Allow-Origin', value: '*' },
 ]
 
 /**
@@ -66,7 +66,12 @@ module.exports = () => {
       dirs: ['app', 'components', 'layouts', 'scripts'],
     },
     images: {
-      domains: ['picsum.photos'],
+      domains: [
+        'images.unsplash.com',
+        'cdn.waterstones.com',
+        'cdn-images-1.medium.com',
+        'miro.medium.com',
+      ],
     },
     async headers() {
       return [
