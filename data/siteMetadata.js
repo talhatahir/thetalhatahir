@@ -1,12 +1,11 @@
+/** @type {import("pliny/config").PlinyConfig } */
 const siteMetadata = {
   title: 'Talha Tahir',
   author: 'Talha Tahir',
-  authorLong:
-    'Talha Tahir - An experienced Full Stack Engineer working remotely',
+  authorLong: 'An experienced Full Stack Engineer working remotely',
   headerTitle: 'talha tahir',
   description: 'My chatter about life and the tech realm',
-  skills:
-    'ReactJS, NextJS, NodeJS, Javascript, AngularJS, Material UI, Webpack, MongoDB, MySQL',
+  skills: 'ReactJS, NextJS, NodeJS, Javascript, AngularJS, Material UI, Webpack, MongoDB, MySQL',
   descriptionLong:
     'My chatter about working remotely as an Engineer in ReactJS, NextJS, NodeJS, Javascript, AngularJS, Material UI, Webpack, MongoDB, MySQL',
   language: 'en-us',
@@ -23,20 +22,32 @@ const siteMetadata = {
   analytics: {
     // If you want to use an analytics provider you have to add it to the
     // content security policy in the `next.config.js` file.
-    // supports plausible, simpleAnalytics, umami or googleAnalytics
-    plausibleDataDomain: '', // e.g. tailwind-nextjs-starter-blog.vercel.app
-    simpleAnalytics: false, // true or false
-    umamiWebsiteId: '', // e.g. 123e4567-e89b-12d3-a456-426614174000
-    googleAnalyticsId: 'G-TVD4T8Q6FC',
-    posthogAnalyticsId: '', // posthog.init e.g. phc_5yXvArzvRdqtZIsHkEm3Fkkhm3d0bEYUXCaFISzqPSQ
+    // supports Plausible, Simple Analytics, Umami, Posthog or Google Analytics.
+    umamiAnalytics: {
+      // We use an env variable for this site to avoid other users cloning our analytics ID
+      umamiWebsiteId: process.env.NEXT_UMAMI_ID, // e.g. 123e4567-e89b-12d3-a456-426614174000
+    },
+    // plausibleAnalytics: {
+    //   plausibleDataDomain: '', // e.g. tailwind-nextjs-starter-blog.vercel.app
+    // },
+    // simpleAnalytics: {},
+    // posthogAnalytics: {
+    //   posthogProjectApiKey: '', // e.g. 123e4567-e89b-12d3-a456-426614174000
+    // },
+    // googleAnalytics: {
+    //   googleAnalyticsId: '', // e.g. G-XXXXXXX
+    // },
+    googleAnalytics: {
+      googleAnalyticsId: 'G-TVD4T8Q6FC',
+    },
   },
   newsletter: {
     // supports mailchimp, buttondown, convertkit, klaviyo, revue, emailoctopus
     // Please add your .env file and modify it according to your selection
     provider: 'emailoctopus',
   },
-  comment: {
-    // If you want to use a commenting system other than giscus you have to add it to the
+  comments: {
+    // If you want to use an analytics provider you have to add it to the
     // content security policy in the `next.config.js` file.
     // Select a provider and use the environment variables associated to it
     // https://vercel.com/docs/environment-variables
@@ -55,34 +66,30 @@ const siteMetadata = {
       // theme example: light, dark, dark_dimmed, dark_high_contrast
       // transparent_dark, preferred_color_scheme, custom
       theme: 'light',
-      // Place the comment box above the comments. options: bottom, top
-      inputPosition: 'bottom',
-      // Choose the language giscus will be displayed in. options: en, es, zh-CN, zh-TW, ko, ja etc
-      lang: 'en',
       // theme when dark mode
       darkTheme: 'transparent_dark',
       // If the theme option above is set to 'custom`
       // please provide a link below to your custom theme css file.
       // example: https://giscus.app/themes/custom_example.css
       themeURL: '',
-    },
-    utterancesConfig: {
-      // Visit the link below, and follow the steps in the 'configuration' section
-      // https://utteranc.es/
-      repo: process.env.NEXT_PUBLIC_UTTERANCES_REPO,
-      issueTerm: '', // supported options: pathname, url, title
-      label: '', // label (optional): Comment 💬
-      // theme example: github-light, github-dark, preferred-color-scheme
-      // github-dark-orange, icy-dark, dark-blue, photon-dark, boxy-light
-      theme: '',
-      // theme when dark mode
-      darkTheme: '',
-    },
-    disqusConfig: {
-      // https://help.disqus.com/en/articles/1717111-what-s-a-shortname
-      shortname: process.env.NEXT_PUBLIC_DISQUS_SHORTNAME,
+      // This corresponds to the `data-lang="en"` in giscus's configurations
+      lang: 'en',
     },
   },
-};
+  search: {
+    provider: 'kbar', // kbar or algolia
+    kbarConfig: {
+      searchDocumentsPath: 'search.json', // path to load documents to search
+    },
+    // provider: 'algolia',
+    // algoliaConfig: {
+    //   // The application ID provided by Algolia
+    //   appId: 'R2IYF7ETH7',
+    //   // Public API key: it is safe to commit it
+    //   apiKey: '599cec31baffa4868cae4e79f180729b',
+    //   indexName: 'docsearch',
+    // },
+  },
+}
 
-module.exports = siteMetadata;
+module.exports = siteMetadata
