@@ -1,0 +1,90 @@
+---
+title: 'ReactJS vs NextJS'
+date: '2023-10-30'
+tags: ['programming', 'tech']
+summary: 'ReactJS vs NextJS, the pros and cons and which is the right library or framework to use for your next project'
+images:
+  ['https://images.unsplash.com/photo-1687603921109-46401b201195?auto=format&fit=crop&q=80&w=1161']
+---
+
+![ReactJS vs NextJS](https://images.unsplash.com/photo-1687603921109-46401b201195?auto=format&fit=crop&q=80&w=1161)
+
+# React.js vs Next.js: Which One to Choose?
+
+When building a modern web application, React and Next.js are the go-to JavaScript libraries. Interestingly, one needs to be careful about which tool to use since neither fits every use case perfectly.
+
+In general, React is more popular compared to Next.js because it was among the first, after Angular, to use a component-based structure, virtual DOM, and a robust ecosystem. So it commands more respect in the development community. Next.js has quickly risen to become a top contender with its straightforward approach and quick setup.
+
+The key difference is that React is just a UI library, while Next.js is a framework built using React, providing everything a framework offers. Let's explore this in more detail and determine which tool suits your use case.
+
+## React.js: The UI Library
+
+React.js, commonly referred to as React, is an open-source JavaScript library developed and maintained by Facebook. It focuses on building user interfaces, making it a powerful tool for creating interactive and dynamic web applications. React's core concepts, including components, the virtual DOM, and unidirectional data flow, have significantly influenced the current web ecosystem.
+
+### Pros:
+
+- **Component-Based:** React applications are built using reusable components, with each component responsible for rendering a part of the user interface.
+
+- **Virtual DOM:** React employs a virtual DOM to efficiently update the actual DOM, resulting in better performance.
+
+- **Unidirectional Data Flow:** React follows a unidirectional data flow, making it easier to understand how data changes affect the application's state.
+
+- **Large Ecosystem:** React boasts a vast ecosystem of libraries and tools for state management, routing, and more. Popular libraries like Redux and React Router complement React's core capabilities and enhance its features.
+
+- **Community Support:** React has a large and active community, providing developers with a wealth of resources, tutorials, and third-party packages. You can always find a solution to any problem due to this vast community support.
+
+### Cons:
+
+- **Steep Learning Curve:** ReactJS requires an understanding of the UI paradigm of stateful and stateless components. There are many technical jargons you need to learn and understand, such as hooks, bundle splitting, webpack, etc. One easy way is to start with `react-scripts`, which hides all the technical details of setting up a React application so you can focus on development.
+
+- **It's a UI Library:** At its core, React is a UI library that you need to extend according to your needs. For example, if you need routing, you would install React Router. If you need state management, either Redux or Zustand needs to be installed.
+
+- **Optimization Requires Knowledge:** To fully utilize optimizations and techniques like bundle splitting and chunking, you would need to acquire more knowledge about application bundlers like webpack or esbuild. They are fully functional separate entities that you need to learn (at least the basics) in order to harness their power with React.
+
+## Next.js: The React Framework
+
+Next.js is a popular framework built on top of React. Developed by Vercel, it simplifies and accelerates the process of building modern web applications. Next.js extends React's capabilities by providing a set of features that are essential for many web projects, including server-side rendering (SSR), static site generation (SSG), routing, and much more.
+
+### Pros:
+
+- **Server-Side Rendering (SSR) and Static Site Generation (SSG):** Next.js allows server-side rendering without any configurations, enabling web pages to be pre-rendered on the server, improving performance and search engine optimization (SEO). This is perfect for a simple static website use case.
+
+- **Routing:** Next.js includes a file-based routing system, which is easier to understand and navigate between pages in your application. The routing system does not require any configuration, and you can start right away.
+
+- **Zero Configuration:** Getting started with Next.js is pretty straightforward. It requires minimal setup as it's a full framework, and many best practices are already built-in.
+
+- **Automatic Code Splitting:** Next.js automatically splits code at the page level, meaning that only the JavaScript needed for a particular page is loaded. There's no need to tweak or add third-party tools for code splitting.
+
+- **API Routes:** Next.js is a full-blown framework, so it already has a backend, making it simple to create API endpoints for your application. There's no need to add a separate NodeJS API for this.
+
+- **CSS Support:** Built-in support for CSS modules, styled-jsx, styled components, and much more is already included.
+
+### Cons:
+
+- **Predefined Folder Structures:** Next.js comes with predefined folder structures and conventions that, like every other full-blown framework, are difficult to modify. If you want to, you can, but it's a substantial effort.
+
+- **Less Control:** Next.js implements most of the techniques like bundle splitting and routing on its own, which gives you less control over things if you want to change them.
+
+- **Reluctance to Change Quickly:** Unlike ReactJS, which churns out frequent builds and new features, Next.js is owned by Vercel, which takes its time to launch new features. This can be an issue if you want to stay at the cutting edge of things.
+
+## Choosing Between Next.js and React.js
+
+The decision to use Next.js or React.js depends on the specific needs of your project. Here are some considerations:
+
+- React.js is ideal when you need a powerful library for building interactive user interfaces and you're prepared to handle routing, server-side rendering, and other features using additional libraries and configurations.
+
+- Next.js is a great choice for projects that require server-side rendering, improved performance, and SEO out of the box. It simplifies many complex aspects of building a web application, making it a valuable tool for various use cases.
+
+## Conclusion
+
+Let me put it this way: React.js is like a Formula-1 car with each part fully customizable according to the requirements of the developer. You have full control over everything, but you need to build everything up from the base; you are only provided with the Engine (React.js). It's going to take time before the car is ready, and it's going to get complex, but if you know what you're doing, at the end of the day, you have a car ready to clock 360 km/h.
+
+![F1 Car](https://images.unsplash.com/photo-1599840689193-b218754f3d01?auto=format&fit=crop&q=80&w=1161)
+
+On the other hand, Next.js is like a Porsche 911; you just open the door, start the engine, and you are off. You can drive it slowly or push it up to 300 km/h. It will do just fine. But forget about major overhauls like modifying the overall design and engine, etc. You can make some small tweaks.
+
+![Porsche 911](https://images.unsplash.com/photo-1596813366843-4a0f41a9538e?auto=format&fit=crop&q=80&w=1161)
+
+It all depends on where you want to drive and your goals. If you want to compete on a racetrack where every second counts, build a Formula 1 car. But if you want to drive on the road and occasionally want to feel the power with minimal system modifications, go for the 911.
+
+Hope this helps you in choosing the right framework.
