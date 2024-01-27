@@ -1,0 +1,215 @@
+---
+title: 'Translate your App using ChatGPT OpenAI and i18n'
+date: '2024-01-27'
+tags: ['programming', 'tech', 'chatgpt']
+summary: 'Easily automate your i18n language translations using ChatGPT OpenAI and publish your application in hundreds of languages with a few clicks'
+images: ['https://images.unsplash.com/photo-1676299081847-824916de030a?q=80&w=1500']
+---
+
+![Translate your App using ChatGPT OpenAI and i18n](https://images.unsplash.com/photo-1676299081847-824916de030a?q=80&w=1500)
+
+In the vast world of SaaS, having your app speak many languages is a big deal. In order to reach a bigger user-base, products need to support multiple languages, no surprise there. Making this happen is a big part of scaling an app.
+
+Now, people usually do this translation thing manually, using tools like Google Translate or the free version of ChatGPT. But guess what? I've made it easier.
+
+I automated the whole translation gig using OpenAI's ChatGPT API. Stick around, and I'll show you how to do it.
+
+Let's dive in! 🌐✨
+
+## Prerequisites
+
+Before diving into the implementation, ensure you have the following:
+
+- A Single Page Application (SPA) with i18n set up (formatjs, i18n-next, i18n ).
+- An OpenAI API key for accessing ChatGPT. (This requires you to [buy](https://openai.com/pricing#language-models) some OpenAI credits, but don't worry the cost is negligible).
+- Node.js installed on your machine.
+
+The below example uses `formatjs` as the i18n framework. Since i18n is the most popular internationalization framework, I have used it for implementation. Otherwise, if you use some other framework, the code below could be tweaked to handle it.
+
+## The Problem
+
+These are different language flavours of my web application : German, French, Spanish and English. Each language has an associated `.json` file which includes key value pairs of translation ids.
+
+![Languages](/static/images/chatgpt/ch-1.png)
+
+Let's add a new translation for the key in English.
+
+![Languages](/static/images/chatgpt/ch-2.png)
+
+When you run the `i18n` command of your framework this key gets added to the json files.
+
+Here is the result for all languages:
+
+English.
+
+![Languages](/static/images/chatgpt/ch-en.png)
+
+For Spanish, French and German, you would see an empty string.
+
+![Languages](/static/images/chatgpt/ch-fr.png)
+
+Now this is where the automation script helps 🤖.
+
+Generally you would manually translate everything for each language and then copy-paste the translations in each file. Imagine you are working on a new feature and you have to add 30 new translations : `30 * 3 = 90` translations which you would have to manually paste in each file 😰
+
+## The ChatGPT Automation Script
+
+This Node.js script utilizes the [OpenAI API](https://openai.com/product#made-for-developers) to translate missing entries in your language files.
+
+Install the openai package.
+
+```javascript
+npm install --save openai
+```
+
+Install the doenv package, incase you want to pick the API key from .env file
+
+```javascript
+npm install dotenv --save
+```
+
+Create a `your-script-name.js` on the root level of your project and add the following script.
+
+```javascript
+require('dotenv').config()
+const fs = require('fs')
+
+const OpenAI = require('openai')
+
+//make sure you have the OPENAI_API_KEY in your .env file
+const OPENAI_API_KEY = process.env.OPENAI_API_KEY
+
+const openai = new OpenAI({
+  apiKey: OPENAI_API_KEY,
+})
+
+async function updateLanguageFile(english, fileName) {
+  //get the .json file for the language using fileName
+  let langJson = require(`./lang/${fileName}.json`)
+  console.warn(`${fileName}.json:`)
+
+  //get all empty keys for a language which need to be translated
+  const emptyKeys = Object.keys(langJson).filter((key) => langJson[key] === '')
+
+  if (emptyKeys.length > 0) {
+    console.warn(`Translating using ChatGPT 3.5 Turbo...\n`)
+
+    const englishEntries = {}
+
+    //fetch the english sentences for all the missing empty keys
+    //which would be sent to ChatGPT OpenAI api
+    emptyKeys.forEach((ele) => {
+      englishEntries[ele] = english[ele]
+    })
+
+    try {
+      //Calls ChatGPT OpenAI api to translate the strings
+      const translatedEntries = await completeTranslation(englishEntries, fileName)
+      console.log(`en => ${JSON.stringify(englishEntries)}`)
+      console.log(`${fileName} => ${translatedEntries}`)
+
+      //append the freshly translated strings to the original language file
+      langJson = { ...langJson, ...JSON.parse(translatedEntries) }
+    } catch (translationError) {
+      console.error(`Error translating:  ${translationError.message}`)
+    }
+
+    //sort the translations according to key name,
+    //so that order is preserved in the language file
+    const sortedLangJson = Object.keys(langJson)
+      .sort()
+      .reduce((acc, key) => {
+        acc[key] = langJson[key]
+        return acc
+      }, {})
+
+    //write it to the language file
+    fs.writeFileSync(`./lang/${fileName}.json`, JSON.stringify(sortedLangJson, null, 2))
+  } else {
+    console.warn(`No translations missing`)
+  }
+  console.warn(`\n`)
+}
+
+const completeTranslation = async (messageObject, lang) => {
+  try {
+    /*This functions sends all the entries of a single language as a json object
+    to ChatGPT OpenAI api and it returns you the translated object in json format.
+    To save cost, I send the whole object in one request rather than
+    sending each string individually which would cost more tokens.*/
+    const completion = await openai.chat.completions.create({
+      model: 'gpt-3.5-turbo', //You can use other models too
+      messages: [
+        //These are the prompts which I use for translations
+        {
+          role: 'system',
+          content:
+            'You will be provided with a json object in English language
+             and your task is to only translate the values into the
+             requested language, and return the result as valid json',
+        },
+        {
+          role: 'user',
+          content: `Translate the following json Object
+          to '${lang}' language: ${JSON.stringify(messageObject)}`,
+        },
+      ],
+      //better to not mess with these,
+      //you can tweak token size if you want to send huge translation objects
+      temperature: 1,
+      max_tokens: 256,
+      top_p: 1,
+      frequency_penalty: 0,
+      presence_penalty: 0,
+    })
+
+    return completion.choices[0].message.content
+  } catch (error) {
+    throw new Error(`Error completing translation: ${error.message}`)
+  }
+}
+
+try {
+  console.info(`Checking for missing translations\n`)
+  const english = require('./lang/en.json') //path to your english .json file
+  const languages = ['de', 'es', 'fr'] //names of you other language files.
+  languages.forEach((lang) => {
+    updateLanguageFile(english, lang)
+  })
+} catch (error) {
+  console.error('Error reading JSON files:', error.message)
+}
+```
+
+## Implementation Steps
+
+Now, let's break down the implementation steps:
+
+1. **Set Up Your Project**: Ensure your SPA has the i18n framework integrated. This script assumes you have language files (e.g., en.json, de.json) in a `lang` folder.
+
+2. **Get OpenAI API Key**: Obtain your OpenAI API key and add it to a `.env` file.
+
+3. **Install Dependencies**: Run `npm install dotenv openai` to install necessary packages.
+
+4. **Run the Script**: Execute the script using `node your-script-name.js`. It will identify missing translations and utilize ChatGPT for automated translations. You can add this script to your package.json file too : `i18n:chatgpt : node your-script-name.js`
+
+## Output
+
+Here is the translation for German, French, Spanish
+
+![Languages](/static/images/chatgpt/de-tr.png)
+
+![Languages](/static/images/chatgpt/fr-tr.png)
+
+![Languages](/static/images/chatgpt/es-tr.png)
+
+😀 Congratulations! You saved yourself from copy-pasting forever!
+Now whenever you have new keys to translate, you simply run this script and it auto-translates them in all languages!
+
+## Conclusion
+
+Automating translations in your SPA with i18n using ChatGPT and OpenAI's language model boosts efficiency and accuracy in localization. It saves time and guarantees a smooth multilingual user experience.
+
+With automation, devs can concentrate on creating awesome user experiences. AI takes care of repetitive tasks like translations. This tech integration not only makes workflows smoother but also improves your app's quality worldwide.
+
+**Happy Coding! ⌨️**
