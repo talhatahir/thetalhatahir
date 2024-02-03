@@ -8,7 +8,6 @@ export default function Comments({ slug }: { slug: string }) {
   const [loadComments, setLoadComments] = useState(false)
   return (
     <>
-      {console.log(siteMetadata.comments?.provider)}
       {siteMetadata.comments?.provider && !loadComments && (
         <button onClick={() => setLoadComments(true)}>Load Comments</button>
       )}
