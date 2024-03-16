@@ -1,11 +1,10 @@
 ---
-title: 'Book Highlights: JavaScript patterns by Stoyan Stefanov'
+title: 'Book Highlights: JavaScript Patterns by Stoyan Stefanov'
 date: '2023-06-01'
 tags: ['writings', 'books']
 layout: 'PostSimple'
 summary: 'My selected highlights and thoughts on the book by Stoyan Stefanov about Javascript patterns generated using highlightextractor.com'
-images:
-  ['https://cdn.waterstones.com/bookjackets/large/9780/5968/9780596806750.jpg']
+images: ['https://cdn.waterstones.com/bookjackets/large/9780/5968/9780596806750.jpg']
 ---
 
 ![JavaScript Patterns by Stoyan Stefanov](https://cdn.waterstones.com/bookjackets/large/9780/5968/9780596806750.jpg)
@@ -33,30 +32,30 @@ Another anti-pattern which you should avoid. Its pretty similar to eval and you 
 **_antipatterns_**
 
 ```js
-setTimeout('myFunc()', 1000);
+setTimeout('myFunc()', 1000)
 
-setTimeout('myFunc(1, 2, 3)', 1000);
+setTimeout('myFunc(1, 2, 3)', 1000)
 ```
 
 **_preferred_**
 
 ```js
-setTimeout(myFunc, 1000);
+setTimeout(myFunc, 1000)
 
 setTimeout(function () {
-  myFunc(1, 2, 3);
-}, 1000);
+  myFunc(1, 2, 3)
+}, 1000)
 ```
 
 **To avoid inconsistency and unexpected results, always specify the radix parameter:**
 
 ```js
 var month = '06',
-  year = '09';
+  year = '09'
 
-month = parseInt(month, 10);
+month = parseInt(month, 10)
 
-year = parseInt(year, 10);
+year = parseInt(year, 10)
 ```
 
 In this example, if you omit the radix parameter like parseInt(year), the returned value will be 0, because “09” assumes octal number (as if you did parseInt(year, 8)) and 09 is not a valid digit in base 8.
@@ -98,14 +97,14 @@ for (var i = 0; i &lt; 10; i += 1) {
 
 ```js
 // bad
-if (true) alert(1);
-else alert(2);
+if (true) alert(1)
+else alert(2)
 
 // better
 if (true) {
-  alert(1);
+  alert(1)
 } else {
-  alert(2);
+  alert(2)
 }
 ```
 
@@ -180,14 +179,14 @@ This is just summary points which are clear and to the point
 ```js
 // one way -- using a literal
 
-var car = { goes: 'far' };
+var car = { goes: 'far' }
 
 // another way -- using a built-in constructor
 
 // warning: this is an antipattern
 
-var car = new Object();
-car.goes = 'far';
+var car = new Object()
+car.goes = 'far'
 ```
 
 **As you can see from this example, an obvious benefit of the literal notation is that it’s shorter to type. Another reason why the literal is the preferred pattern for object creation is that it emphasizes that objects are simply mutable hashes and not something that needs to be baked from a “recipe” (from a class). Another reason for using literals as opposed to the Object constructor is that there is no scope resolution. Because it’s possible that you have created a local constructor with the same name, the interpreter needs to look up the scope chain from the place you are calling Object() all the way up until it finds the global Object constructor.**
@@ -204,9 +203,9 @@ If you forget the new keyword, then the object created is pointing to the window
 
 ```js
 // an array of one element
-var a = [3];
-console.log(a.length); // 1
-console.log(a[0]); // 3
+var a = [3]
+console.log(a.length) // 1
+console.log(a[0]) // 3
 ```
 
 Here another example is given which again highlights that you should use the Array literal method to declare an array.
@@ -232,19 +231,19 @@ Out of the five primitive types, three are primitive wrapper objects.
 **It's better to avoid wrapper object built-in constructors like:**
 
 ```js
-var s = new String('my string');
+var s = new String('my string')
 
-var n = new Number(101);
+var n = new Number(101)
 
-var b = new Boolean(true);
+var b = new Boolean(true)
 
 // better and simpler:
 
-var s = 'my string';
+var s = 'my string'
 
-var n = 101;
+var n = 101
 
-var b = true;
+var b = true
 ```
 
 **One reason to use the wrapper objects is when you want to augment the value and persist state. Because primitives are not objects, they cannot be augmented with properties.**
@@ -265,8 +264,8 @@ Always use the literal approach and only use the constructor when you have to la
 // function expression, a.k.a. anonymous function
 
 var add = function (a, b) {
-  return a + b;
-};
+  return a + b
+}
 ```
 
 **Function declarations can only appear in “program code,” meaning inside of the bodies of other functions or in the global space.**
@@ -281,18 +280,18 @@ var add = function (a, b) {
 
 ```js
 var setup = function () {
-  alert(1);
+  alert(1)
 
   return function () {
-    alert(2);
-  };
-};
+    alert(2)
+  }
+}
 
 // using the setup function
 
-var my = setup(); // alerts 1
+var my = setup() // alerts 1
 
-my(); // alerts 2
+my() // alerts 2
 ```
 
 **Because setup() wraps the returned function, it creates a closure, and you can use this closure to store some private data, which is accessible by the returned function but not to the outside code. **
@@ -304,9 +303,9 @@ my(); // alerts 2
 ```js
 //Here’s an example:
 
-(function () {
-  alert('watch out!');
-})();
+;(function () {
+  alert('watch out!')
+})()
 ```
 
 **Functions are first-class objects; they can be passed around as values and augmented with properties and methods.**
