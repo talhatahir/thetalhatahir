@@ -1,12 +1,11 @@
 ---
 title: 'Integrating Sentry releases with React using BitBucket pipelines'
 date: '2020-05-25'
+lastmod: '2024-03-23'
 tags: ['ReactJS', 'sentry', 'programmingtips', 'tech']
 summary: 'Integrate Sentry releases with React using BitBucket pipelines to identify bugs and issues quickly in your release and patch them up.'
 images:
-  [
-    'https://images.unsplash.com/photo-1516259762381-22954d7d3ad2?auto=format&fit=crop&w=1161&q=80',
-  ]
+  ['https://images.unsplash.com/photo-1516259762381-22954d7d3ad2?auto=format&fit=crop&w=1161&q=80']
 ---
 
 ![Photo by [Max Chen](https://unsplash.com/@maxchen2k?utm_source=medium&utm_medium=referral) on [Unsplash](https://unsplash.com?utm_source=medium&utm_medium=referral)](https://images.unsplash.com/photo-1516259762381-22954d7d3ad2?auto=format&fit=crop&w=1161&q=80)
@@ -35,7 +34,7 @@ if (process.env.REACT_APP_SENTRY_DSN) {
     dsn: process.env.REACT_APP_SENTRY_DSN,
     environment: process.env.REACT_APP_ENVIRONMENT,
     release: process.env.REACT_APP_BITBUCKET_BUILD_NUMBER,
-  });
+  })
 }
 ```
 
@@ -46,33 +45,33 @@ release is a string which represents your current build number. Since we would b
 Now in order to catch exceptions, you need to Add Sentry to your **ErrorBoundary.js** like this:
 
 ```js
-import React from 'react';
-import * as Sentry from '@sentry/browser';
+import React from 'react'
+import * as Sentry from '@sentry/browser'
 
 class ErrorBoundary extends React.Component {
   constructor(props) {
-    super(props);
-    this.state = { error: null, errorInfo: null };
+    super(props)
+    this.state = { error: null, errorInfo: null }
   }
 
   componentDidCatch(error, errorInfo) {
-    this.setState({ error, errorInfo });
-    Sentry.captureException(error);
+    this.setState({ error, errorInfo })
+    Sentry.captureException(error)
   }
 
   render() {
-    const { error, errorInfo } = this.state;
-    const { children } = this.props;
+    const { error, errorInfo } = this.state
+    const { children } = this.props
 
     if (errorInfo) {
-      return <div>Something went wrong</div>;
+      return <div>Something went wrong</div>
     }
 
-    return children;
+    return children
   }
 }
 
-export default ErrorBoundary;
+export default ErrorBoundary
 ```
 
 ## 2. Generate **Sentry Auth Token**
@@ -88,13 +87,13 @@ Generate an auth token which is required to authorize your pipeline code to make
 You need to add following variables to your pipeline settings with their values so that sentry-cli can access them.
 
 ```js
-SENTRY_AUTH_TOKEN = your - token - value;
+SENTRY_AUTH_TOKEN = your - token - value
 
-SENTRY_ORG = your - sentry - organisation - name;
+SENTRY_ORG = your - sentry - organisation - name
 
-SENTRY_FRONTEND_PROJECT = your - sentry - project - name;
+SENTRY_FRONTEND_PROJECT = your - sentry - project - name
 
-SENTRY_BACKEND_PROJECT = your - sentry - project - name;
+SENTRY_BACKEND_PROJECT = your - sentry - project - name
 ```
 
 **Note:** If you have a single Project in Sentry to which you want to send errors then simply add SENTRY_PROJECT . I am using two Sentry projects, one to log backend/API errors and the other to log Frontend/React Errors.
