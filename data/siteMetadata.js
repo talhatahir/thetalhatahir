@@ -12,7 +12,7 @@ const siteMetadata = {
   theme: 'system', // system, dark or light
   siteUrl: 'https://www.thetalhatahir.com',
   siteLogo: '/static/images/logo.png',
-  image: '/static/images/avatar.png',
+  image: '/static/images/avatar.jpg',
   socialBanner: '/static/images/logo.png',
   email: 'talhatahir4050@gmail.com',
   github: 'https://github.com/talhatahir',
