@@ -6,12 +6,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const siteUrl = siteMetadata.siteUrl
   const blogRoutes = allBlogs.map((post) => ({
     url: `${siteUrl}/${post.path}`,
-    lastModified: post.lastmod || post.date,
+    lastModified: new Date().toISOString(),
   }))
 
   const routes = ['', 'blog', 'about'].map((route) => ({
     url: `${siteUrl}/${route}`,
-    lastModified: new Date().toISOString().split('T')[0],
+    lastModified: new Date().toISOString(),
   }))
 
   return [...routes, ...blogRoutes]
