@@ -27,6 +27,7 @@ export default function Home({ posts }) {
               <span className="mr-3 inline-block whitespace-nowrap pt-3">🤖 OpenAI API</span>
               <span className="mr-3 inline-block whitespace-nowrap pt-3">📦 NodeJS</span>
               <span className="mr-3 inline-block whitespace-nowrap pt-3">🧱 Material UI</span>
+              <span className="mr-3 inline-block whitespace-nowrap pt-3">🐜 Ant Design</span>
               <span className="mr-3 inline-block whitespace-nowrap pt-3">⏳ Esbuild</span>
               <span className="mr-3 inline-block whitespace-nowrap pt-3">🧊 HTML</span>
               <span className="mr-3 inline-block whitespace-nowrap pt-3">🍡 CSS</span>
