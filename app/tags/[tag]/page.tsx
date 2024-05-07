@@ -12,8 +12,8 @@ export async function generateMetadata({ params }: { params: { tag: string } }):
   return genPageMetadata({
     title: tag,
     description: `${siteMetadata.title} ${tag} tagged content`,
+    robots: { index: false, follow: false },
     alternates: {
-      canonical: './',
       types: {
         'application/rss+xml': `${siteMetadata.siteUrl}/tags/${tag}/feed.xml`,
       },
