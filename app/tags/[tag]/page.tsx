@@ -12,7 +12,7 @@ export async function generateMetadata({ params }: { params: { tag: string } }):
   return genPageMetadata({
     title: tag,
     description: `${siteMetadata.title} ${tag} tagged content`,
-    robots: { index: false, follow: false },
+    robots: { index: false, follow: true },
     alternates: {
       types: {
         'application/rss+xml': `${siteMetadata.siteUrl}/tags/${tag}/feed.xml`,
