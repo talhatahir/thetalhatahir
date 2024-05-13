@@ -1,5 +1,5 @@
 const handler = async () => {
-  const res = await fetch('https://ghchart.rshah.org/178945/talhatahir', {
+  const res = await fetch('https://ghchart.rshah.org/178942/talhatahir', {
     headers: {
       'Content-Type': 'image/svg+xml',
       'Cache-Control': 'public, max-age=86400',

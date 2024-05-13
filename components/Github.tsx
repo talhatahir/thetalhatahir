@@ -1,6 +1,7 @@
 'use client'
 import { useState, useEffect } from 'react'
 import Image from 'next/image'
+import Link from '@/components/Link'
 
 const Github = () => {
   const [svgContent, setSvgContent] = useState('')
@@ -39,8 +40,15 @@ const Github = () => {
 
   return (
     <div className="flex flex-col justify-center items-center dark:text-grey text-gray pb-12">
-      <p className="text-sm leading-7  text-gray dark:text-gray md:mt-5">Github Contributions</p>
-      <Image width={900} height={504} src={svgContent} alt="Github Contributions" />
+      <p className="text-xs leading-7  text-gray dark:text-gray md:mt-5">
+        <Link
+          href="/about"
+          className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
+        >
+          My Github Contributions
+        </Link>
+      </p>
+      <Image width={900} height={504} src={svgContent} alt="My Github Contributions" />
     </div>
   )
 }
