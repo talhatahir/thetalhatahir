@@ -2,6 +2,7 @@ const handler = async () => {
   const res = await fetch('https://ghchart.rshah.org/178941/talhatahir', {
     headers: {
       'Content-Type': 'image/svg+xml',
+      'Cache-Control': 'public, max-age=86400',
     },
   })
 
