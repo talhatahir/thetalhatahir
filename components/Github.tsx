@@ -38,10 +38,8 @@ const Github = () => {
   }
 
   return (
-    <div className="hidden sm:block dark:text-grey text-gray pb-8 text-base mx-auto w-max">
-      <p className="text-sm leading-7 mt-12 text-gray dark:text-gray mx-auto w-max">
-        Github Contributions
-      </p>
+    <div className="flex flex-col justify-center items-center dark:text-grey text-gray pb-12">
+      <p className="text-sm leading-7  text-gray dark:text-gray md:mt-5">Github Contributions</p>
       <Image width={900} height={504} src={svgContent} alt="Github Contributions" />
     </div>
   )
