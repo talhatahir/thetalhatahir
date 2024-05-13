@@ -1,6 +1,7 @@
 import Link from '@/components/Link'
 import Tag from '@/components/Tag'
 import Image from '@/components/Image'
+import Github from '@/components/Github'
 import siteMetadata from '@/data/siteMetadata'
 import { formatDate } from 'pliny/utils/formatDate'
 
@@ -42,6 +43,9 @@ export default function Home({ posts }) {
               <span className="mr-3 inline-block whitespace-nowrap pt-3">❤️‍🩹 AngularJS</span>
             </p>
           </div>
+
+          <Github />
+
           <p className="text-lg leading-7 text-gray dark:text-gray">{siteMetadata.description}</p>
         </div>
         <ul className="divide-y divide-gray-200 dark:divide-gray-700">
