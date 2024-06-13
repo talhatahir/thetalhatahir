@@ -11,7 +11,7 @@ const Github = () => {
     const fetchSVGContent = async () => {
       try {
         setLoading(true)
-        const response = await fetch(`/api/contributions`)
+        const response = await fetch(`/api/contributions`, { next: { revalidate: 86400 } })
         const svgText = await response.text()
         const parser = new DOMParser()
         const xmlDoc = parser.parseFromString(svgText, 'image/svg+xml')
