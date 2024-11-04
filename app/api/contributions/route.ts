@@ -13,4 +13,6 @@ const handler = async () => {
   })
 }
 
+export const revalidate = 86400 //24 hours
+
 export { handler as GET }
