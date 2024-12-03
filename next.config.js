@@ -71,6 +71,7 @@ module.exports = () => {
         'cdn.waterstones.com',
         'cdn-images-1.medium.com',
         'miro.medium.com',
+        'www.jobfillr.com',
       ],
     },
     async headers() {
