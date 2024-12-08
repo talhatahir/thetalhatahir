@@ -42,11 +42,27 @@ export const collaborationProjects = [
     description: `Worked as a Senior Frontend Engineer on the website team at TestGorilla. Technologies used: NextJS, Contentful, Styled Components and many others.`,
     imgSrc: '/static/images/testgorilla.png',
     href: 'https://www.testgorilla.com',
+    location: 'Amsterdam, Netherlands (Remote)',
+  },
+  {
+    title: 'Skrapp.io',
+    description: `Worked as a Senior Fullstack Engineer on their Chrome extension and Web app powered by NextJS. Technologies used: NextJS, Ant Design, Vanilla Javascript, PostgreSQL, Styled Components`,
+    imgSrc: '/static/images/skrapp.png',
+    href: 'https://skrapp.io',
+    location: 'Singapore (Remote)',
   },
   {
     title: 'Filestage.io',
     description: `Worked as a Senior Fullstack Engineer on the web app at Filestage.io. Technologies used: ReactJS, MUI, NodeJS, AngularJS Express, MongoDB, Styled Components and many others. See my <a href='/filestage/contributions'>contributions</a>.`,
     imgSrc: '/static/images/filestage-logo.png',
     href: 'https://filestage.io',
+    location: 'Stuttgart, Germany (Remote)',
+  },
+  {
+    title: 'Dubizzle Group',
+    description: `Worked as a Principal Software Engineer on their Real Estate arm : <a href='https://www.bayut.com'>bayut.com</a>, also worked on ther mobile app for agents made in React Native. Technologies used: ReactJS, MUI, i18n, Redux. MySQL, Laravel for APIs`,
+    imgSrc: '/static/images/dubizzle.webp',
+    href: 'https://www.dubizzlegroup.com/',
+    location: 'Dubai, UAE (Remote)',
   },
 ]

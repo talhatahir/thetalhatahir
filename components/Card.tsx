@@ -1,7 +1,15 @@
 import Image from './Image'
 import Link from './Link'
 
-const Card = ({ title, description, imgSrc, href }) => (
+interface Props {
+  title: string
+  description: string
+  imgSrc: string
+  href?: string
+  location?: string
+}
+
+const Card = ({ title, description, imgSrc, href, location }: Props) => (
   <div className="md max-w-[544px] p-4 md:w-1/2">
     <div
       className={`${
@@ -38,6 +46,7 @@ const Card = ({ title, description, imgSrc, href }) => (
             title
           )}
         </h2>
+        {location && <p className="text-gray-500 dark:text-gray-400 text-sm mb-2">{location}</p>}
         <p
           className="prose mb-3 max-w-none text-gray-500 dark:text-gray-400"
           dangerouslySetInnerHTML={{ __html: description }}
