@@ -13,6 +13,9 @@ const generateRssItem = (config, post) => `
     <title>${escape(post.title)}</title>
     <link>${config.siteUrl}/blog/${post.slug}</link>
     ${post.summary && `<description>${escape(post.summary)}</description>`}
+    ${
+      post.images?.[0] && `<enclosure url="${config.siteUrl}${post.images[0]}" type="image/jpeg" />`
+    }
     <pubDate>${new Date(post.date).toUTCString()}</pubDate>
     <author>${config.email} (${config.author})</author>
     ${post.tags && post.tags.map((t) => `<category>${t}</category>`).join('')}
