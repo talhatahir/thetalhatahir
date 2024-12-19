@@ -1,6 +1,6 @@
 const handler = async () => {
   try {
-    const res = await fetch('https://ghchart.rshah.org/178942/talhatahir', {
+    const res = await fetch('https://www.gitch.art/api/og/talhatahir?color=f1c40f', {
       headers: {
         'Content-Type': 'image/svg+xml',
       },

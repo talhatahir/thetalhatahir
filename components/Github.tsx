@@ -13,18 +13,8 @@ const Github = () => {
         setLoading(true)
         const response = await fetch(`/api/contributions`)
         const svgText = await response.text()
-        const parser = new DOMParser()
-        const xmlDoc = parser.parseFromString(svgText, 'image/svg+xml')
 
-        const rectElements = xmlDoc.querySelectorAll('rect[style*="fill:#EEEEEE;"]')
-
-        rectElements.forEach((rectElement) => {
-          rectElement.setAttribute('style', 'fill:#161b22;shape-rendering:crispedges;')
-        })
-
-        const modifiedSvgText = new XMLSerializer().serializeToString(xmlDoc)
-
-        setSvgContent(`data:image/svg+xml;base64,${btoa(modifiedSvgText)}`)
+        setSvgContent(`data:image/svg+xml;base64,${btoa(svgText)}`)
       } catch (error) {
         console.error('Error fetching SVG:', error)
       }
@@ -39,7 +29,7 @@ const Github = () => {
   }
 
   return (
-    <div className="flex flex-col justify-center items-center dark:text-grey text-gray pb-12">
+    <div className="flex flex-col justify-center items-center dark:text-grey text-gray pb-4">
       <p className="text-xs leading-7  text-gray dark:text-gray md:mt-5">
         <Link
           href="/about"
@@ -48,7 +38,7 @@ const Github = () => {
           My Github Contributions
         </Link>
       </p>
-      <Image width={900} height={504} src={svgContent} alt="My Github Contributions" />
+      <Image width={1000} height={604} src={svgContent} alt="My Github Contributions" />
     </div>
   )
 }
