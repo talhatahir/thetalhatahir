@@ -73,6 +73,7 @@ module.exports = () => {
         'cdn-images-1.medium.com',
         'miro.medium.com',
         'www.jobfillr.com',
+        'www.gitch.art',
       ],
     },
     async headers() {

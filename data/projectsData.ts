@@ -6,6 +6,12 @@ export const soloProjects = [
     href: '/blog/jobfillr-autofill-job-applications',
   },
   {
+    title: 'Gitchart',
+    description: `Create beautiful Github contribution charts for your profile. Perfect for adding to your portfolio, README, or anywhere you want to showcase them.`,
+    imgSrc: 'https://www.gitch.art/og-git.png',
+    href: 'https://www.gitch.art',
+  },
+  {
     title: 'Kindle Highlight Extractor',
     description: `Extract highlights from your Kindle Clippings file and save them to a CSV file. Works for all Kindle devices and e-books.`,
     imgSrc: '/static/images/kindle-highlights.png',
