@@ -1,4 +1,4 @@
-export const themes = [
+const themes = [
   {
     name: 'GitHub',
     color: '2da44e',
