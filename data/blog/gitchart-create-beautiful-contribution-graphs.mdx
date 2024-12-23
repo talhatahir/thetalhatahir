@@ -1,0 +1,71 @@
+---
+title: 'Gitchart: Create Beautiful GitHub Contribution Graphs'
+date: '2024-12-23'
+tags: ['programming', 'tech', 'productivity',]
+summary: 'Transform your GitHub contribution graph into a beautiful piece of art using Gitch.art, a micro-SaaS product built in 24 hours with NextJS'
+images: ['/static/images/og-git.png']
+---
+
+![Gitch.art - Beautiful GitHub Contribution Graphs](/static/images/og-git-bg.png)
+
+As developers, we spend countless hours contributing to repositories, fixing bugs, and pushing code. All these contributions are visualized in GitHub's contribution graph - that green grid showing your coding activity throughout the year. While the default graph serves its purpose, I always felt it lacked personality and style.
+
+## The Problem
+
+I wanted to showcase my GitHub contributions in a more visually appealing way. After searching online, there were quite a few solutions online but most tools offered the same monotonous color schemes, and none really stood out. Also most just provided an option to download the image, which I didn't find useful, as it did not show me the real-time contribution graph. So i thought, lets give it a shot! Gave myself 24 hours to build it(inspired my [marc lou](https://marclou.beehiiv.com/))
+
+## Building Gitchart in 24 Hours
+
+I started with the stack i know which could ship fast so i can spend time on building it rather than worrying about deployemnts : NextJS, TailwindCSS, Vercel.
+Looked at the github contributions api, tinkered with the generated html and wrote some code with help from cursor ofcourse, to get the contribution data i wanted. 
+
+With TailwindCSS, I styled the page and added some funky gifs and color gradients. 
+The whole design is simple and to the point, enter your username and click generate and you have your very own contribution graph with an option to selecte from a bunch of themes. You can either download this SVG which you can customized indeifinitely or you can use the share button to share your generated graph on social media.
+
+All that was left is deployment and using Vercel, its pretty easy to deploy a NextJS app.
+
+## The Fun Part: SVG Magic
+
+One of the most enjoyable aspects of building [Gitchart](https://www.gitch.art) was working with SVGs. I created an SVG out of the Github data and then manipulated it to create beautiful visualizations by adding lightning effects and gradients. I spent hours experimenting with different patterns, different effects, and color combinations to create themes that would make contribution graphs truly stand out.
+
+And voila!
+
+![My GitHub Contribution Graph](/static/images/talhatahir-gitchart.svg)
+
+
+
+
+Each successful SVG manipulation felt like unlocking a new level of creativity. It was fascinating to see how small changes in the code could create dramatically different visual effects.
+
+## Features that Make Gitchart Special
+
+- **Beautiful Themes**: Carefully crafted color schemes that make your contribution graph pop
+- **Customization Options**: Adjust colors, patterns, and styles to match your personal brand
+- **One-Click Generation**: Simply enter your GitHub username and create stunning visualizations
+- **High-Resolution Export**: Download your contribution art in high quality for use anywhere
+- **Mobile Responsive**: Works perfectly on both desktop and mobile devices
+
+## The Impact
+
+Since launching [Gitchart](https://www.gitch.art), the response has been incredible. Over **500** developers have used it to generate beautiful visualizations of their yearly contributions within the first 48 hours. It's heartwarming to see developers sharing their personalized contribution graphs on social media and in their portfolios.
+
+What started as a personal project to solve my own need has evolved into a tool that helps developers showcase their work in a more engaging way. Every time I see someone use [Gitchart](https://www.gitch.art) to create their unique contribution visualization, it brings a smile to my face.
+
+
+## Looking Forward
+
+The basic API is rate limited so you can only generate a handful of graphs, but you can get unlimited access by paying a one time fee which enables you to generate unlimited real time graphs. You get all upcoming features and support for free.
+
+
+Future plans include:
+- Adding more customizable themes
+- Implementing advanced SVG effects
+- Creating shareable theme templates
+- Adding animation options
+- Supporting different contribution visualization styles
+
+## Try It Yourself
+
+Ready to transform your GitHub contribution graph into a piece of art? Visit [Gitchart](https://www.gitch.art) and generate your own beautiful visualization in seconds. Join the growing community of developers who are making their contribution graphs stand out!
+
+**Happy Coding! 🎨**
