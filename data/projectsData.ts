@@ -15,7 +15,7 @@ export const soloProjects = [
     title: 'Kindle Highlight Extractor',
     description: `Extract highlights from your Kindle Clippings file and save them to a CSV file. Works for all Kindle devices and e-books.`,
     imgSrc: '/static/images/kindle-highlights.png',
-    href: 'https://www.highlightextractor.com',
+    href: 'https://highlight-extractor.vercel.app',
   },
   {
     title: 'Nextjs Blog Template',
