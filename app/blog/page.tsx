@@ -7,8 +7,8 @@ import siteMetadata from '@/data/siteMetadata'
 const POSTS_PER_PAGE = 5
 
 export const metadata = genPageMetadata({
-  title: `Blog - ${siteMetadata.authorLong}`,
-  description: `${siteMetadata.title} - ${siteMetadata.skills}`,
+  title: `Blog - Talha Tahir | ${siteMetadata.authorLong}`,
+  description: `${siteMetadata.title} | ${siteMetadata.skills}`,
 })
 
 export default function BlogPage() {

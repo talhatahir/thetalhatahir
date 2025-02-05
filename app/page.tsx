@@ -1,9 +1,16 @@
 import { sortPosts, allCoreContent } from 'pliny/utils/contentlayer'
 import { allBlogs } from 'contentlayer/generated'
-import Main from './Main'
+import Home from './Home'
+import { genPageMetadata } from './seo'
+import siteMetadata from '@/data/siteMetadata'
+
+export const metadata = genPageMetadata({
+  title: `Talha Tahir - ${siteMetadata.authorLong}`,
+  description: `${siteMetadata.title} - ${siteMetadata.skills}`,
+})
 
 export default async function Page() {
   const sortedPosts = sortPosts(allBlogs)
   const posts = allCoreContent(sortedPosts)
-  return <Main posts={posts} />
+  return <Home posts={posts} />
 }

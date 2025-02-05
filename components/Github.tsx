@@ -38,7 +38,13 @@ const Github = () => {
           My Github Contributions
         </Link>
       </p>
-      <Image width={1000} height={604} src={svgContent} alt="My Github Contributions" />
+      <Image
+        width={1000}
+        height={604}
+        src={svgContent}
+        alt="My Github Contributions"
+        style={{ width: '100%', height: 'auto' }}
+      />
     </div>
   )
 }

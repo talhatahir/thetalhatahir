@@ -1,8 +1,15 @@
 import ListLayout from '@/layouts/ListLayoutWithTags'
 import { allCoreContent, sortPosts } from 'pliny/utils/contentlayer'
 import { allBlogs } from 'contentlayer/generated'
+import { genPageMetadata } from 'app/seo'
+import siteMetadata from '@/data/siteMetadata'
 
 const POSTS_PER_PAGE = 5
+
+export const metadata = genPageMetadata({
+  title: `Blog - Talha Tahir | ${siteMetadata.authorLong}`,
+  description: `${siteMetadata.title} | ${siteMetadata.skills}`,
+})
 
 export const generateStaticParams = async () => {
   const totalPages = Math.ceil(allBlogs.length / POSTS_PER_PAGE)

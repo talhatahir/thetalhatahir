@@ -1,9 +1,12 @@
 import { soloProjects, collaborationProjects } from '@/data/projectsData'
 import Card from '@/components/Card'
 import { genPageMetadata } from 'app/seo'
+import siteMetadata from '@/data/siteMetadata'
 
-export const metadata = genPageMetadata({ title: 'Projects' })
-
+export const metadata = genPageMetadata({
+  title: `Projects - Talha Tahir | ${siteMetadata.authorLong}`,
+  description: `${siteMetadata.title} | ${siteMetadata.skills}`,
+})
 export default function Projects() {
   return (
     <>
