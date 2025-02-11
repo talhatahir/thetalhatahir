@@ -1,0 +1,127 @@
+---
+title: 'PostureSmart: Correct Your Posture with AI'
+date: '2025-01-24'
+tags: ['programming', 'tech', 'productivity',]
+summary: 'How my back pain led me to create a Chrome extension that uses AI to correct your posture in real-time and send your notifications about your posture'
+images: ['/static/images/posture-promo.png']
+---
+
+
+![PostureSmart - Correct Your Posture with AI](https://www.posturesm.art/posture-mq.png)
+
+
+
+## My Story
+
+
+A while ago, I found myself struggling with persistent neck and back pain. Like many software developers, I spend countless hours hunched over my laptop, coding away without realizing the toll it was taking on my body. 
+
+Then one fine day, as I laid down on my bed for a much needed nap, I felt a sharp pain in my neck and lower back. I thought this was just a one-time thing and I shrugged it off, took a NSAID and went to sleep. The next day, it got worse, I couldn't even turn my head fully without feeling a sharp pain. Alongside this, I started having lower back pain and stiffness.
+Being stubborn, I ignored these symptoms for a while but then I had to go to an orthopedic doctor.
+
+![Poor Posture](https://images.unsplash.com/photo-1728347053156-cf9066af4d9f?q=50&w=600)
+
+
+The doctor confirmed with an x-ray that due to my poor posture while sitting in front of my laptop all day, I had a cervical strain in my neck. Not only that, but the x-ray also showed that my lower back especially L5 was compressed and was showing early signs of a stress fracture. Then it hit me, all those years where I just hunched over my laptop, without any breaks, without any proper posture, it had done the damage.
+
+## The Solution
+
+He prescribed me a couple of pain killers, a muscle relaxant and a list of exercies to do, and to sit straight while working. The damage was reversible but if I wanted to avoid surgery in the next 5 years or so, I had to change my posture. This kind of hit me hard, I never thought that such a small thing like sitting infront of your screen could have such a big impact on your body and eventually your life.
+
+
+## PostureSmart was born
+
+I started looking at YouTube videos, read articles on how to keep your posture straight while working, some people suggested ergonomic chairs, standing desks and other things. I thought about it and I thought to myself, why not use AI to solve this problem. Why not build something which gives you instant feedback about your posture and corrects it when you slouch. The problem is that once you start slouching, because your mind is so focused, you don't even realize it. 
+
+So I looked up at tools, I found a few apps which claimed to correct your posture, but they were either paid or had a lot of features I didn't need. So I thought to myself, why not build my own. Hence [PostureSmart](https://www.posturesm.art) was born.
+
+![PostureSmart](https://www.posturesm.art/posture-mq.png)
+
+
+## The Technology Behind PostureSmart
+
+Using TensorFlow.js and Google's MoveNet model, PostureSmart performs real-time pose detection through your webcam. I created this as a chrome extension so that anyone can use it, either on MacOS or Windows. The extension tracks 10+ key points on your body, focusing specifically on the relationship between your head, shoulders, and ears to determine if you're maintaining proper posture while sitting.
+
+![PostureSmart Technology](/static/images/posturesmart/scr1.png)
+
+What makes PostureSmart unique is its ability to run entirely in your browser, ensuring your privacy while delivering excellent posture feedback in real-time. Even if you do not prefer using the webcam, you can use its normal mode to setup basic notifications which will remind you to sit straight. 
+
+
+With advanced mode, the camera gets enabled behind the scenes and will auto-detect if your posture is consistently bad for a while. If it is, it will notify you using a chrome notification.
+
+![PostureSmart Settings](/static/images/posturesmart/scr2.png)
+
+## Features That Keep Your Posture in Check
+
+Here is a full list of features that PostureSmart has:
+
+### 1. Real-Time Posture Analysis
+PostureSmart continuously monitors six crucial aspects of your posture:
+- Shoulder levelness to detect if your shoulders are hunched
+- Head tilt (both up and down)
+- Forward head position to detect if you are slouching
+- Head rotation (left and right) to detect if you are leaning to one side
+
+The extension provides an intuitive dashboard with gauge-style indicators for each posture aspect. Green means you're doing great, while red indicates areas needing attention. You can practice your correct posture by clicking "Check posture" button and it will immediately show you the areas you are doing wrong.
+
+![PostureSmart Settings](/static/images/posturesmart/scr7.png)
+
+
+### 2. Normal Mode Notifications
+You can configure how the extension should notify you about your posture. Some people just need a gentle reminder to sit straight, so they can enable normal mode with a set frequency on how often they should be notified. You can choose either the default notications or quirky ones which adds a little quirkiness to the notifications.
+
+
+### 3. Advanced Mode Notifications
+You can enable advanced mode to enable AI-based notifications which detect and alert you in real-time about your posture. By setting the threshold, you can control how long the extension should wait to send you a notification if you are consistently sitting in a bad posture. This is truly helpful in the initial days if you are trying to fix your posture.
+
+![PostureSmart Settings](/static/images/posturesmart/scr4.png)
+
+
+
+### 4. Privacy-First Design
+- All processing happens locally in your browser
+- No video data is ever stored or transmitted
+- Works offline once installed
+
+
+## How to Get Started
+
+1. Install [PostureSmart](https://chromewebstore.google.com/detail/posturesmart-correct-your/jjdbjpcdikaljelndnmnbacecmipbono) from the Chrome Web Store
+2. Pin the Chrome extension to your toolbar.
+3. Click the extension icon and click on "Check posture".
+3. Grant camera permissions
+4. Position yourself so your head and shoulders are visible
+5. Let PostureSmart guide you to better posture!
+
+
+## Settings
+
+1. Click on the extension icon and click on "Settings".
+2. Enable/disable Normal or Advanced mode.
+3. Configure the notification frequency for Normal mode or Advanced mode.
+4. Click on "Save" to apply the changes.
+
+
+
+## The Outcome
+
+I have been using PostureSmart for a while now and it has helped me a lot. I have not had any back pain since then and I am able to sit for longer hours without any issues. I got feedback from my friends and they said that even the simple notification alerts them to sit up straight and it's pretty intuitive.
+
+
+## Looking Forward
+
+PostureSmart represents a step forward in using AI to promote better health habits. Future updates will include:
+- Customizable posture profiles
+- Detailed posture analytics
+- Integration with standing desk controls
+- Support for additional browsers
+
+
+## Take care of your back
+
+![PostureSmart Settings](https://images.unsplash.com/photo-1582478168038-23743a1da244?q=80&w=1240)
+
+I never thought that I would be talking about back issues, but I cannot stress enough how important it is. Don't wait until you're experiencing pain to think about your posture. PostureSmart provides the real-time feedback you need to develop better sitting habits and maintain them throughout your workday.
+
+[Add PostureSmart to Chrome](https://chromewebstore.google.com/detail/posturesmart-correct-your/jjdbjpcdikaljelndnmnbacecmipbono)
+
