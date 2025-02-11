@@ -32,7 +32,8 @@ const Github = () => {
     <div className="flex flex-col justify-center items-center dark:text-grey text-gray pb-4">
       <p className="text-xs leading-7  text-gray dark:text-gray md:mt-5">
         <Link
-          href="/about"
+          href="https://github.com/talhatahir"
+          target="_blank"
           className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
         >
           My Github Contributions
