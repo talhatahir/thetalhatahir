@@ -6,7 +6,7 @@ import siteMetadata from '@/data/siteMetadata'
 
 export const metadata = genPageMetadata({
   title: `Talha Tahir - ${siteMetadata.authorLong}`,
-  description: `${siteMetadata.title} - ${siteMetadata.skills}`,
+  description: `${siteMetadata.title} - ${siteMetadata.authorLong} | ${siteMetadata.skills}`,
 })
 
 export default async function Page() {

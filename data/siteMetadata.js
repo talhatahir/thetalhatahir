@@ -2,7 +2,7 @@
 const siteMetadata = {
   title: 'Talha Tahir',
   author: 'Talha Tahir',
-  authorLong: 'An experienced Full Stack Engineer working remotely',
+  authorLong: 'An experienced Full Stack Engineer',
   headerTitle: 'talha tahir',
   description: 'My chatter about life and the tech realm',
   skills: 'ReactJS, NextJS, NodeJS, Javascript, AngularJS, Material UI, Webpack, MongoDB, MySQL',

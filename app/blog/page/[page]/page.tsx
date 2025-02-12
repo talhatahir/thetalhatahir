@@ -8,7 +8,7 @@ const POSTS_PER_PAGE = 5
 
 export const metadata = genPageMetadata({
   title: `Blog - Talha Tahir | ${siteMetadata.authorLong}`,
-  description: `${siteMetadata.title} | ${siteMetadata.skills}`,
+  description: `${siteMetadata.title} - ${siteMetadata.authorLong} | ${siteMetadata.skills}`,
 })
 
 export const generateStaticParams = async () => {
