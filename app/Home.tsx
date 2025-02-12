@@ -4,23 +4,34 @@ import Image from '@/components/Image'
 import Github from '@/components/Github'
 import siteMetadata from '@/data/siteMetadata'
 import { formatDate } from 'pliny/utils/formatDate'
-
-const MAX_DISPLAY = 15
+import { themes, MAX_DISPLAY } from './constants'
 
 export default function Home({ posts }) {
+  const randomTheme = themes[Math.floor(Math.random() * themes.length)]
+
   return (
     <>
       <div className="divide-y divide-gray-200 dark:divide-gray-700">
         <div className="space-y-2 pb-8 pt-6 md:space-y-5">
           <h1 className="text-2xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-5xl md:leading-14">
             I'm{' '}
-            <span className="dark:from-secondary-700 dark:to-secondary-400 mt-10 bg-gradient-to-r from-primary-700 to-primary-400 bg-clip-text text-center text-4xl font-extrabold tracking-tight text-transparent sm:text-5xl lg:text-6xl">
+            <span
+              style={{
+                backgroundImage: `linear-gradient(to right, #${randomTheme.color}, #${randomTheme.color}cc)`,
+                WebkitBackgroundClip: 'text',
+                backgroundClip: 'text',
+              }}
+              className="mt-10 text-center text-4xl font-extrabold tracking-tight text-transparent sm:text-5xl lg:text-6xl"
+            >
               talha tahir
             </span>{' '}
             👋
           </h1>
           <div className="dark:text-grey text-gray mb-8  mt-4 text-base">
-            <p>A passionate Engineer who likes to build products and solve problems.</p>
+            <h2 className="text-xl leading-8 tracking-tight">
+              An experienced Full Stack Engineer Engineer who likes to build products and solve
+              problems.
+            </h2>
             <p className="dark:text-grey text-gray mb-8   mt-4 text-sm">
               <span className="mr-3 inline-block whitespace-nowrap pt-3">❤️ React.js</span>
               <span className="mr-3 inline-block whitespace-nowrap pt-3">🛠️ Javascript</span>
@@ -44,9 +55,12 @@ export default function Home({ posts }) {
             </p>
           </div>
 
-          <Github />
-
-          <p className="text-lg leading-7 text-gray dark:text-gray">{siteMetadata.description}</p>
+          <h3 className="text-md leading-7 text-gray dark:text-gray">
+            I write about my experiences as a Remote Engineer, Lifehacks to increase your
+            producitivity, Jobhacks to get your next gig, and selfishly post about my own microSaaS.
+            Sometimes a book inspires me enough to write about it.
+          </h3>
+          <Github color={randomTheme.color} />
         </div>
         <ul className="divide-y divide-gray-200 dark:divide-gray-700">
           {!posts.length && 'No posts found.'}

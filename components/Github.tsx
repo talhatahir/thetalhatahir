@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react'
 import Image from 'next/image'
 import Link from '@/components/Link'
 
-const Github = () => {
+const Github = ({ color }: { color: string }) => {
   const [svgContent, setSvgContent] = useState('')
   const [loading, setLoading] = useState(false)
 
@@ -11,7 +11,7 @@ const Github = () => {
     const fetchSVGContent = async () => {
       try {
         setLoading(true)
-        const response = await fetch(`/api/contributions`)
+        const response = await fetch(`/api/contributions?color=${color}`)
         const svgText = await response.text()
 
         setSvgContent(`data:image/svg+xml;base64,${btoa(svgText)}`)
