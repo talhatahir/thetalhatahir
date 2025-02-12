@@ -7,7 +7,7 @@ import siteMetadata from '@/data/siteMetadata'
 
 export const metadata = genPageMetadata({
   title: 'About | Talha Tahir',
-  description: `${siteMetadata.title} | An accomplished Engineer with a deep passion for software development`,
+  description: `${siteMetadata.title} - ${siteMetadata.authorLong} | ${siteMetadata.skills}`,
 })
 
 export default function Page() {
