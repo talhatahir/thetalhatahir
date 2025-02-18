@@ -4,8 +4,15 @@ import AuthorLayout from '@/layouts/AuthorLayout'
 import { coreContent } from 'pliny/utils/contentlayer'
 import { genPageMetadata } from 'app/seo'
 import Image from '@/components/Image'
+import { Metadata } from 'next'
 
-export const metadata = genPageMetadata({ title: 'Github Contributions to Filestage repo' })
+export const metadata: Metadata = {
+  ...genPageMetadata({ title: 'Github Contributions to Filestage repo' }),
+  robots: {
+    index: false,
+    follow: false,
+  },
+}
 
 export default function Page() {
   const author = allAuthors.find((p) => p.slug === 'default') as Authors
