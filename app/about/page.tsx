@@ -6,7 +6,7 @@ import { genPageMetadata } from 'app/seo'
 import siteMetadata from '@/data/siteMetadata'
 
 export const metadata = genPageMetadata({
-  title: 'About | Talha Tahir',
+  title: `About | ${siteMetadata.author} | ${siteMetadata.authorLong}`,
   description: `${siteMetadata.title} - ${siteMetadata.authorLong} | ${siteMetadata.skills}`,
 })
 
