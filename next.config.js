@@ -75,6 +75,7 @@ module.exports = () => {
         'www.jobfillr.com',
         'www.posturesm.art',
         'www.gitch.art',
+        'covers.openlibrary.org',
       ],
     },
     async headers() {

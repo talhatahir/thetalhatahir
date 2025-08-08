@@ -1,0 +1,298 @@
+---
+title: 'How to effectively use Cursor as an Engineer to 10x your work'
+date: '2025-08-08'
+lastmod: '2025-08-08'
+tags: ['productivity', 'AI', 'programming-tips']
+layout: 'PostLayout'
+summary: 'A practical workflow to turn Cursor into your coding co-pilot: repo-aware conversations, edit-on-diff, test-first loops, prompts that ship code, and safe automation.'
+images:
+  ['https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1574&q=80']
+---
+
+![Cursor for Engineers](https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1574&q=80)
+
+Used right, Cursor can compress days of work into hours. This is the workflow I use to ship real changes safely and fast.
+
+If you’re just starting out with AI-assisted development, you might also like my guide on [Using ChatGPT effectively as a Programmer](../blog/using-chatgpt-effectively-as-a-programmer).
+
+---
+
+## 1) Start with a repo-aware brief
+
+Give Cursor the problem, constraints, and the relevant files. Mention your framework and build tools (e.g., Next.js, Contentlayer). Ask it to propose an execution plan before writing code.
+
+Good brief:
+
+```
+Goal: Add unit tests for components under components/ and fix flaky behaviors.
+Context: components/*.tsx, app/*, any hooks in hooks/*
+Constraints: No breaking changes; keep public props stable.
+Deliverable: Test files + minimal refactors + how to run the tests locally.
+```
+
+Then say: “Proceed with the plan and make the edits.”
+
+## 2) Use “edit on diff”, not walls of code
+
+Ask Cursor to modify specific files and sections. Diff-sized edits reduce hallucinations and make reviews easy. If the file is long, have it quote the exact lines it is changing.
+
+## 3) Test-first loops (tight feedback)
+
+- Ask Cursor to add or update minimal tests.
+- Run tests locally; paste failing traces back into the chat.
+- Iterate until green.
+
+This turns the model into a failure-driven development partner.
+
+## 4) Prompt patterns that ship code
+
+- “Make it real”: Require runnable code, imports, and configuration.
+- “Converge on minimal change”: Prefer small edits over rewrites.
+- “Name things well”: Enforce clear function and variable names.
+- “Guard rails”: Ask it to handle edge cases and add early returns.
+
+Pair this with my productivity approach in [How to boost productivity as a programmer](../blog/boost-productivity-as-programmer).
+
+## 5) Navigate unfamiliar repos fast
+
+Use repo search + structural queries:
+
+- “Where is the blog post layout rendered?”
+- “Who generates the RSS feed?”
+- “Where are API routes for newsletter subscription?”
+
+Ask Cursor to open and summarize the relevant files, then request targeted edits.
+
+## 6) Automate safely
+
+- Have Cursor draft scripts for repetitive chores (e.g., image optimization, RSS updates), then review diffs.
+- For long-running commands, ask it to run in the background and stream logs.
+- Keep secrets out of transcripts; pass via env vars.
+
+## 7) When to stop and code by hand
+
+If the change spans many files or involves nuanced design trade-offs, give Cursor scaffolding work, but write the core APIs yourself. Use it for drafts, cleanups, and tests.
+
+---
+
+## Agent mode vs Ask mode
+
+Both are powerful. Use them for different jobs:
+
+- Ask mode: Q&A, quick code snippets, explanations, small refactors. You stay in control, copy/paste what you need.
+- Agent mode: Multi-step tasks inside the repo—edit files, run commands, execute tests, and iterate on failures. Best for changes you can validate with a build or tests.
+
+Tips:
+
+- Prefer Agent mode when the task can be proven by tests or a build.
+- Give a clear brief, list files, and require diff-sized edits.
+- Ask the Agent to run linters/tests after each change and paste output back.
+
+### Example 1: Agent mode writes unit tests for a React component
+
+Component under test:
+
+```tsx
+// components/Counter.tsx
+import { useState } from 'react'
+
+export function Counter({ initial = 0, step = 1 }: { initial?: number; step?: number }) {
+  const [count, setCount] = useState(initial)
+  return (
+    <div>
+      <p>Count: {count}</p>
+      <button onClick={() => setCount((c) => c + step)}>Increment</button>
+      <button onClick={() => setCount((c) => c - step)}>Decrement</button>
+      <button onClick={() => setCount(initial)}>Reset</button>
+    </div>
+  )
+}
+```
+
+Ask the Agent:
+
+```
+Goal: Create unit tests for components/Counter.tsx using React Testing Library.
+Context: components/Counter.tsx
+Constraints: Cover increment, decrement, reset, and custom step prop. Keep tests deterministic.
+Deliverable: __tests__/Counter.test.tsx + any minimal config. Run tests and share results.
+```
+
+Expected test (idea):
+
+```ts
+// __tests__/Counter.test.tsx
+import { render, screen } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
+import { Counter } from '../components/Counter'
+
+test('increments, decrements and resets', async () => {
+  render(<Counter initial={2} step={2} />)
+  const user = userEvent.setup()
+  await user.click(screen.getByText('Increment'))
+  expect(screen.getByText('Count: 4')).toBeInTheDocument()
+  await user.click(screen.getByText('Decrement'))
+  expect(screen.getByText('Count: 2')).toBeInTheDocument()
+  await user.click(screen.getByText('Reset'))
+  expect(screen.getByText('Count: 2')).toBeInTheDocument()
+})
+```
+
+Guard rails for the Agent:
+
+- If imports are missing, ask it to add dev deps (testing-library, jest/vitest) and config.
+- Require it to run tests and paste failing traces; iterate until green.
+
+### Example 2: Ask mode for quick utilities; Agent for wiring
+
+Use Ask mode for one-off helpers or isolated files. Switch to Agent when it needs repo edits or tests.
+
+Create a typed POST endpoint under `app/api/feedback/route.ts` with runtime validation.
+
+```ts
+// app/api/feedback/route.ts
+import { NextResponse } from 'next/server'
+import { z } from 'zod'
+
+const FeedbackSchema = z.object({
+  email: z.string().email(),
+  message: z.string().min(5).max(2000),
+})
+
+export async function POST(req: Request) {
+  const json = await req.json().catch(() => null)
+  const result = FeedbackSchema.safeParse(json)
+  if (!result.success) {
+    return NextResponse.json(
+      { error: 'Invalid payload', issues: result.error.flatten() },
+      { status: 400 }
+    )
+  }
+  const { email, message } = result.data
+  // TODO: persist or forward to a tool
+  return NextResponse.json({ ok: true, received: { email, message } }, { status: 200 })
+}
+```
+
+Ask Cursor to:
+
+- Add the route with imports.
+- Generate a small client util:
+
+```ts
+// lib/feedback.ts
+export async function sendFeedback(payload: { email: string; message: string }) {
+  const res = await fetch('/api/feedback', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload),
+  })
+  if (!res.ok) throw new Error('Feedback failed')
+  return res.json()
+}
+```
+
+### Example 3: Refactor prop-drilling into Context + hooks (Agent)
+
+Before:
+
+```tsx
+// components/UserBadge.tsx
+export function UserBadge({ user }: { user: { name: string } }) {
+  return <span>{user.name}</span>
+}
+
+// components/Header.tsx
+export function Header({ user }: { user: { name: string } }) {
+  return (
+    <header>
+      <UserBadge user={user} />
+    </header>
+  )
+}
+
+// app/page.tsx
+export default function Page() {
+  const user = { name: 'Talha' }
+  return <Header user={user} />
+}
+```
+
+After (Context + hook):
+
+```tsx
+// components/UserContext.tsx
+import { createContext, useContext } from 'react'
+
+type User = { name: string } | null
+const UserContext = createContext<User>(null)
+export function UserProvider({ user, children }: { user: User; children: React.ReactNode }) {
+  return <UserContext.Provider value={user}>{children}</UserContext.Provider>
+}
+export function useUser() {
+  const ctx = useContext(UserContext)
+  if (!ctx) throw new Error('useUser must be used within <UserProvider>')
+  return ctx
+}
+
+// components/UserBadge.tsx
+export function UserBadge() {
+  const user = useUser()
+  return <span>{user.name}</span>
+}
+
+// components/Header.tsx
+export function Header() {
+  return (
+    <header>
+      <UserBadge />
+    </header>
+  )
+}
+
+// app/page.tsx
+export default function Page() {
+  const user = { name: 'Talha' }
+  return (
+    <UserProvider user={user}>
+      <Header />
+    </UserProvider>
+  )
+}
+```
+
+Ask Cursor to produce the diffs only for the changed files. Review and accept.
+
+### Example 4: Performance pass with `useMemo`, `useCallback`, and `memo` (Ask)
+
+```tsx
+import { memo, useMemo, useCallback } from 'react'
+
+const List = memo(function List({ items, onSelect }: { items: string[]; onSelect: (v: string) => void }) {
+  const count = items.length
+  const upper = useMemo(() => items.map((i) => i.toUpperCase()), [items])
+  const handleClick = useCallback((i: string) => () => onSelect(i), [onSelect])
+  return (
+    <div>
+      <p>Total: {count}</p>
+      {upper.map((i) => (
+        <button key={i} onClick={handleClick(i)}>{i}</button>
+      ))}
+    </div>
+  )
+})
+```
+
+Have Cursor explain why each memoization boundary exists and when to remove it (don’t over-memoize).
+
+---
+
+### Final tips
+
+- Keep prompts short, specific, and repo-aware.
+- Prefer edits with context and ask for linter/test runs after changes.
+- Capture learnings into your prompts; they compound.
+
+If you’re exploring React changes, read [React 19: What it brings to the table](../blog/react-19-what-it-brings) next.
+
+

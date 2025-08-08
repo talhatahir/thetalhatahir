@@ -22,7 +22,7 @@ const Github = ({ color }: { color: string }) => {
     }
 
     fetchSVGContent()
-  }, [])
+  }, [color])
 
   if (loading || svgContent === '') {
     return null

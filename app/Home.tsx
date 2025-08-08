@@ -33,10 +33,10 @@ export default function Home({ posts }) {
               problems.
             </h2>
             <p className="dark:text-grey text-gray mb-8   mt-4 text-sm">
+              <span className="mr-3 inline-block whitespace-nowrap pt-3">🤖 OpenAI</span>
               <span className="mr-3 inline-block whitespace-nowrap pt-3">❤️ React.js</span>
               <span className="mr-3 inline-block whitespace-nowrap pt-3">🛠️ Javascript</span>
               <span className="mr-3 inline-block whitespace-nowrap pt-3">🥇 Next.js</span>
-              <span className="mr-3 inline-block whitespace-nowrap pt-3">🤖 OpenAI API</span>
               <span className="mr-3 inline-block whitespace-nowrap pt-3">📦 NodeJS</span>
               <span className="mr-3 inline-block whitespace-nowrap pt-3">🧱 Material UI</span>
               <span className="mr-3 inline-block whitespace-nowrap pt-3">🐜 Ant Design</span>
