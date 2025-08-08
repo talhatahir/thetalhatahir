@@ -3,8 +3,8 @@ import path from 'path'
 import GithubSlugger from 'github-slugger'
 import { escape } from 'pliny/utils/htmlEscaper.js'
 import siteMetadata from '../data/siteMetadata.js'
-import tagData from '../app/tag-data.json' assert { type: 'json' }
-import { allBlogs } from '../.contentlayer/generated/index.mjs'
+import tagData from '../app/tag-data.json' with { type: 'json' }
+import allBlogs from '../.contentlayer/generated/Blog/_index.json' with { type: 'json' }
 import { sortPosts } from 'pliny/utils/contentlayer.js'
 
 const generateRssItem = (config, post) => `

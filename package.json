@@ -5,11 +5,11 @@
   "scripts": {
     "start": "next dev",
     "dev": "cross-env INIT_CWD=$PWD next dev",
-    "build": "cross-env INIT_CWD=$PWD next build && cross-env NODE_OPTIONS='--experimental-json-modules' node ./scripts/postbuild.mjs",
+    "build": "cross-env INIT_CWD=$PWD next build && node ./scripts/postbuild.mjs",
     "serve": "next start",
     "analyze": "cross-env ANALYZE=true next build",
     "lint": "next lint --fix --dir pages --dir app --dir components --dir lib --dir layouts --dir scripts",
-    "rss": "cross-env NODE_OPTIONS='--experimental-json-modules' node ./scripts/postbuild.mjs"
+    "rss": "node ./scripts/postbuild.mjs"
   },
   "dependencies": {
     "@next/bundle-analyzer": "13.5.3",
@@ -56,7 +56,7 @@
     "lint-staged": "^13.0.0",
     "prettier": "^3.0.0",
     "prettier-plugin-tailwindcss": "^0.4.1",
-    "typescript": "^5.1.3"
+    "typescript": "^5.5.4"
   },
   "resolutions": {
     "@opentelemetry/api": "1.4.1",
