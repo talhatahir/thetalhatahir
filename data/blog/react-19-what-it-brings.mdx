@@ -106,6 +106,54 @@ If SEO is your focus, also see my tips in [How to boost productivity as a progra
 
 React 19 improves interop with custom elements: props/attributes mapping is more predictable, event handling is smoother, and TypeScript support is better for custom events. If your design system is a set of Web Components, interop friction is much lower now.
 
+## React Compiler: automatic render optimizations
+
+React Compiler reduces unnecessary re-renders by analyzing your components and generating the stable props/handlers they need. In many places, you can stop hand-writing `useMemo` and `useCallback`.
+
+Before (manual memoization):
+
+```tsx
+import { memo, useCallback, useMemo } from 'react'
+
+const ProductList = memo(function ProductList({ items, onBuy }: { items: { id: string; name: string }[]; onBuy: (id: string) => void }) {
+  const names = useMemo(() => items.map((i) => i.name), [items])
+  const handleBuy = useCallback((id: string) => () => onBuy(id), [onBuy])
+  return (
+    <ul>
+      {items.map((i, idx) => (
+        <li key={i.id}>
+          {names[idx]} <button onClick={handleBuy(i.id)}>Buy</button>
+        </li>
+      ))}
+    </ul>
+  )
+})
+```
+
+After (let the compiler optimize):
+
+```tsx
+function ProductList({ items, onBuy }: { items: { id: string; name: string }[]; onBuy: (id: string) => void }) {
+  return (
+    <ul>
+      {items.map((i) => (
+        <li key={i.id}>
+          {i.name} <button onClick={() => onBuy(i.id)}>Buy</button>
+        </li>
+      ))}
+    </ul>
+  )
+}
+```
+
+How to think about it:
+
+- Keep components pure: avoid mutating props/objects during render.
+- Derive values from props/state inside render; the compiler tracks dependencies.
+- You can keep memoization where it protects heavy work, but you will write less of it overall.
+
+Availability: frameworks are rolling this out alongside React 19 as an opt‑in. Check your framework docs for how to enable the compiler in your toolchain.
+
 ## Hydration error messages you can act on
 
 When server-rendered HTML and client render disagree, hydration errors now include clearer diffs and guidance so you can quickly isolate what drifted.
