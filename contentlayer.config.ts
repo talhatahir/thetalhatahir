@@ -1,5 +1,5 @@
 import { defineDocumentType, ComputedFields, makeSource } from 'contentlayer/source-files'
-import { writeFileSync } from 'fs'
+import { writeFileSync, readFileSync } from 'fs'
 import readingTime from 'reading-time'
 import GithubSlugger from 'github-slugger'
 import path from 'path'
@@ -149,9 +149,14 @@ export default makeSource({
       rehypePresetMinify,
     ],
   },
-  onSuccess: async (importData) => {
-    const { allBlogs } = await importData()
-    createTagCount(allBlogs)
-    createSearchIndex(allBlogs)
+  onSuccess: async () => {
+    try {
+      const json = readFileSync('./.contentlayer/generated/Blog/_index.json', 'utf-8')
+      const allBlogs = JSON.parse(json)
+      createTagCount(allBlogs)
+      createSearchIndex(allBlogs)
+    } catch (err) {
+      console.error('Contentlayer onSuccess failed to load generated JSON:', err)
+    }
   },
 })
