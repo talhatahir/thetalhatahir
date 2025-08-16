@@ -4,9 +4,8 @@ date: '2025-06-12'
 lastmod: '2025-08-12'
 tags: ['books', 'self-improvement']
 layout: 'PostSimple'
-summary: 'My distilled highlights and notes from Dale Carnegie’s classic—practical principles for better conversations, influence without manipulation, and leadership that lasts.'
-images:
-  ['https://covers.openlibrary.org/b/isbn/0671027034-L.jpg']
+summary: 'My notes from Dale Carnegie`s classic and how I applied these principles in engineering teams and remote work environments'
+images: ['https://covers.openlibrary.org/b/isbn/0671027034-L.jpg']
 ---
 
 ![How to Win Friends and Influence People – Book Cover](https://covers.openlibrary.org/b/isbn/0671027034-L.jpg)
@@ -15,54 +14,110 @@ images:
 
 ---
 
-### Main Summary
+### Why I read this book
 
-This book is about dealing with people in a simple, kind way. Praise works better than criticism. If you want someone to agree with you, first show that you understand them. Small changes—using names, listening well, smiling—can change outcomes. These ideas help a lot in remote work too. See: [Mastering the art of remote work](../blog/mastering-remote-work).
+I picked up this book after a particularly frustrating code review session where I realized I was being way too direct with feedback. A senior engineer recommended it, saying it changed how he approached technical discussions. I was skeptical—how relevant could a book from 1936 be for modern software teams?
 
-## Highlights
+Turns out, very relevant. The core principles translate perfectly to engineering work, especially in remote teams where every interaction matters more. Here are the highlights that actually changed how I work.
 
-**“Don’t criticize, condemn, or complain.”**
+These ideas have been especially helpful in remote work environments. If you're working remotely, also check out [Mastering the art of remote work](../blog/mastering-remote-work).
 
-Criticism makes people defensive and closes doors. It’s better to describe the outcome you want and talk about how to get there together. This keeps the focus on the work, not the blame.
+## Key principles that changed my approach
 
-**“Give honest and sincere appreciation.”**
+**"Don't criticize, condemn, or complain."**
 
-People need to feel seen. Specific praise builds trust fast: “Thanks for fixing the deploy in 10 minutes—it saved us a customer ticket.”
+This one hit me hard. I used to open code reviews with "This is wrong" or "Why did you do it this way?" - basically putting people on the defensive from the start.
 
-**“Remember that a person’s name is to that person the sweetest and most important sound.”**
+Now I try: "I'm seeing some potential issues here. Let's walk through this together." Same message, but it invites collaboration instead of triggering defensiveness.
 
-Using someone’s name shows care. In async tools, mention people by name when you thank them or ask for help.
+**Real example:** Instead of "This function is inefficient," I write "What do you think about optimizing this loop? I'm concerned about performance with large datasets."
 
-**“Be a good listener. Encourage others to talk about themselves.”**
+**"Give honest and sincere appreciation."**
 
-Let silence do the work. Ask open questions like “What would make this easier?” and listen fully before you respond.
+People need recognition, especially in engineering where good work often goes unnoticed. Be specific about what they did well.
 
-**“Talk in terms of the other person’s interests.”**
+Instead of generic "good job," try: "Thanks for fixing that deployment issue so quickly—you saved us from customer complaints and I learned a lot watching you debug it."
 
-Translate your point to what they value. Product cares about impact, engineering cares about clarity, design cares about constraints.
+I started doing this more in team meetings and Slack. The impact on team morale has been noticeable.
 
-**“The only way to get the best of an argument is to avoid it.”**
+**"Remember that a person's name is to that person the sweetest and most important sound."**
 
-Don’t fight—align first. Start with shared goals, then compare options. Most debates cool down once goals are clear.
+In async communication, using someone's name makes a huge difference. Instead of "Can someone review this?" try "Hey Sarah, could you take a look at this when you have time?"
 
-**“If you are wrong, admit it quickly and emphatically.”**
+It's such a small change, but people respond much more positively.
 
-Own it early and fix it fast. A short note like “My mistake—pushing a fix now” resets the tone.
+**"Be a good listener. Encourage others to talk about themselves."**
 
-**“Begin in a friendly way.”**
+In technical discussions, I used to jump straight to my solution. Now I ask more questions first:
 
-Open PRs and incident threads with something positive: “Nice work on X. One question about Y…” It lowers guard and invites collaboration.
+- "What's your thinking on this approach?"
+- "What constraints are you working with?"
+- "How would you prefer to handle error cases?"
 
-**“Let the other person feel that the idea is his or hers.”**
+Let people explain their reasoning before offering alternatives. You learn more, and they feel heard.
 
-Co‑create plans. Move from “my proposal” to “our plan.” People support what they help build.
+**"Talk in terms of the other person's interests."**
 
-**“Throw down a challenge.”**
+This is crucial for cross-team communication:
 
-Clear goals motivate. Try “Let’s ship in three days with under two bugs.” Small, concrete challenges build momentum.
+- **To Product:** Focus on user impact and business outcomes
+- **To Engineering:** Talk about maintainability, performance, and technical debt
+- **To Design:** Emphasize user experience and implementation constraints
+
+Same technical change, but framed differently for each audience.
+
+**"The only way to get the best of an argument is to avoid it."**
+
+Technical arguments get heated fast. Instead of debating approaches, I try to establish shared goals first:
+
+"We both want this to be maintainable and perform well. Let's compare how each approach handles that."
+
+Most technical disagreements dissolve once you align on what success looks like.
+
+**"If you are wrong, admit it quickly and emphatically."**
+
+Own mistakes fast, especially in production incidents:
+
+"My mistake on that deploy—rolling back now and will have a postmortem ready by tomorrow."
+
+No excuses, no blame-shifting. Just quick acknowledgment and action.
+
+**"Begin in a friendly way."**
+
+I changed how I open PRs and incident discussions:
+
+- ❌ "This code has several problems..."
+- ✅ "Nice work on the core logic. I have a few suggestions for the error handling..."
+
+Starting positive makes people more receptive to criticism.
+
+**"Let the other person feel that the idea is his or hers."**
+
+Instead of "Here's what we should do," try "What if we explored this approach?" Then build on their input.
+
+People support solutions they helped create. This is especially important in architecture discussions.
+
+**"Throw down a challenge."**
+
+Clear, achievable goals motivate teams:
+
+- "Let's get this feature shipped with zero critical bugs by Friday"
+- "Can we reduce this API response time by 50%?"
+
+Specific challenges create focus and energy.
 
 ---
 
-If you like highlight‑style notes, you may also enjoy my summary of [Atomic Habits](../blog/atomic-habits).
+## How this applies to engineering
 
+These principles aren't just for management—they're essential for any engineer who needs to:
 
+- Give effective code reviews
+- Resolve technical disagreements
+- Onboard new team members
+- Communicate with stakeholders
+- Lead technical initiatives
+
+The book is 90 years old, but human nature hasn't changed. People still want to feel respected, heard, and valued. Technical skills get you hired; people skills help you be effective.
+
+If you enjoyed these insights, check out my notes on [Atomic Habits](../blog/atomic-habits) for more practical self-improvement ideas.

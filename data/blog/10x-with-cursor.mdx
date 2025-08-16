@@ -4,96 +4,122 @@ date: '2025-08-08'
 lastmod: '2025-08-08'
 tags: ['productivity', 'AI', 'programming-tips']
 layout: 'PostLayout'
-summary: 'A practical workflow to turn Cursor into your coding co-pilot: repo-aware conversations, edit-on-diff, test-first loops, prompts that ship code, and safe automation.'
+summary: 'My honest experience with Cursor AI and the workflow that transformed how I code - from skeptical developer to someone who genuinely ships faster'
 images:
   ['https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1574&q=80']
 ---
 
 ![Cursor for Engineers](https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1574&q=80)
 
-Used right, Cursor can compress days of work into hours. This is the workflow I use to ship real changes safely and fast.
+I'll be honest - I was skeptical about AI coding tools. Another hyped product that promises to make developers 10x more productive? Sure.
 
-If you’re just starting out with AI-assisted development, you might also like my guide on [Using ChatGPT effectively as a Programmer](../blog/using-chatgpt-effectively-as-a-programmer).
+But after using Cursor for the past few months, I have to admit I was wrong. Not because it writes perfect code (it doesn't), but because it fundamentally changed how I approach development. Let me share what actually works and what doesn't.
+
+If you're just getting started with AI tools, you might also find my guide on [Using ChatGPT effectively as a Programmer](../blog/using-chatgpt-effectively-as-a-programmer) helpful.
 
 ---
 
-## 1) Start with a repo-aware brief
+## My Cursor workflow that actually works
 
-Give Cursor the problem, constraints, and the relevant files. Mention your framework and build tools (e.g., Next.js, Contentlayer). Ask it to propose an execution plan before writing code.
+After months of trial and error, here's what I've learned about making Cursor genuinely useful:
 
-Good brief:
+### 1) Give context, not just commands
+
+The biggest mistake I made initially was treating Cursor like a fancy autocomplete. I'd ask it to "add a login form" and wonder why the result felt disconnected from my app.
+
+Here's what works better - I give it the full picture:
 
 ```
 Goal: Add unit tests for components under components/ and fix flaky behaviors.
-Context: components/*.tsx, app/*, any hooks in hooks/*
+Context: This is a Next.js app with TypeScript. We use Jest + React Testing Library.
+Files to look at: components/*.tsx, app/*, any hooks in hooks/*
 Constraints: No breaking changes; keep public props stable.
-Deliverable: Test files + minimal refactors + how to run the tests locally.
+Deliverable: Test files + minimal refactors + how to run locally.
 ```
 
-Then say: “Proceed with the plan and make the edits.”
+Then I say: "Show me the plan first, then we'll implement it."
 
-## 2) Use “edit on diff”, not walls of code
+This approach saved me from countless rewrites. Cursor understands what you're building, not just what you're asking for.
 
-Ask Cursor to modify specific files and sections. Diff-sized edits reduce hallucinations and make reviews easy. If the file is long, have it quote the exact lines it is changing.
+### 2) Small edits beat big rewrites
 
-## 3) Test-first loops (tight feedback)
+Early on, I'd let Cursor rewrite entire files. Bad idea. The code looked impressive but often broke subtle integrations I'd forgotten about.
 
-- Ask Cursor to add or update minimal tests.
-- Run tests locally; paste failing traces back into the chat.
-- Iterate until green.
+Now I ask for specific changes: "Update the UserCard component to show the avatar on the left" instead of "rewrite this component." If the file is long, I make Cursor quote the exact lines it's changing.
 
-This turns the model into a failure-driven development partner.
+This keeps me in control and makes reviews actually manageable.
 
-## 4) Prompt patterns that ship code
+### 3) Make it fail fast (then fix it)
 
-- “Make it real”: Require runnable code, imports, and configuration.
-- “Converge on minimal change”: Prefer small edits over rewrites.
-- “Name things well”: Enforce clear function and variable names.
-- “Guard rails”: Ask it to handle edge cases and add early returns.
+This technique transformed how I use Cursor. Instead of trying to write perfect code upfront, I:
 
-Pair this with my productivity approach in [How to boost productivity as a programmer](../blog/boost-productivity-as-programmer).
+- Ask Cursor to write minimal tests first
+- Run them locally and watch them fail
+- Paste the failing output back into chat
+- Let it iterate until everything passes
 
-## 5) Navigate unfamiliar repos fast
+It's like pair programming with someone who never gets tired of fixing bugs. This approach catches integration issues early and gives me confidence the code actually works.
 
-Use repo search + structural queries:
+### 4) Use patterns that ship real code
 
-- “Where is the blog post layout rendered?”
-- “Who generates the RSS feed?”
-- “Where are API routes for newsletter subscription?”
+I developed some prompting patterns that consistently produce usable results:
 
-Ask Cursor to open and summarize the relevant files, then request targeted edits.
+- **"Make it production-ready"**: Forces it to include error handling, proper imports, and config
+- **"Keep it minimal"**: Prevents over-engineering and focuses on the core requirement  
+- **"Name things clearly"**: Results in readable code I can maintain later
+- **"Handle edge cases"**: Adds proper validation and early returns
 
-## 6) Automate safely
+These patterns work well with the productivity principles I shared in [How to boost productivity as a programmer](../blog/boost-productivity-as-programmer).
 
-- Have Cursor draft scripts for repetitive chores (e.g., image optimization, RSS updates), then review diffs.
-- For long-running commands, ask it to run in the background and stream logs.
-- Keep secrets out of transcripts; pass via env vars.
+### 5) Navigate codebases faster
 
-## 7) When to stop and code by hand
+One area where Cursor genuinely shines is understanding large codebases. I use it like a smart search:
 
-If the change spans many files or involves nuanced design trade-offs, give Cursor scaffolding work, but write the core APIs yourself. Use it for drafts, cleanups, and tests.
+- "Where does the blog post rendering happen?"
+- "How do we handle RSS feed generation?"  
+- "Show me all the API routes for newsletter functionality"
+
+It opens relevant files, explains the relationships, and then I can ask for specific changes. This beats grepping through code when you're working on unfamiliar parts of a system.
+
+### 6) Automate the boring stuff (carefully)
+
+Cursor is great at generating scripts for repetitive tasks - image optimization, updating configs, batch file operations. But I always review the diffs before running anything.
+
+For longer scripts, I have it run in the background and stream logs so I can monitor what's happening. And I never let it handle secrets directly - everything goes through environment variables.
+
+### 7) Know when to take back control
+
+Here's the thing - Cursor isn't magic. When I'm dealing with complex architecture decisions or changes that span multiple files, I use it for scaffolding and let it handle the boring parts. But I write the core logic myself.
+
+It's excellent for generating boilerplate, writing tests, and handling edge cases. It's not great at making nuanced design decisions or understanding business requirements.
 
 ---
 
-## Agent mode vs Ask mode
+## Agent vs Chat mode: when to use what
 
-Both are powerful. Use them for different jobs:
+Cursor has two modes, and I use them for different types of work:
 
-- Ask mode: Q&A, quick code snippets, explanations, small refactors. You stay in control, copy/paste what you need.
-- Agent mode: Multi-step tasks inside the repo—edit files, run commands, execute tests, and iterate on failures. Best for changes you can validate with a build or tests.
+**Chat mode** is my go-to for:
+- Quick questions about code
+- Getting explanations for complex logic  
+- Small refactors and code snippets
+- Brainstorming approaches
 
-Tips:
+I stay in control, copy what I need, and keep the scope small.
 
-- Prefer Agent mode when the task can be proven by tests or a build.
-- Give a clear brief, list files, and require diff-sized edits.
-- Ask the Agent to run linters/tests after each change and paste output back.
+**Agent mode** is where things get interesting:
+- Multi-step tasks that span several files
+- Running commands, tests, and iterating on failures
+- Changes I can validate with a build or test suite
 
-### Example 1: Agent mode writes unit tests for a React component
+The key with Agent mode is giving it tasks that have clear success criteria. "Make the tests pass" works great. "Improve the user experience" doesn't.
 
-Component under test:
+### Real example: Agent mode for testing
+
+Last week I needed tests for a Counter component. Here's how I approached it:
 
 ```tsx
-// components/Counter.tsx
+// components/Counter.tsx - the component I needed to test
 import { useState } from 'react'
 
 export function Counter({ initial = 0, step = 1 }: { initial?: number; step?: number }) {
@@ -109,16 +135,16 @@ export function Counter({ initial = 0, step = 1 }: { initial?: number; step?: nu
 }
 ```
 
-Ask the Agent:
+Instead of asking for "unit tests," I gave Agent mode a clear brief:
 
 ```
-Goal: Create unit tests for components/Counter.tsx using React Testing Library.
-Context: components/Counter.tsx
-Constraints: Cover increment, decrement, reset, and custom step prop. Keep tests deterministic.
-Deliverable: __tests__/Counter.test.tsx + any minimal config. Run tests and share results.
+Goal: Create comprehensive tests for components/Counter.tsx
+Context: Next.js app using React Testing Library + Jest
+Constraints: Test increment, decrement, reset, and custom props. Make tests reliable.
+Deliverable: Test file + run tests to prove they work
 ```
 
-Expected test (idea):
+What I got back was solid:
 
 ```ts
 // __tests__/Counter.test.tsx
@@ -126,28 +152,31 @@ import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { Counter } from '../components/Counter'
 
-test('increments, decrements and resets', async () => {
+test('handles increment, decrement and reset with custom step', async () => {
   render(<Counter initial={2} step={2} />)
   const user = userEvent.setup()
+  
   await user.click(screen.getByText('Increment'))
   expect(screen.getByText('Count: 4')).toBeInTheDocument()
+  
   await user.click(screen.getByText('Decrement'))
   expect(screen.getByText('Count: 2')).toBeInTheDocument()
+  
   await user.click(screen.getByText('Reset'))
   expect(screen.getByText('Count: 2')).toBeInTheDocument()
 })
 ```
 
-Guard rails for the Agent:
+The best part? It ran the tests, found missing dependencies, added them, and confirmed everything passed. This saved me the usual back-and-forth of debugging test setup.
 
-- If imports are missing, ask it to add dev deps (testing-library, jest/vitest) and config.
-- Require it to run tests and paste failing traces; iterate until green.
+### Chat mode for API endpoints
 
-### Example 2: Ask mode for quick utilities; Agent for wiring
+When I needed a quick feedback API endpoint, I used Chat mode since it was a self-contained task:
 
-Use Ask mode for one-off helpers or isolated files. Switch to Agent when it needs repo edits or tests.
+**My prompt:**
+"Create a POST endpoint at `app/api/feedback/route.ts` that validates email and message using Zod, returns proper errors."
 
-Create a typed POST endpoint under `app/api/feedback/route.ts` with runtime validation.
+**What I got:**
 
 ```ts
 // app/api/feedback/route.ts
@@ -169,15 +198,12 @@ export async function POST(req: Request) {
     )
   }
   const { email, message } = result.data
-  // TODO: persist or forward to a tool
+  // TODO: persist or forward to a service
   return NextResponse.json({ ok: true, received: { email, message } }, { status: 200 })
 }
 ```
 
-Ask Cursor to:
-
-- Add the route with imports.
-- Generate a small client util:
+Then I asked for a client utility:
 
 ```ts
 // lib/feedback.ts
@@ -187,85 +213,48 @@ export async function sendFeedback(payload: { email: string; message: string }) 
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(payload),
   })
-  if (!res.ok) throw new Error('Feedback failed')
+  if (!res.ok) throw new Error('Feedback submission failed')
   return res.json()
 }
 ```
 
-### Example 3: Refactor prop-drilling into Context + hooks (Agent)
+Perfect for isolated, single-purpose code. No need for Agent mode here.
 
-Before:
+## What I learned about Cursor's limitations
 
+Let me be honest about where Cursor falls short, because understanding these limitations is crucial:
+
+### It's not great at big picture decisions
+
+When I was refactoring a component hierarchy to remove prop drilling, I thought Cursor would nail it. The task seemed straightforward - convert manual prop passing to React Context.
+
+**Before:**
 ```tsx
-// components/UserBadge.tsx
+// Lots of prop drilling through Header -> UserBadge
 export function UserBadge({ user }: { user: { name: string } }) {
   return <span>{user.name}</span>
 }
-
-// components/Header.tsx
-export function Header({ user }: { user: { name: string } }) {
-  return (
-    <header>
-      <UserBadge user={user} />
-    </header>
-  )
-}
-
-// app/page.tsx
-export default function Page() {
-  const user = { name: 'Talha' }
-  return <Header user={user} />
-}
 ```
 
-After (Context + hook):
-
+**What I wanted:**
 ```tsx
-// components/UserContext.tsx
-import { createContext, useContext } from 'react'
-
-type User = { name: string } | null
-const UserContext = createContext<User>(null)
-export function UserProvider({ user, children }: { user: User; children: React.ReactNode }) {
-  return <UserContext.Provider value={user}>{children}</UserContext.Provider>
-}
-export function useUser() {
-  const ctx = useContext(UserContext)
-  if (!ctx) throw new Error('useUser must be used within <UserProvider>')
-  return ctx
-}
-
-// components/UserBadge.tsx
+// Clean context usage
 export function UserBadge() {
   const user = useUser()
   return <span>{user.name}</span>
 }
-
-// components/Header.tsx
-export function Header() {
-  return (
-    <header>
-      <UserBadge />
-    </header>
-  )
-}
-
-// app/page.tsx
-export default function Page() {
-  const user = { name: 'Talha' }
-  return (
-    <UserProvider user={user}>
-      <Header />
-    </UserProvider>
-  )
-}
 ```
 
-Ask Cursor to produce the diffs only for the changed files. Review and accept.
+Cursor created the Context setup correctly, but it made some questionable architectural decisions about where to place the provider and how to handle error boundaries. I ended up keeping its implementation but rethinking the overall structure myself.
 
-### Example 4: Performance pass with `useMemo`, `useCallback`, and `memo` (Ask)
+**Lesson:** Use Cursor for implementation details, but make the architectural decisions yourself.
+
+### It overdoes performance optimizations
+
+I asked Cursor to optimize a slow list component, and it went wild with memoization:
 
 ```tsx
+// What Cursor gave me - probably overkill
 import { memo, useMemo, useCallback } from 'react'
 
 const List = memo(function List({ items, onSelect }: { items: string[]; onSelect: (v: string) => void }) {
@@ -283,16 +272,24 @@ const List = memo(function List({ items, onSelect }: { items: string[]; onSelect
 })
 ```
 
-Have Cursor explain why each memoization boundary exists and when to remove it (don’t over-memoize).
+It technically works, but the memoization is probably unnecessary for most use cases. I had to ask it to explain when each optimization actually helps and when to remove them.
+
+**Lesson:** Cursor defaults to "more is better" with optimizations. Question its choices.
 
 ---
 
-### Final tips
+## My honest take
 
-- Keep prompts short, specific, and repo-aware.
-- Prefer edits with context and ask for linter/test runs after changes.
-- Capture learnings into your prompts; they compound.
+After months of daily use, here's what I think: Cursor won't replace good developers, but it makes good developers much more productive.
 
-If you’re exploring React changes, read [React 19: What it brings to the table](../blog/react-19-what-it-brings) next.
+The key is treating it like a really fast junior developer. Great at implementation, needs guidance on architecture, and sometimes gets carried away with "best practices."
+
+I'm shipping features faster, spending less time on boilerplate, and catching more bugs early. But I'm still making the important decisions about what to build and how to structure it.
+
+If you're considering Cursor, start small. Use it for tests, refactoring, and generating utilities. Once you develop good prompting habits, gradually expand to bigger tasks.
+
+And remember - the goal isn't to let AI write all your code. It's to spend more time on the problems that actually matter.
+
+For more AI productivity tips, check out [React 19: What it brings to the table](../blog/react-19-what-it-brings) or my guide on [Using ChatGPT effectively as a Programmer](../blog/using-chatgpt-effectively-as-a-programmer).
 
 
