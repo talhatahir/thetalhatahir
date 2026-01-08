@@ -1,5 +1,11 @@
 export const soloProjects = [
   {
+    title: 'Plansm.art : Your digital smart planner',
+    description: `A free micro SaaS yearly planner to help you plan ahead and create tasks with ease. With a friendly UI/UX and encryption.`,
+    imgSrc: '/static/images/plan-smart.png',
+    href: 'https://www.plansm.art/',
+  },
+  {
     title: 'Chrome Extension: PostureSmart',
     description: `A free Chrome extension designed to correct your posture in real-time and send your notifications about your posture.`,
     imgSrc: 'https://www.posturesm.art/posture-mq.png',
