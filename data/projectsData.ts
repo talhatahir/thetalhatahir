@@ -14,8 +14,8 @@ export const soloProjects = [
   {
     title: 'Gitchart',
     description: `Create beautiful Github contribution charts for your profile. Perfect for adding to your portfolio, README, or anywhere you want to showcase them.`,
-    imgSrc: 'https://www.gitch.art/og-git.png',
-    href: 'https://www.gitch.art',
+    imgSrc: 'https://gitchart-nine.vercel.app/og-git.png',
+    href: 'https://gitchart-nine.vercel.app',
   },
   {
     title: 'Kindle Highlight Extractor',
@@ -49,6 +49,13 @@ export const soloProjects = [
 ]
 
 export const collaborationProjects = [
+  {
+    title: 'Stellic',
+    description: `Working as a Lead Frontend Engineer at Stellic. Stellic is an EdTech SaaS platform for degree management and academic planning. Technologies used: ReactJS, AngularJS, TailwindCSS, Django, PostgreSQL.`,
+    imgSrc: '/static/images/stellic.png',
+    href: 'https://www.stellic.com',
+    location: 'San Mateo, USA (Remote)',
+  },
   {
     title: 'TestGorilla',
     description: `Worked as a Senior Frontend Engineer on the website team at TestGorilla. Technologies used: NextJS, Contentful, Styled Components and many others.`,

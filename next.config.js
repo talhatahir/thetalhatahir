@@ -74,7 +74,7 @@ module.exports = () => {
         'miro.medium.com',
         'www.jobfillr.com',
         'www.posturesm.art',
-        'www.gitch.art',
+        'gitchart-nine.vercel.app',
         'covers.openlibrary.org',
       ],
     },

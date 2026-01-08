@@ -3,7 +3,7 @@ import { type NextRequest } from 'next/server'
 const handler = async (request: NextRequest) => {
   const color = request.nextUrl.searchParams.get('color')
   try {
-    const res = await fetch(`https://www.gitch.art/api/og/talhatahir?color=${color}`, {
+    const res = await fetch(`https://gitchart-nine.vercel.app/api/og/talhatahir?color=${color}`, {
       headers: {
         'Content-Type': 'image/svg+xml',
       },
