@@ -1,0 +1,158 @@
+---
+title: 'How to 10x your work using Cursor browser'
+date: '2026-01-12'
+lastmod: '2026-01-12'
+tags: ['productivity', 'AI', 'programming-tips']
+layout: 'PostLayout'
+summary: 'How I use Cursor Browser for UAT testing, debugging network calls, accessibility checks, and generating E2E tests - all without leaving the IDE'
+images:
+  ['https://images.unsplash.com/photo-1746286720965-cccf57e56c68?q=80&w=2340&auto=format&fit=crop']
+---
+
+![Cursor AI Editor](https://images.unsplash.com/photo-1746286720965-cccf57e56c68?q=80&w=2340&auto=format&fit=crop)
+
+If you've read my article on [How to effectively use Cursor as an Engineer](../blog/10x-with-cursor), you know I'm a fan. But there's one feature I didn't cover that has quietly become essential to my workflow: the **Cursor Browser**.
+
+Most people think of Cursor as just an AI code editor. But the built-in browser tool changes how you test, debug, and verify your work. No more context switching. No more juggling Chrome DevTools in a separate window. Everything happens in one place.
+
+Let me show you how I actually use it.
+
+---
+
+## 1. UAT Testing After Developing a Feature
+
+Here's my old workflow: write feature, push to staging, open browser, test manually, find bug, go back to code, fix, push again, test again. Repeat the process.
+
+Now? I develop the feature and test it immediately in Cursor Browser without leaving the IDE.
+
+**How I do it:**
+
+After I finish a component or feature, I ask Cursor to open the browser and navigate to the local dev server. Then I run through the user flow myself - or better yet, I describe what I want to test and let Cursor do it.
+
+```
+"Open localhost:3000, navigate to the settings page, 
+try changing the email address, and verify the save works."
+```
+
+Cursor clicks through the UI, fills in forms, and reports back what it sees. If something breaks, I'm already in the code. I fix it right there. Or better yet, i ask Cursor to fix it for me.
+
+**Why this matters:**
+
+The feedback loop shrinks from minutes to seconds. I catch issues before they even hit staging. And because the browser is integrated, Cursor can see exactly what went wrong and often suggest the fix.
+
+---
+
+## 2. Debugging with Network Call Visibility
+
+This one has saved me hours at time.
+
+When something isn't working - a form submission fails silently, data doesn't load, an API returns unexpected results - I used to open Chrome DevTools, find the Network tab, reproduce the issue, and dig through requests. Eventually figuring out that a certain attribute in the response is of type object rather than a number or something else.
+
+Now I just ask Cursor Browser to show me what's happening.
+
+**Real example:**
+
+Last week, a user reported that filtering wasn't working on a dashboard. Instead of opening DevTools separately, I ran the scenario in Cursor Browser:
+
+```
+"Open the dashboard, apply the 'last 7 days' filter, ensure that the data displayed is correctly showing the last 7 days, if it looks odd, look at the network tab to identify the API calls and figure out what is wrong."
+```
+
+Cursor showed me the API call, the request payload, and the response. Turns out the date format was wrong. And then it went ahead to identify the issue. Fixed it in 30 seconds.
+
+**What makes this powerful:**
+
+The browser sees everything - request headers, response bodies, timing, errors. And because it's inside Cursor, the AI can cross-reference what it sees with your actual code. It can tell you not just that a request failed, but which line in your codebase is responsible.
+
+This is debugging on easy mode.
+
+---
+
+## 3. Accessibility Testing
+
+I'll be honest - accessibility testing was always something I did at the end, if at all. It felt like extra work. But Cursor Browser makes it so easy that I've started doing it during development.
+
+**How I use it:**
+
+After building a component, I ask Cursor to check its accessibility:
+
+```
+"Navigate to the signup form and check for accessibility issues. 
+Can a screen reader user complete this form?"
+```
+
+Cursor inspects the DOM, checks for missing alt tags, improper heading hierarchy, missing form labels, and keyboard navigation issues. It tells me exactly what's broken and suggests fixes.
+
+**A recent catch:**
+
+I had a modal that looked fine visually but was completely inaccessible. No focus trap, no ARIA labels, couldn't close it with Escape key. Cursor pointed all of this out in seconds. Would have shipped it broken otherwise.
+
+**Why this matters:**
+
+Accessibility isn't just about compliance - it's about building things that actually work for everyone. And when testing is this easy, you have no excuse to skip it.
+
+---
+
+## 4. Running Use-Cases to Generate E2E Tests
+
+This is probably my favorite use case. Writing E2E tests is tedious. Nobody enjoys it. But they're important for catching regressions.
+
+Here's the trick: let Cursor watch you run through a flow, then have it write the test.
+
+**My workflow:**
+
+1. I open Cursor Browser and run through the user flow manually (or describe it)
+2. Cursor observes the actions - clicks, form inputs, navigation, assertions
+3. I ask it to generate a Playwright test based on what it saw
+
+```
+"I just logged in, navigated to settings, updated my profile picture, 
+and verified the change appeared. Write me a Playwright E2E test for this flow."
+```
+
+Cursor generates a complete test file with proper selectors, waits, and assertions. It's not perfect - you'll need to clean it up - but it gets you 80% of the way there in seconds instead of minutes.
+
+**Why this beats writing tests from scratch:**
+
+The test reflects actual user behavior because it was generated from actual user behavior. No guessing about selectors or wondering if the flow is right. The browser was there, it saw everything.
+
+---
+
+## Putting It All Together
+
+Here's my typical flow when building a new feature:
+
+1. **Write the code** - implement the feature
+2. **UAT in Cursor Browser** - test it immediately, catch obvious bugs
+3. **Check network calls** - verify API interactions work correctly
+4. **Accessibility check** - make sure it's usable for everyone
+5. **Generate E2E test** - lock in the behavior so regressions get caught
+
+All of this happens without leaving Cursor. No context switching. No juggling windows. Just build, test, ship.
+
+---
+
+## The Honest Limitations
+
+It's not perfect. A few things to keep in mind:
+
+- **Complex multi-tab flows** can be tricky. The browser works best for straightforward user journeys.
+- **Heavy JavaScript apps** might occasionally lag. If your app is massive, give it a moment to load.
+- **Generated E2E tests need cleanup.** They're a starting point, not production-ready. Review the selectors and add proper test data.
+- **It's not a replacement for real QA.** This is for developer testing. You still need proper QA processes for production releases.
+
+But for day-to-day development? It's a massive time saver.
+
+---
+
+## Final Thoughts
+
+The Cursor Browser isn't just a gimmick. It's a legit productivity tool that removes friction from testing and debugging. The ability to test, inspect network calls, check accessibility, and generate tests without switching contexts is genuinely useful.
+
+If you're already using Cursor for coding, you're leaving value on the table by not using the browser. Try it for a week. Run your UAT in it. Debug an API issue with it. Generate one E2E test with it.
+
+You'll wonder how you worked without it.
+
+For more on getting the most out of Cursor, check out [How to effectively use Cursor as an Engineer to 10x your work](../blog/10x-with-cursor).
+
+Happy shipping! 🚀
