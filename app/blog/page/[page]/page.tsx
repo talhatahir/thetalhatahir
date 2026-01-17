@@ -3,8 +3,7 @@ import { allCoreContent, sortPosts } from 'pliny/utils/contentlayer'
 import { allBlogs } from 'contentlayer/generated'
 import { genPageMetadata } from 'app/seo'
 import siteMetadata from '@/data/siteMetadata'
-
-const POSTS_PER_PAGE = 5
+import { POSTS_PER_PAGE } from 'app/constants'
 
 export const metadata = genPageMetadata({
   title: `Blog - Talha Tahir | ${siteMetadata.authorLong}`,

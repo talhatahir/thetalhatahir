@@ -4,8 +4,9 @@ const siteMetadata = {
   author: 'Talha Tahir',
   authorLong: 'An experienced Full Stack Engineer',
   headerTitle: 'talha tahir',
-  description: 'My chatter about life and the tech realm',
-  skills: 'ReactJS, NextJS, NodeJS, Javascript, AngularJS, Material UI, Webpack, MongoDB, MySQL',
+  description:
+    'Tech blog by Talha Tahir, a Full Stack Engineer sharing practical tips on JavaScript, Cursor, React, remote work, productivity, and building better software',
+  skills: 'AI, ReactJS, NextJS, NodeJS, Javascript, AngularJS, Material UI, Webpack, MongoDB, MySQL',
   descriptionLong:
     'My chatter about working remotely as an Engineer in ReactJS, NextJS, NodeJS, Javascript, AngularJS, Material UI, Webpack, MongoDB, MySQL',
   language: 'en-us',

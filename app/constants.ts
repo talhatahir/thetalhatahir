@@ -26,3 +26,4 @@ export const themes = [
 ]
 
 export const MAX_DISPLAY = 15
+export const POSTS_PER_PAGE = 10
