@@ -6,7 +6,10 @@ import siteMetadata from '../data/siteMetadata.js'
 import { readFileSync } from 'fs'
 const tagData = JSON.parse(readFileSync(path.join(process.cwd(), 'app', 'tag-data.json'), 'utf-8'))
 const allBlogs = JSON.parse(
-  readFileSync(path.join(process.cwd(), '.contentlayer', 'generated', 'Blog', '_index.json'), 'utf-8')
+  readFileSync(
+    path.join(process.cwd(), '.contentlayer', 'generated', 'Blog', '_index.json'),
+    'utf-8'
+  )
 )
 import { sortPosts } from 'pliny/utils/contentlayer.js'
 
