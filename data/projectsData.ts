@@ -8,8 +8,8 @@ export const soloProjects = [
   {
     title: 'Chrome Extension: PostureSmart',
     description: `A free Chrome extension designed to correct your posture in real-time and send your notifications about your posture.`,
-    imgSrc: 'https://www.posturesm.art/posture-mq.png',
-    href: 'https://www.posturesm.art',
+    imgSrc: 'https://posturesmart-website.vercel.app/posture-mq.png',
+    href: 'https://posturesmart-website.vercel.app',
   },
   {
     title: 'Chrome Extension: Jobfillr',

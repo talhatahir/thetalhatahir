@@ -73,7 +73,7 @@ module.exports = () => {
         'cdn-images-1.medium.com',
         'miro.medium.com',
         'www.jobfillr.com',
-        'www.posturesm.art',
+        'posturesmart-website.vercel.app',
         'gitchart-nine.vercel.app',
         'covers.openlibrary.org',
       ],
