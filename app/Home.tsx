@@ -5,8 +5,16 @@ import Github from '@/components/Github'
 import siteMetadata from '@/data/siteMetadata'
 import { formatDate } from 'pliny/utils/formatDate'
 import { MAX_DISPLAY } from './constants'
+import type { Blog } from 'contentlayer/generated'
+import { CoreContent } from 'pliny/utils/contentlayer'
 
-export default function Home({ posts, themeColor }: { posts: any[]; themeColor: string }) {
+export default function Home({
+  posts,
+  themeColor,
+}: {
+  posts: CoreContent<Blog>[]
+  themeColor: string
+}) {
   const color = themeColor
 
   return (
