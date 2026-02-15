@@ -3,9 +3,25 @@ import siteMetadata from '@/data/siteMetadata'
 import SocialIcon from '@/components/social-icons'
 import NewsletterForm from 'pliny/ui/NewsletterForm'
 
-export default function Footer() {
+interface FooterProps {
+  themeColor?: string
+}
+
+export default function Footer({ themeColor }: FooterProps) {
   return (
     <footer>
+      <style>
+        {themeColor
+          ? `
+          footer button[type="submit"] {
+            background-color: #${themeColor} !important;
+          }
+          footer button[type="submit"]:hover {
+            opacity: 0.8;
+          }
+        `
+          : ''}
+      </style>
       <div className="mt-16 flex flex-col items-center">
         {siteMetadata.newsletter?.provider && (
           <div className="flex items-center justify-center pt-6 pb-6">

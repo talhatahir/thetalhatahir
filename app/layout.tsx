@@ -85,7 +85,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
                 <Header themeColor={themeColor} />
                 <main className="mb-auto">{children}</main>
               </SearchProvider>
-              <Footer />
+              <Footer themeColor={themeColor} />
             </div>
           </SectionContainer>
         </ThemeProviders>

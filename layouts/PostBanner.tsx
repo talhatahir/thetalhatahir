@@ -15,15 +15,17 @@ interface LayoutProps {
   children: ReactNode
   next?: { path: string; title: string }
   prev?: { path: string; title: string }
+  themeColor: string
 }
 
-export default function PostMinimal({ content, next, prev, children }: LayoutProps) {
+export default function PostMinimal({ content, next, prev, children, themeColor }: LayoutProps) {
   const { slug, title, images } = content
   const displayImage =
     images && images.length > 0 ? images[0] : 'https://picsum.photos/seed/picsum/800/400'
 
   return (
     <SectionContainer>
+      <style>{`:root { --theme-color: #${themeColor}; }`}</style>
       <ScrollTopAndComment />
       <article>
         <div>
@@ -51,7 +53,8 @@ export default function PostMinimal({ content, next, prev, children }: LayoutPro
                 <div className="pt-4 xl:pt-8">
                   <Link
                     href={`/${prev.path}`}
-                    className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
+                    style={{ color: `#${themeColor}` }}
+                    className="hover:opacity-80"
                     aria-label={`Previous post: ${prev.title}`}
                   >
                     &larr; {prev.title}
@@ -62,7 +65,8 @@ export default function PostMinimal({ content, next, prev, children }: LayoutPro
                 <div className="pt-4 xl:pt-8">
                   <Link
                     href={`/${next.path}`}
-                    className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
+                    style={{ color: `#${themeColor}` }}
+                    className="hover:opacity-80"
                     aria-label={`Next post: ${next.title}`}
                   >
                     {next.title} &rarr;
