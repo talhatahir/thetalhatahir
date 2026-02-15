@@ -4,19 +4,21 @@ import AuthorLayout from '@/layouts/AuthorLayout'
 import { coreContent } from 'pliny/utils/contentlayer'
 import { genPageMetadata } from 'app/seo'
 import siteMetadata from '@/data/siteMetadata'
+import { getThemeColor } from '../themeColor'
 
 export const metadata = genPageMetadata({
   title: `About | ${siteMetadata.author} | ${siteMetadata.authorLong}`,
   description: `${siteMetadata.title} - ${siteMetadata.authorLong} | ${siteMetadata.skills}`,
 })
 
-export default function Page() {
+export default async function Page() {
   const author = allAuthors.find((p) => p.slug === 'default') as Authors
   const mainContent = coreContent(author)
+  const themeColor = await getThemeColor()
 
   return (
     <>
-      <AuthorLayout content={mainContent}>
+      <AuthorLayout content={mainContent} themeColor={themeColor}>
         <MDXLayoutRenderer code={author.body.code} />
       </AuthorLayout>
     </>

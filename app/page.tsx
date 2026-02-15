@@ -3,6 +3,7 @@ import { allBlogs } from 'contentlayer/generated'
 import Home from './Home'
 import { genPageMetadata } from './seo'
 import siteMetadata from '@/data/siteMetadata'
+import { getThemeColor } from './themeColor'
 
 export const metadata = genPageMetadata({
   title: `Talha Tahir - ${siteMetadata.authorLong}`,
@@ -12,5 +13,6 @@ export const metadata = genPageMetadata({
 export default async function Page() {
   const sortedPosts = sortPosts(allBlogs)
   const posts = allCoreContent(sortedPosts)
-  return <Home posts={posts} />
+  const themeColor = await getThemeColor()
+  return <Home posts={posts} themeColor={themeColor} />
 }

@@ -4,10 +4,10 @@ import Image from '@/components/Image'
 import Github from '@/components/Github'
 import siteMetadata from '@/data/siteMetadata'
 import { formatDate } from 'pliny/utils/formatDate'
-import { themes, MAX_DISPLAY } from './constants'
+import { MAX_DISPLAY } from './constants'
 
-export default function Home({ posts }) {
-  const randomTheme = themes[Math.floor(Math.random() * themes.length)]
+export default function Home({ posts, themeColor }: { posts: any[]; themeColor: string }) {
+  const color = themeColor
 
   return (
     <>
@@ -17,7 +17,7 @@ export default function Home({ posts }) {
             I'm{' '}
             <span
               style={{
-                backgroundImage: `linear-gradient(to right, #${randomTheme.color}, #${randomTheme.color}cc)`,
+                backgroundImage: `linear-gradient(to right, #${color}, #${color}cc)`,
                 WebkitBackgroundClip: 'text',
                 backgroundClip: 'text',
               }}
@@ -60,7 +60,7 @@ export default function Home({ posts }) {
             producitivity, Jobhacks to get your next gig, and selfishly post about my own microSaaS.
             Sometimes a book inspires me enough to write about it.
           </h3>
-          <Github color={randomTheme.color} />
+          <Github color={color} />
         </div>
         <ul className="divide-y divide-gray-200 dark:divide-gray-700">
           {!posts.length && 'No posts found.'}
@@ -98,7 +98,7 @@ export default function Home({ posts }) {
                           </h2>
                           <div className="flex flex-wrap">
                             {tags.map((tag) => (
-                              <Tag key={tag} text={tag} />
+                              <Tag key={tag} text={tag} color={color} />
                             ))}
                           </div>
                         </div>
@@ -109,7 +109,8 @@ export default function Home({ posts }) {
                       <div className="text-base font-medium leading-6">
                         <Link
                           href={`/blog/${slug}`}
-                          className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
+                          style={{ color: `#${color}` }}
+                          className="hover:opacity-80"
                           aria-label={`Read "${title}"`}
                         >
                           Read more &rarr;
@@ -127,7 +128,8 @@ export default function Home({ posts }) {
         <div className="flex justify-end text-base font-medium leading-6">
           <Link
             href="/blog"
-            className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
+            style={{ color: `#${color}` }}
+            className="hover:opacity-80"
             aria-label="All posts"
           >
             All Posts &rarr;

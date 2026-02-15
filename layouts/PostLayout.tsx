@@ -24,14 +24,24 @@ interface LayoutProps {
   next?: { path: string; title: string }
   prev?: { path: string; title: string }
   children: ReactNode
+  themeColor: string
 }
 
-export default function PostLayout({ content, authorDetails, next, prev, children }: LayoutProps) {
+export default function PostLayout({
+  content,
+  authorDetails,
+  next,
+  prev,
+  children,
+  themeColor,
+}: LayoutProps) {
   const { filePath, path, slug, date, title, tags } = content
   const basePath = path.split('/')[0]
+  const color = themeColor
 
   return (
     <SectionContainer>
+      <style>{`:root { --theme-color: #${color}; }`}</style>
       <ScrollTopAndComment />
       <article>
         <div className="xl:divide-y xl:divide-gray-200 xl:dark:divide-gray-700">
@@ -76,7 +86,8 @@ export default function PostLayout({ content, authorDetails, next, prev, childre
                           {author.linkedin && (
                             <Link
                               href={author.linkedin}
-                              className="flex items-center pt-2 text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
+                              style={{ color: `#${color}` }}
+                              className="flex items-center pt-2 hover:opacity-80"
                             >
                               <SocialIcon kind="linkedin" href={siteMetadata.linkedin} size={6} />
                               <span className="ml-2">
@@ -99,7 +110,8 @@ export default function PostLayout({ content, authorDetails, next, prev, childre
                   <Link
                     href="https://forms.gle/iQYfDF6KZLzCGdaa7"
                     rel="nofollow"
-                    className="mr-3 text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
+                    style={{ color: `#${color}` }}
+                    className="mr-3 hover:opacity-80"
                   >
                     {'📜 Provide feedback for this article'}
                   </Link>
@@ -108,7 +120,8 @@ export default function PostLayout({ content, authorDetails, next, prev, childre
                   <Link
                     href="https://forms.gle/uoanBhUu2ubAkJyv5"
                     rel="nofollow"
-                    className="mr-3 text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
+                    style={{ color: `#${color}` }}
+                    className="mr-3 hover:opacity-80"
                   >
                     {'🛠️ Consult me for free'}
                   </Link>
@@ -132,7 +145,7 @@ export default function PostLayout({ content, authorDetails, next, prev, childre
                     </h2>
                     <div className="flex flex-wrap">
                       {tags.map((tag) => (
-                        <Tag key={tag} text={tag} />
+                        <Tag key={tag} text={tag} color={color} />
                       ))}
                     </div>
                   </div>
@@ -144,7 +157,7 @@ export default function PostLayout({ content, authorDetails, next, prev, childre
                         <h2 className="text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400">
                           Previous Article
                         </h2>
-                        <div className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400">
+                        <div className="hover:opacity-80" style={{ color: `#${color}` }}>
                           <Link href={`/${prev.path}`}>{prev.title}</Link>
                         </div>
                       </div>
@@ -154,7 +167,7 @@ export default function PostLayout({ content, authorDetails, next, prev, childre
                         <h2 className="text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400">
                           Next Article
                         </h2>
-                        <div className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400">
+                        <div className="hover:opacity-80" style={{ color: `#${color}` }}>
                           <Link href={`/${next.path}`}>{next.title}</Link>
                         </div>
                       </div>
@@ -165,7 +178,8 @@ export default function PostLayout({ content, authorDetails, next, prev, childre
               <div className="pt-4 xl:pt-8">
                 <Link
                   href={`/${basePath}`}
-                  className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
+                  style={{ color: `#${color}` }}
+                  className="hover:opacity-80"
                   aria-label="Back to the blog"
                 >
                   &larr; Back to the blog

@@ -4,20 +4,20 @@ export const themes = [
     color: '2da44e',
   },
   {
-    name: 'Ruby Red',
-    color: 'e74c3c',
+    name: 'Cyan',
+    color: '06b6d4',
   },
   {
     name: 'Golden Sun',
     color: 'f1c40f',
   },
   {
-    name: 'Electric Indigo',
-    color: '6610f2',
+    name: 'Vibrant Purple',
+    color: '8b5cf6',
   },
   {
-    name: 'Midnight Blue',
-    color: '2c3e50',
+    name: 'Sky Blue',
+    color: '38bdf8',
   },
   {
     name: 'Magenta',

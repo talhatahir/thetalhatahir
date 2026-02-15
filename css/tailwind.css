@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --theme-color: #22c55e;
+}
+
 .task-list-item::before {
   @apply hidden;
 }
@@ -20,6 +24,15 @@
 
 .csl-entry {
   @apply my-5;
+}
+
+/* Dynamic theme color for prose links */
+.prose a {
+  color: var(--theme-color) !important;
+}
+
+.prose a:hover {
+  opacity: 0.8;
 }
 
 /* https://stackoverflow.com/questions/61083813/how-to-avoid-internal-autofill-selected-style-to-be-applied */

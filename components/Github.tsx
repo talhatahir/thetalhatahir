@@ -34,7 +34,8 @@ const Github = ({ color }: { color: string }) => {
         <Link
           href="https://github.com/talhatahir"
           target="_blank"
-          className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
+          style={{ color: `#${color}` }}
+          className="hover:opacity-80"
         >
           My Github Contributions
         </Link>
