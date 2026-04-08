@@ -1,0 +1,554 @@
+---
+title: 'How I Built a 24/7 Personal AI Assistant with Claude Code for $26/month'
+date: '2026-04-06'
+tags: ['AI', 'tech', 'productivity']
+summary: "I got tired of OpenClaw's fragility, so I rebuilt my personal AI assistant from scratch using Claude Code on a cheap VPS — Discord on my phone, Google Calendar briefings, GitHub-backed memory, all for ~$26/month."
+images:
+  ['https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=1161&q=80']
+---
+
+![AI Assistant](https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=1161&q=80)
+
+## TL;DR 🎯
+
+I replaced my [OpenClaw setup](../blog/my-simple-openclaw-installation-journey) with a Claude Code session running 24/7 on a €5/month Hetzner VPS. Discord as the chat interface (works on iPhone), Google Calendar for daily briefings, GitHub repo as the memory layer. No Docker containers, no token burn surprises, no stale bots. **Total cost: ~$26/month.** One focused afternoon to set up.
+
+If you just want the architecture diagram — scroll to the bottom.
+
+---
+
+## Why I Ditched OpenClaw 🦀
+
+![Frustrated developer](https://images.unsplash.com/photo-1504639725590-34d0984388bd?auto=format&fit=crop&w=1161&q=80)
+
+If you read my [OpenClaw installation journey](../blog/my-simple-openclaw-installation-journey), you know I spent real time and money getting that system stable. And for a while, it worked. But the cracks kept showing.
+
+The Docker container would restart and I'd have to re-pair the gateway token. The Slack bot would occasionally go quiet. The token burn was always lurking — one wrong model choice and you're out $20 before you've had your morning chai. Every few days, something needed babysitting.
+
+But the core idea was right. A personal AI that knows who you are, responds on your phone, checks your calendar, remembers things. I loved that. I just hated the implementation.
+
+So I rebuilt the whole thing on Claude's native stack. No Docker. No Slack app permissions. No API key juggling. Just Claude Code running in a tmux session, reading identity files from a Git repo, talking to me on Discord.
+
+**The difference:** OpenClaw felt like maintaining infrastructure. This feels like having an assistant.
+
+---
+
+## What You'll Build 🏗️
+
+- A persistent Claude Code session running 24/7 on a Hetzner VPS
+- A personal assistant with its own name, personality, and memory of you
+- Discord as the primary chat interface (iPhone, Mac, anywhere)
+- Google Calendar integration with daily briefings
+- A GitHub repo as the memory layer
+- Blog writing capability with automatic GitHub commits
+
+**Prerequisites:**
+- Claude Pro subscription ($20/month)
+- A GitHub account
+- A Discord account
+- A Google account with Calendar
+- A Mac (for initial setup)
+
+---
+
+## Part 1: The VPS 🖥️
+
+![Server](https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1161&q=80)
+
+### Why a VPS?
+
+Claude Code needs a machine that never sleeps. Your MacBook dies when you close the lid. A €5/month VPS runs 24/7, doesn't care if your WiFi drops, and is accessible from anywhere.
+
+If you followed my OpenClaw journey, you already know the VPS game. The difference here is we're going much cheaper — no 8GB RAM needed, no Docker overhead. Claude Code is lightweight.
+
+### Create the server
+
+Go to [hetzner.com](https://www.hetzner.com/) → Cloud → Create Server:
+
+- **Location**: Helsinki (or wherever is closest to you)
+- **Image**: Ubuntu 24.04
+- **Type**: Cost-Optimized → **CX23** (2 vCPU, 4GB RAM, ~€5.59/month including IPv4)
+- **SSH Key**: add your public key (`cat ~/.ssh/id_ed25519.pub`)
+
+Once provisioned, SSH in:
+
+```bash
+ssh root@your-vps-ip
+```
+
+### Secure the server
+
+```bash
+adduser yourname
+usermod -aG sudo yourname
+
+ufw default deny incoming
+ufw default allow outgoing
+ufw allow OpenSSH
+ufw enable
+
+apt install fail2ban -y
+```
+
+### Install Tailscale
+
+This is the part that makes everything feel safe. [Tailscale](https://tailscale.com/) creates a private encrypted network between your devices. Your VPS becomes invisible to the public internet — only your Mac and iPhone can reach it.
+
+```bash
+curl -fsSL https://tailscale.com/install.sh | sh
+sudo tailscale up
+```
+
+Open the URL it gives you, sign in with your Google account. Then install Tailscale on your Mac and iPhone using the same account.
+
+Once all three are connected, lock down the firewall:
+
+```bash
+sudo ufw delete allow OpenSSH
+sudo ufw allow in on tailscale0
+sudo ufw reload
+```
+
+**Your VPS now has no public SSH port.** Nobody can reach it except your devices. This alone is a massive upgrade over my OpenClaw setup where ports were exposed.
+
+Get your Tailscale IP and use it from now on:
+
+```bash
+tailscale ip
+ssh yourname@100.x.x.x
+```
+
+### Install tmux
+
+tmux keeps your Claude Code session alive when you disconnect. Essential.
+
+```bash
+sudo apt install tmux -y
+```
+
+---
+
+## Part 2: Claude Code on the VPS 🤖
+
+### Install
+
+```bash
+curl -fsSL https://claude.ai/install.sh | bash
+```
+
+Add to PATH:
+
+```bash
+echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.bashrc && source ~/.bashrc
+```
+
+Verify:
+
+```bash
+claude --version
+```
+
+### Authenticate
+
+Claude Code authenticates via your Claude Pro account. On a headless VPS with no browser, you need to generate a token on your Mac first:
+
+```bash
+claude setup-token
+```
+
+It opens a browser, you log in, it gives you a token. Copy it, then on the VPS:
+
+```bash
+echo 'export CLAUDE_CODE_OAUTH_TOKEN="your-token-here"' >> ~/.bashrc
+source ~/.bashrc
+```
+
+### Start your persistent session
+
+```bash
+tmux new -s assistant
+claude
+```
+
+Press Enter through the prompts. You should see your Claude Pro account details.
+
+To detach (keeps running): `Ctrl+B` then `D`
+
+To reattach: `tmux attach -t assistant`
+
+That's it. Claude Code is now running 24/7.
+
+---
+
+## Part 3: The Memory Layer 🧠
+
+![Memory](https://images.unsplash.com/photo-1456406644174-8ddd4cd52a06?auto=format&fit=crop&w=1161&q=80)
+
+This is what separates a chatbot from an assistant. OpenClaw had its own memory system that was opaque — you couldn't see what it remembered or correct it easily. With Claude Code, memory is just markdown files in a Git repo. Simple, inspectable, yours.
+
+### Create a private GitHub repo
+
+Create a private repo called `claude-assistant` on GitHub. Generate a Personal Access Token (Settings → Developer settings → Tokens (classic)) with `repo` scope.
+
+Clone it on your VPS:
+
+```bash
+cd ~
+git clone https://YOUR_TOKEN@github.com/yourusername/claude-assistant.git
+git config --global user.email "you@email.com"
+git config --global user.name "Your Name"
+```
+
+### Create the structure
+
+```bash
+cd ~/claude-assistant
+mkdir -p memory briefings
+touch CLAUDE.md SOUL.md USER.md
+touch memory/fitness-log.md memory/preferences.md memory/notes.md
+```
+
+### Write your identity files
+
+Here's the key insight: **Claude Code automatically reads `CLAUDE.md` from whatever folder you launch it from.** This is your behaviour rulebook. Everything else flows from it.
+
+**CLAUDE.md** — behaviour rules:
+
+```markdown
+# Claude Assistant — Behaviour Rules
+
+## Startup
+- At the start of every session, read SOUL.md, USER.md,
+  memory/preferences.md and memory/notes.md silently
+
+## Identity
+- Your name is [Your Assistant Name]
+
+## Memory
+- User tells you something important → append to memory/notes.md
+- You notice a preference → append to memory/preferences.md
+- After writing any memory file → git add, commit, push
+- Commit format: "memory: what was updated"
+
+## Timezone
+- PKT (UTC+5), Lahore, Pakistan
+
+## Response style
+- Direct and concise
+- No filler phrases
+- Trusted assistant, not customer service
+```
+
+**SOUL.md** — personality:
+
+```markdown
+# Soul
+
+## Name
+My name is [Your Assistant Name].
+
+## Personality
+- Warm but direct — no fluff
+- Proactive — flags things worth knowing
+- Honest — says when it doesn't know something
+- Feels like a trusted friend, not a corporate assistant
+
+## Tone
+- Conversational and natural
+- Brief by default, detailed when asked
+- Never uses filler phrases like "Certainly!" or "Great question!"
+```
+
+**USER.md** — who you are:
+
+```markdown
+# User Profile
+
+## Basic info
+- Name: Your Name
+- Location: Your City
+- Timezone: Your timezone
+
+## Work
+- Your job/role
+
+## Preferences
+- Prefers concise responses
+```
+
+Push everything:
+
+```bash
+cd ~/claude-assistant
+git add .
+git commit -m "initial: add identity and memory structure"
+git push origin main
+```
+
+### Always launch Claude from this folder
+
+This is critical. Claude Code reads `CLAUDE.md` from the current directory. So always launch from `~/claude-assistant`:
+
+```bash
+cd ~/claude-assistant && claude
+```
+
+Optionally create an alias so you don't have to type the full path every time:
+
+```bash
+echo "alias assistant='cd ~/claude-assistant && claude --channels plugin:discord@claude-plugins-official'" >> ~/.bashrc
+source ~/.bashrc
+```
+
+---
+
+## Part 4: Connect Your Tools 🔌
+
+### Google Calendar
+
+The easiest integration by far. No API keys, no OAuth dance.
+
+1. Go to [claude.ai](https://claude.ai) → Settings → Connectors
+2. Find Google Calendar → Connect → authorize with your Google account
+3. Restart Claude Code — Calendar MCP appears automatically
+
+Test it:
+
+```
+What's on my Google Calendar today?
+```
+
+If it lists your events, you're done. That's it.
+
+### Discord (your chat interface)
+
+![Discord](https://images.unsplash.com/photo-1614680376573-df3480f0c6ff?auto=format&fit=crop&w=1161&q=80)
+
+**Why Discord this time?**
+
+I know — I literally said Discord was a dead end in my [OpenClaw post](../blog/my-simple-openclaw-installation-journey). The bot went stale after one day and I dropped it. But that was OpenClaw's Discord integration, not Claude Code's.
+
+Claude Code has a native Discord Channels plugin that runs as part of the Claude Code process itself. It doesn't spin up a separate bot service that can go stale. When Claude Code is running, the bot is running. When Claude Code stops, the bot stops. Simple, predictable, no ghost states.
+
+**Also: Slack needs a workspace, app setup, OAuth scopes, and event subscriptions.** Discord just needs a bot token and a server invite. For a personal assistant that only I use, Discord is less overhead.
+
+**Create a Discord bot:**
+
+1. Go to [discord.com/developers/applications](https://discord.com/developers/applications) → New Application → name it whatever your assistant is called
+2. Click Bot → Reset Token → **copy the token** (you won't see it again)
+3. Enable **Message Content Intent**
+4. OAuth2 → check `bot` → permissions: Send Messages, Read Message History, View Channels
+5. Copy the OAuth URL → open it → invite to your server
+
+**Create a private Discord server:**
+
+Click + in Discord → Create My Own → For me and my friends → name it whatever you want.
+
+**Install the Discord plugin on VPS:**
+
+First install [Bun](https://bun.sh/) (required by the plugin):
+
+```bash
+sudo apt install unzip -y
+curl -fsSL https://bun.sh/install | bash
+source ~/.bashrc
+```
+
+Then inside Claude Code:
+
+```
+/plugin install discord@claude-plugins-official
+/reload-plugins
+```
+
+Configure with your bot token when prompted. Then DM your bot on Discord to get a pairing code:
+
+```
+/discord:access pair <code>
+/discord:access policy allowlist
+```
+
+**Auto-allow permissions** so Claude doesn't ask for approval on every single Discord message:
+
+```json
+{
+  "permissions": {
+    "allow": [
+      "Bash(*)",
+      "Read(*)",
+      "Write(*)",
+      "Edit(*)",
+      "mcp__plugin_discord_discord__reply",
+      "mcp__plugin_discord_discord__send"
+    ]
+  }
+}
+```
+
+Save this to `~/claude-assistant/.claude/settings.local.json`.
+
+> **Note:** These permissions are broad. You're trusting Claude Code with full file access and shell execution. For a personal assistant running on a private VPS behind Tailscale, I'm comfortable with this. If your threat model is different, tighten accordingly.
+
+---
+
+## Part 5: Crons ⏰
+
+This is where the assistant starts feeling alive. Instead of only responding when you message it, it proactively reaches out.
+
+The beauty of Claude Code is you don't need to write cron syntax yourself. Just tell your assistant what you want:
+
+```
+Set up a real Linux cron job using crontab: every day at 6am UTC
+(11am my local time), fetch my Google Calendar events for today
+and send a summary to my Discord channel ID [your-channel-id]
+```
+
+Claude Code writes and installs the cron job. Verify:
+
+```bash
+crontab -l
+```
+
+**My heartbeats:**
+- ☀️ **11am PKT** — daily calendar briefing posted to #briefings
+- 🌙 **11pm PKT** — gym check-in: "Did you work out today?" posted to #fitness
+
+Add more whenever you want. Just describe them in plain English.
+
+---
+
+## Part 6: Mobile Access 📱
+
+**Discord on iPhone** — install from App Store, log in, DM your bot. Works immediately since it's running 24/7 on the VPS. This is your primary interface.
+
+---
+
+## How Memory Actually Works 🗂️
+
+This is what makes it feel like a real assistant rather than a stateless chatbot.
+
+**Static identity** (you write once):
+- `SOUL.md` — who your assistant is
+- `USER.md` — who you are
+
+**Dynamic memory** (your assistant writes automatically):
+- `memory/preferences.md` — patterns it notices ("user prefers bullet points")
+- `memory/notes.md` — things you explicitly tell it ("remember my dentist is May 10th")
+- `briefings/YYYY-MM-DD.md` — daily calendar summaries
+
+Every write is git committed and pushed. GitHub stores it, and you can pull it on any machine. Everything in sync, no iCloud, no Notion, no extra services.
+
+**Test it:**
+
+```
+Remember that I prefer morning meetings and dislike video calls
+```
+
+Check your GitHub repo. `memory/notes.md` will have a new commit within seconds.
+
+With OpenClaw, memory was a black box. Here, it's just markdown files. You can read them, edit them, delete them. Full control.
+
+---
+
+
+## The Full Architecture 🏛️
+
+```
+Your iPhone (Discord)
+      ↓
+Hetzner VPS (Helsinki) — behind Tailscale
+  └── tmux session "assistant"
+        └── Claude Code
+              ├── CLAUDE.md (identity + rules)
+              ├── SOUL.md (personality)
+              ├── USER.md (who you are)
+              ├── memory/ (auto-updated, git-synced)
+              ├── Google Calendar MCP
+              └── Discord Channels plugin
+
+GitHub repo (claude-assistant)
+  └── synced across machines via git
+
+Cron jobs on VPS
+  └── 11am PKT → calendar briefing → Discord
+  └── 11pm PKT → gym check-in → Discord
+```
+
+---
+
+## Cost Breakdown 💰
+
+| Item | Cost |
+|---|---|
+| Claude Pro | $20/month |
+| Hetzner CX23 | ~$5.59/month |
+| GitHub | Free |
+| Tailscale | Free |
+| Discord | Free |
+| **Total** | **~$25.59/month** |
+
+Compare this to my OpenClaw setup: $12/month for the VPS alone (needed 8GB RAM for Docker), plus API costs that could spike unpredictably. Here, Claude Pro is a flat $20 and the VPS is half the price because we're not running Docker.
+
+---
+
+## OpenClaw vs Claude Code Assistant — Honest Comparison ⚖️
+
+Since I've run both, here's the real comparison:
+
+| Aspect | OpenClaw | Claude Code |
+|--------|----------|-------------|
+| Setup complexity | High (Docker, env vars, gateway tokens) | Medium (tmux, identity files) |
+| Monthly cost | ~$20-30+ (variable API costs) | ~$26 (flat) |
+| Memory | Opaque, built-in | Transparent, Git-backed markdown |
+| Messaging | Slack (guided setup, solid) | Discord (native plugin, simple) |
+| Maintenance | Container restarts, token re-pairing | tmux re-attach, that's it |
+| Model flexibility | Any model via API | Claude only (Pro subscription) |
+| Reliability | Occasional staleness | Rock solid so far |
+
+**Where OpenClaw still wins:** model flexibility. If you want to use Gemini, GPT, or mix models, OpenClaw lets you do that. Claude Code is Claude-only.
+
+**Where Claude Code wins:** everything else, for my use case. The simplicity is the killer feature. There's almost nothing to maintain.
+
+---
+
+## What I'd Tell Myself on Day 1 📋
+
+1. **Start with Hetzner, not Hostinger.** For Claude Code you don't need 8GB RAM. CX23 at €5.59/month is plenty.
+
+2. **Tailscale first, everything else second.** Once your VPS is behind Tailscale, security anxiety drops to zero. No exposed ports, no fail2ban tuning, no worrying about your bot token leaking.
+
+3. **The identity files are the whole trick.** `CLAUDE.md`, `SOUL.md`, `USER.md` — these three files are what turn a generic Claude session into *your* assistant. Spend time on them.
+
+4. **Discord > Slack for personal use.** I was wrong in my OpenClaw post. The issue wasn't Discord — it was OpenClaw's Discord integration. Claude Code's native plugin is solid.
+
+5. **Git-backed memory is better than any built-in memory system.** You can see it, edit it, version it. No black boxes.
+
+6. **Set up heartbeats early.** The assistant feels 10x more useful when it proactively messages you instead of waiting to be asked.
+
+---
+
+## What's Next 🚀
+
+Once the base is running, extend it naturally:
+
+- **Daily news digest** — every morning, search for articles on topics you care about and post a summary to Discord
+- **Meeting prep** — 30 minutes before a calendar event, pull up relevant notes and send a briefing
+- **Expense tracking** — log purchases via Discord, summarise monthly spend on demand
+- **Email summaries** — connect Gmail MCP, get daily email digests
+- **More memory** — the more you use it, the more `preferences.md` fills up and the better it knows you
+
+The whole system gets smarter over time without you doing anything. That's the point.
+
+---
+
+## Links 🔗
+
+- [Hetzner Cloud](https://www.hetzner.com/cloud/)
+- [Tailscale](https://tailscale.com/)
+- [Claude Code](https://www.anthropic.com/claude-code)
+- [Discord Developer Portal](https://discord.com/developers/applications)
+- [My OpenClaw Journey](../blog/my-simple-openclaw-installation-journey)
+
+---
+
+*Built in one afternoon. Maintaining itself ever since.*
