@@ -427,36 +427,9 @@ Add more whenever you want. Just describe them in plain English.
 
 ---
 
-## Part 6: Mac Local Setup 💻
-
-Install Claude Code on your Mac:
-
-```bash
-npm install -g @anthropic-ai/claude-code
-```
-
-Add an alias (no `--channels` flag — Discord runs from the VPS only):
-
-```bash
-echo "alias assistant='cd /full/path/to/claude-assistant && claude'" >> ~/.zshrc
-source ~/.zshrc
-```
-
-Now your Mac reads the same identity files, connects to the same Google Calendar, writes to the same GitHub memory. **Same assistant, different machine.**
-
----
-
-## Part 7: Mobile Access 📱
+## Part 6: Mobile Access 📱
 
 **Discord on iPhone** — install from App Store, log in, DM your bot. Works immediately since it's running 24/7 on the VPS. This is your primary interface.
-
-**Termius on iPhone** — for when you need terminal access:
-1. Install [Termius](https://termius.com/) from App Store
-2. Tailscale on iPhone, same account
-3. Add your VPS Tailscale IP as a host
-4. Connect and run `tmux attach -t assistant`
-
-I rarely need Termius. Discord handles 95% of interactions.
 
 ---
 
@@ -487,25 +460,6 @@ With OpenClaw, memory was a black box. Here, it's just markdown files. You can r
 
 ---
 
-## Organising Discord 💬
-
-One DM thread gets messy fast. Create channels in your server for different purposes:
-
-- **#general** — casual conversation
-- **#briefings** — daily calendar summaries
-- **#blog** — blog writing requests and drafts
-- **#fitness** — gym check-ins
-
-Get each channel ID (right-click → Copy Channel ID with Developer Mode on) and add them to CLAUDE.md:
-
-```markdown
-## Discord channels
-- DM: general conversation
-- #blog (ID: your-id-here): all blog writing
-- #briefings (ID: your-id-here): daily calendar summaries
-```
-
----
 
 ## The Full Architecture 🏛️
 
