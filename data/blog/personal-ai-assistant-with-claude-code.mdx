@@ -222,7 +222,7 @@ Here's the key insight: **Claude Code automatically reads `CLAUDE.md` from whate
   memory/preferences.md and memory/notes.md silently
 
 ## Identity
-- Your name is Claudia
+- Your name is [Your Assistant Name]
 
 ## Memory
 - User tells you something important → append to memory/notes.md
@@ -245,7 +245,7 @@ Here's the key insight: **Claude Code automatically reads `CLAUDE.md` from whate
 # Soul
 
 ## Name
-My name is Claudia.
+My name is [Your Assistant Name].
 
 ## Personality
 - Warm but direct — no fluff
@@ -293,7 +293,7 @@ Clone the same repo on your Mac:
 git clone https://github.com/yourusername/claude-assistant.git
 ```
 
-Open [Obsidian](https://obsidian.md/) → Open folder as vault → select the `claude-assistant` folder. Now you can see all your memory files in a beautiful interface. When Claudia writes a new memory, pull and it's right there.
+Open [Obsidian](https://obsidian.md/) → Open folder as vault → select the `claude-assistant` folder. Now you can see all your memory files in a beautiful interface. When your assistant writes a new memory, pull and it's right there.
 
 ### Always launch Claude from this folder
 
@@ -303,10 +303,10 @@ This is critical. Claude Code reads `CLAUDE.md` from the current directory. So a
 cd ~/claude-assistant && claude
 ```
 
-Create an alias:
+Optionally create an alias so you don't have to type the full path every time:
 
 ```bash
-echo "alias claudia='cd ~/claude-assistant && claude --channels plugin:discord@claude-plugins-official'" >> ~/.bashrc
+echo "alias assistant='cd ~/claude-assistant && claude --channels plugin:discord@claude-plugins-official'" >> ~/.bashrc
 source ~/.bashrc
 ```
 
@@ -438,11 +438,11 @@ npm install -g @anthropic-ai/claude-code
 Add an alias (no `--channels` flag — Discord runs from the VPS only):
 
 ```bash
-echo "alias claudia='cd /full/path/to/claude-assistant && claude'" >> ~/.zshrc
+echo "alias assistant='cd /full/path/to/claude-assistant && claude'" >> ~/.zshrc
 source ~/.zshrc
 ```
 
-Now type `claudia` on your Mac and she reads the same identity files, connects to the same Google Calendar, writes to the same GitHub memory. **Same assistant, different machine.**
+Now your Mac reads the same identity files, connects to the same Google Calendar, writes to the same GitHub memory. **Same assistant, different machine.**
 
 ---
 
