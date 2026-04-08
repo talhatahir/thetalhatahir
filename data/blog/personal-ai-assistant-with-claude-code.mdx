@@ -11,7 +11,7 @@ images:
 
 ## TL;DR 🎯
 
-I replaced my [OpenClaw setup](../blog/my-simple-openclaw-installation-journey) with a Claude Code session running 24/7 on a €5/month Hetzner VPS. Discord as the chat interface (works on iPhone), Google Calendar for daily briefings, GitHub repo as the memory layer (viewable in Obsidian). No Docker containers, no token burn surprises, no stale bots. **Total cost: ~$26/month.** One focused afternoon to set up.
+I replaced my [OpenClaw setup](../blog/my-simple-openclaw-installation-journey) with a Claude Code session running 24/7 on a €5/month Hetzner VPS. Discord as the chat interface (works on iPhone), Google Calendar for daily briefings, GitHub repo as the memory layer. No Docker containers, no token burn surprises, no stale bots. **Total cost: ~$26/month.** One focused afternoon to set up.
 
 If you just want the architecture diagram — scroll to the bottom.
 
@@ -39,7 +39,7 @@ So I rebuilt the whole thing on Claude's native stack. No Docker. No Slack app p
 - A personal assistant with its own name, personality, and memory of you
 - Discord as the primary chat interface (iPhone, Mac, anywhere)
 - Google Calendar integration with daily briefings
-- A GitHub repo as the memory layer, viewable in Obsidian
+- A GitHub repo as the memory layer
 - Blog writing capability with automatic GitHub commits
 
 **Prerequisites:**
@@ -285,16 +285,6 @@ git commit -m "initial: add identity and memory structure"
 git push origin main
 ```
 
-### The Obsidian trick
-
-Clone the same repo on your Mac:
-
-```bash
-git clone https://github.com/yourusername/claude-assistant.git
-```
-
-Open [Obsidian](https://obsidian.md/) → Open folder as vault → select the `claude-assistant` folder. Now you can see all your memory files in a beautiful interface. When your assistant writes a new memory, pull and it's right there.
-
 ### Always launch Claude from this folder
 
 This is critical. Claude Code reads `CLAUDE.md` from the current directory. So always launch from `~/claude-assistant`:
@@ -446,7 +436,7 @@ This is what makes it feel like a real assistant rather than a stateless chatbot
 - `memory/notes.md` — things you explicitly tell it ("remember my dentist is May 10th")
 - `briefings/YYYY-MM-DD.md` — daily calendar summaries
 
-Every write is git committed and pushed. Your Mac pulls it. Obsidian shows it. GitHub stores it. Everything in sync, no iCloud, no Notion, no extra services.
+Every write is git committed and pushed. GitHub stores it, and you can pull it on any machine. Everything in sync, no iCloud, no Notion, no extra services.
 
 **Test it:**
 
@@ -477,7 +467,7 @@ Hetzner VPS (Helsinki) — behind Tailscale
               └── Discord Channels plugin
 
 GitHub repo (claude-assistant)
-  └── synced to Mac + viewed in Obsidian
+  └── synced across machines via git
 
 Cron jobs on VPS
   └── 11am PKT → calendar briefing → Discord
@@ -493,7 +483,6 @@ Cron jobs on VPS
 | Claude Pro | $20/month |
 | Hetzner CX23 | ~$5.59/month |
 | GitHub | Free |
-| Obsidian | Free |
 | Tailscale | Free |
 | Discord | Free |
 | **Total** | **~$25.59/month** |
@@ -558,7 +547,6 @@ The whole system gets smarter over time without you doing anything. That's the p
 - [Tailscale](https://tailscale.com/)
 - [Claude Code](https://www.anthropic.com/claude-code)
 - [Discord Developer Portal](https://discord.com/developers/applications)
-- [Obsidian](https://obsidian.md/)
 - [My OpenClaw Journey](../blog/my-simple-openclaw-installation-journey)
 
 ---
