@@ -2,7 +2,7 @@ interface LogoProps {
   color?: string
 }
 
-const Logo = ({ color = '06C066' }: LogoProps) => {
+const Logo = ({ color = '2da44e' }: LogoProps) => {
   const fillColor = `#${color}`
 
   return (
