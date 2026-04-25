@@ -42,24 +42,21 @@ export default function Home({
             </h2>
             <p className="dark:text-grey text-gray mb-8   mt-4 text-sm">
               <span className="mr-3 inline-block whitespace-nowrap pt-3">🤖 OpenAI</span>
+              <span className="mr-3 inline-block whitespace-nowrap pt-3">✨ Claude</span>
+              <span className="mr-3 inline-block whitespace-nowrap pt-3">🖱️ Cursor</span>
               <span className="mr-3 inline-block whitespace-nowrap pt-3">❤️ React.js</span>
-              <span className="mr-3 inline-block whitespace-nowrap pt-3">🛠️ Javascript</span>
               <span className="mr-3 inline-block whitespace-nowrap pt-3">🥇 Next.js</span>
+              <span className="mr-3 inline-block whitespace-nowrap pt-3">🛠️ Javascript</span>
+              <span className="mr-3 inline-block whitespace-nowrap pt-3">🔷 TypeScript</span>
               <span className="mr-3 inline-block whitespace-nowrap pt-3">📦 NodeJS</span>
-              <span className="mr-3 inline-block whitespace-nowrap pt-3">🧱 Material UI</span>
-              <span className="mr-3 inline-block whitespace-nowrap pt-3">🐜 Ant Design</span>
-              <span className="mr-3 inline-block whitespace-nowrap pt-3">⏳ Esbuild</span>
-              <span className="mr-3 inline-block whitespace-nowrap pt-3">🧊 HTML</span>
-              <span className="mr-3 inline-block whitespace-nowrap pt-3">🍡 CSS</span>
               <span className="mr-3 inline-block whitespace-nowrap pt-3">🕰️ Git</span>
-              <span className="mr-3 inline-block whitespace-nowrap pt-3">🚃 Npm</span>
-              <span className="mr-3 inline-block whitespace-nowrap pt-3">🧶 Yarn</span>
+              <span className="mr-3 inline-block whitespace-nowrap pt-3">🧱 Material UI</span>
               <span className="mr-3 inline-block whitespace-nowrap pt-3">📜 MongoDB</span>
               <span className="mr-3 inline-block whitespace-nowrap pt-3">📃 MySQL</span>
               <span className="mr-3 inline-block whitespace-nowrap pt-3">🎢 Redux</span>
               <span className="mr-3 inline-block whitespace-nowrap pt-3">🍤 Zustand</span>
               <span className="mr-3 inline-block whitespace-nowrap pt-3">🍽️ APIs</span>
-              <span className="mr-3 inline-block whitespace-nowrap pt-3">❤️‍🩹 AngularJS</span>
+              <span className="mr-3 inline-block whitespace-nowrap pt-3">💔 AngularJS</span>
             </p>
           </div>
 
