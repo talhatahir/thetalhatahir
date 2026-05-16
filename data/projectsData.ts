@@ -1,5 +1,11 @@
 export const soloProjects = [
   {
+    title: 'TabShame: macOS Tab Shaming App',
+    description: `A macOS menu bar app that monitors your open browser tabs across Safari, Chrome, and Edge, then delivers humorous notifications and sound effects to discourage excessive tab hoarding. Cheaper than therapy. More effective than willpower.`,
+    imgSrc: 'https://www.tabshame.com/tabshame-icon.png',
+    href: 'https://www.tabshame.com/',
+  },
+  {
     title: 'Plansm.art : Your digital smart planner',
     description: `A free micro SaaS yearly planner to help you plan ahead and create tasks with ease. With a friendly UI/UX and encryption.`,
     imgSrc: '/static/images/plan-smart.png',
