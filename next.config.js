@@ -76,6 +76,7 @@ module.exports = () => {
         'posturesmart-website.vercel.app',
         'gitchart-nine.vercel.app',
         'covers.openlibrary.org',
+        'www.tabshame.com',
       ],
     },
     async headers() {
