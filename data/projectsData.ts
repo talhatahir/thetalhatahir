@@ -9,7 +9,7 @@ export const soloProjects = [
     title: 'Plansm.art : Your digital smart planner',
     description: `A free micro SaaS yearly planner to help you plan ahead and create tasks with ease. With a friendly UI/UX and encryption.`,
     imgSrc: '/static/images/plan-smart.png',
-    href: 'https://www.plansm.art/',
+    href: 'https://planner-dusky-eight.vercel.app/',
   },
   {
     title: 'Chrome Extension: PostureSmart',
