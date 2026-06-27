@@ -1,0 +1,105 @@
+---
+title: 'My Personal AI Assistant Built Me an App That Pays'
+date: '2026-06-27'
+lastmod: '2026-06-27'
+tags: ['AI', 'productivity', 'product']
+layout: 'PostLayout'
+summary: 'I built TabShame — a macOS app that shames you for too many tabs — with an AI assistant doing most of the heavy lifting. Here is what most people get wrong about using AI, and what changed when I stopped treating it as a faster Stack Overflow.'
+images:
+  ['https://images.unsplash.com/photo-1677442135703-1787eea5ce01?auto=format&fit=crop&w=1574&q=80']
+---
+
+![AI assistant on a laptop](https://images.unsplash.com/photo-1677442135703-1787eea5ce01?auto=format&fit=crop&w=1574&q=80)
+
+A few months ago I shipped a macOS app called [TabShame](https://tabshame.com). It lives in your menu bar, counts your open browser tabs, and judges you for it — increasingly harshly the more tabs you have. No tab management. No suggestions. Just shame.
+
+Three sales in a month with zero paid marketing. Reddit only.
+
+An AI assistant built most of it.
+
+---
+
+## Most people are using AI wrong
+
+When developers talk about AI tools, the conversation usually lands on code completion: tab to accept, move on. Maybe a chat window to explain an error. It is faster Stack Overflow — useful, but not transformative.
+
+That is not how I use mine.
+
+My AI assistant is a persistent collaborator. It knows my projects, my stack, my history, my context. When I come to it with "I want to build a macOS app that shames people for too many tabs," it does not just write Swift code. It asks the right questions, pushes back on bad ideas, remembers what we decided last week, and flags when I am about to make a mistake I made before.
+
+That is a fundamentally different kind of tool.
+
+---
+
+## The idea: TabShame
+
+The concept came from a real problem — my own. I routinely have 60+ browser tabs open across Chrome and Safari. Tab management apps always felt like the wrong solution. I did not want to be helped. I wanted to feel bad about it until I actually changed.
+
+So: an app that shames you. No tips, no auto-groups, no saving sessions. Just increasingly aggressive emoji as your tab count climbs.
+
+| Tabs | What you get |
+|------|-------------|
+| 0–19 | 😊 Practically a monk. |
+| 20–34 | 😅 Getting a little cozy in here. |
+| 35–44 | 😫 We're watching you. |
+| 50–59 | 🤯 You have a problem. |
+| 70–79 | 💀 This is an intervention. |
+| 80+ | 🔥 EVERYTHING IS FINE. |
+
+Simple premise. Clear niche. Genuinely funny.
+
+---
+
+## How the AI actually helped
+
+I am a software engineer, so writing the code was not the blocker. Time was. Between a full-time job and life, I can carve out a few hours here and there — not weeks of sustained focus.
+
+This is exactly where a good AI assistant earns its keep.
+
+**Architecture decisions.** SwiftUI menu bar app, AppleScript for tab counts (no browser extension required), Paddle for payments, Sparkle for auto-updates. I described the product, the AI helped me arrive at this stack quickly — including warnings about what would be painful later (Sparkle setup is always painful).
+
+**The boring but necessary code.** AppleScript integration for five different browsers. License key activation flow. Settings panel. Launch at login. All the scaffolding that does not feel like building a product but takes most of the time. The AI wrote the first draft of almost all of it.
+
+**Decisions I would have delayed.** Should I use Stripe or Paddle? The AI laid out the tradeoffs in two minutes. One-time purchase or subscription? We talked through it. I made faster calls because I had a sounding board available at any hour.
+
+**Launch prep.** Reddit post copy, launch timing, where to post first — things outside my engineering comfort zone where I would have wasted time second-guessing myself.
+
+Total build time: about two weeks of evenings and weekends.
+
+---
+
+## What "an AI built it" actually means
+
+I want to be precise here because "AI built my app" is easy to misread.
+
+I had the idea. I made every product decision. I wrote the code that mattered — the core logic, the UI interactions, the parts that define what the app actually feels like. I debugged everything that broke.
+
+The AI handled the volume: the boilerplate, the research, the initial drafts, the tedious integrations. It let me punch above my available hours.
+
+Think of it like hiring a skilled contractor for a renovation. You own the house. You decide what gets built and why. But you would be a fool to do every nail and wire yourself when someone competent is available to help.
+
+---
+
+## The results, honestly
+
+Three sales in the first month. At $4.99 each, that is $14.97. Not life-changing.
+
+But consider: I spent no money on marketing, ran a few Reddit posts, and built the whole thing in evenings. The product exists, it works, it has real customers. The baseline is established.
+
+Most side projects never ship. This one did — because the execution cost was low enough that I could actually finish it.
+
+That is the argument for personal AI assistants, not the dollar figure.
+
+---
+
+## What "using AI well" actually looks like
+
+The leverage is not in prompting. It is in persistence and context.
+
+A context-free AI chat is fine for one-off questions. But when your AI assistant knows your codebase, your preferences, your past decisions, your ongoing projects — it compounds. Every conversation starts from a better place. You spend less time catching it up and more time actually building.
+
+Most developers use AI like a calculator: reach for it when you need a specific answer, put it down when you are done. The developers who are pulling ahead are using it like a colleague who is always available, always caught up, and never tired of the problem.
+
+TabShame is a small app. But it is proof that this approach works — that a solo developer with limited time can build, launch, and sell a product with the right kind of help.
+
+If you have too many tabs open right now, [TabShame](https://tabshame.com) will tell you about it.
