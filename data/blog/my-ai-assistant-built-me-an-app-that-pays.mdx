@@ -1,0 +1,83 @@
+---
+title: 'My Personal AI Assistant Built Me an App That Pays'
+date: '2026-06-27'
+lastmod: '2026-06-27'
+tags: ['AI', 'productivity', 'product']
+layout: 'PostLayout'
+summary: 'I have a personal AI assistant running on a server that helps me with everything. It helped me build TabShame — a macOS app that shames you for having too many browser tabs. Here is how that went.'
+images:
+  ['/static/images/tabshame-icon.png']
+---
+
+![TabShame](/static/images/tabshame-icon.png)
+
+A few months ago I built a macOS app called [TabShame](https://tabshame.com). It sits in your menu bar, counts your browser tabs, and shows you increasingly judgmental emoji the more tabs you have. No tab management, no suggestions, just shame. It has made 3 sales in a month with zero paid marketing — just a couple of Reddit posts.
+
+What made this possible? An AI assistant I've set up to help me with pretty much everything.
+
+---
+
+## What is a personal AI assistant?
+
+Most developers use AI for code completion or to explain errors. That's fine but i feel like its not the full picture.
+
+I have an AI assistant running on a server that knows me — my projects, my preferences, what stack I use, decisions I've made before. When I come to it with an idea, it doesn't start from zero. It knows context. It can help me plan, write code, research, draft copy, debug — and remember all of it for next time.
+
+It's less like Copilot and more like having a colleague who is always available and always caught up on what you're working on.
+
+---
+
+## The idea: TabShame
+
+I genuinely have a tab problem. At any given time I have 50-80 tabs open across Chrome and Safari. I've tried tab managers. They don't work for me — not because they're bad products, but because I don't want to be helped. I want to be judged.
+
+So I thought, what if an app just... shamed me?
+
+That was it. No complex problem, no gap in the market. Just a dumb idea I thought was funny.
+
+| Tabs | What you get |
+|------|-------------|
+| 0–19 | 😊 Practically a monk. |
+| 20–34 | 😅 Getting a little cozy in here. |
+| 35–44 | 😫 We're watching you. |
+| 50–59 | 🤯 You have a problem. |
+| 70–79 | 💀 This is an intervention. |
+| 80+ | 🔥 EVERYTHING IS FINE. |
+
+---
+
+## Building it with an AI assistant
+
+I'm a software engineer so writing code isn't the hard part. Time is. I have a full time job and can only work on side projects in the evenings.
+
+This is exactly where having an AI assistant helps.
+
+I'd never built a macOS app before. My assistant helped me figure out the right stack quickly — SwiftUI for the menu bar app, AppleScript to query tab counts from any browser without needing an extension, Paddle for payments, Sparkle for auto-updates. It even warned me that Sparkle setup was going to be painful (it was).
+
+A lot of the code was written by the assistant as a first draft — the AppleScript integrations for five different browsers, the license key activation flow, the settings panel. All the scaffolding that takes most of the time but isn't really the interesting part of building a product.
+
+It also helped me with stuff outside of code. Should I use Stripe or Paddle? What's the best way to write a Reddit launch post? When should I post it? These are things I'd normally spend too long overthinking.
+
+Total build time was about two weeks of evenings and weekends.
+
+---
+
+## What "AI built it" actually means
+
+I want to be clear about this — I didn't just prompt my way to a shipped product.
+
+I had the idea. I made every product decision. I wrote the parts that actually define what TabShame feels like — the UI interactions, the core logic, the emoji choices. I debugged everything that went wrong (and a lot went wrong).
+
+The assistant handled the volume. The boilerplate, the research, the first drafts, the boring integrations. It let me get further than I could have in the available hours.
+
+---
+
+## Is it worth it?
+
+Three sales at $4.99 = $14.97 with zero marketing. Not going to retire on that.
+
+But the product exists. It works. It has real paying customers. Most side projects never ship because the execution cost is too high relative to the time you can put in.
+
+Having an AI assistant that knows your context and can help you move fast changes that calculation a bit. It won't do the work for you but it makes the work lighter — and sometimes that's the difference between shipping and not shipping.
+
+If you have too many tabs open right now, [TabShame](https://tabshame.com) will let you know.
