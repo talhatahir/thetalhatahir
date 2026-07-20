@@ -1,0 +1,120 @@
+---
+title: 'The Popover API Just Made Your Dropdown Library Obsolete'
+date: '2026-07-20'
+lastmod: '2026-07-20'
+tags: ['css', 'javascript', 'frontend', 'programming-tips']
+layout: 'PostLayout'
+summary: 'Native popovers and CSS anchor positioning are Baseline in 2026. You do not need a 40KB library to position a tooltip anymore.'
+images:
+  ['https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=1738&q=80']
+---
+
+![Popover API](https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=1738&q=80)
+
+At some point in the last decade, the JavaScript community collectively decided that the browser couldn't be trusted to show things on top of other things. So we installed Popper.js, then Floating UI, then whatever your design system wraps around those. A tooltip became a 40KB dependency.
+
+That era is ending.
+
+---
+
+## The Popover API
+
+The [Popover API](https://developer.mozilla.org/en-US/docs/Web/API/Popover_API) is Baseline 2024. It shipped in Chrome 114, Safari 17, and Firefox 125. All major browsers have had it for over a year.
+
+The API is three things:
+
+1. A `popover` HTML attribute
+2. A `popovertarget` button attribute to wire them together
+3. A `:popover-open` CSS pseudo-class to style the open state
+
+The simplest possible tooltip:
+
+```html
+<button popovertarget="my-tooltip">Hover me</button>
+
+<div id="my-tooltip" popover>
+  This is the tooltip content.
+</div>
+```
+
+No JS. The browser handles showing and hiding it, managing focus, closing on Escape, and dismissing when you click outside — all the things you previously installed a library to do.
+
+---
+
+## What You Get for Free
+
+The Popover API's default behavior handles:
+
+- **Top layer rendering** — popovers always render above everything else, no z-index wars
+- **Light dismiss** — clicking outside closes it automatically (for `popover="auto"`)
+- **Escape key** — closes without any keydown listeners
+- **Accessibility** — focus management and ARIA roles are handled by the browser
+- **Backdrop** — optional with `::backdrop` pseudo-element
+
+`popover="auto"` is the auto-dismissing mode (closes when you click elsewhere). `popover="manual"` stays open until you explicitly close it — useful for persistent panels.
+
+---
+
+## CSS Anchor Positioning
+
+The trickier part of any dropdown library was always the positioning — keeping the popup anchored to the trigger and adjusting when it would overflow the viewport.
+
+CSS Anchor Positioning (Baseline 2024, though browser support is catching up slightly behind the Popover API itself) solves this natively:
+
+```css
+.trigger {
+  anchor-name: --my-anchor;
+}
+
+.tooltip {
+  position: absolute;
+  position-anchor: --my-anchor;
+  top: anchor(bottom);
+  left: anchor(left);
+}
+```
+
+The tooltip anchors to the trigger. If it would overflow the viewport, you can use `position-try-fallbacks` to define alternative positions:
+
+```css
+.tooltip {
+  position-try-fallbacks: flip-block, flip-inline;
+}
+```
+
+This is what Floating UI's `autoPlacement` does, now in the browser.
+
+---
+
+## What It Doesn't Replace
+
+To be honest about the limits:
+
+**It does replace:**
+- Simple tooltips
+- Basic dropdown menus with a flat list of items
+- Notification banners and toasts
+- Context menus
+
+**It doesn't (yet) replace:**
+- Complex comboboxes with search and filtering (the `<selectlist>` work is still in progress)
+- Nested dropdown menus with submenus
+- Drag-to-reorder panels
+- Very complex positioning logic with multiple reference elements
+
+If your use case is a dropdown with a list of links or a tooltip with some text — and that's most cases — you don't need Floating UI. The browser handles it.
+
+---
+
+## Cleaning House
+
+The practical question: how do you know if you can drop a dependency?
+
+Open your component and check what you're actually using. If it's:
+- `useFloating` just to position something below a button → Popover API + anchor positioning
+- `useClick`, `useDismiss`, `useRole` from Floating UI → built into `popover="auto"` 
+- `offset()`, `flip()`, `shift()` middleware → `position-try-fallbacks`
+
+For new projects, start native. For existing ones, identify the simple cases — tooltips, basic dropdowns — and replace them. You'll ship less JavaScript without writing more of it.
+
+The browser got better. Update your defaults.
