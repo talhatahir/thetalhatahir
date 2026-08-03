@@ -1,0 +1,187 @@
+---
+title: 'Claude as a Coworker: How I Stopped Prompting and Started Collaborating'
+date: '2026-04-06'
+lastmod: '2026-04-06'
+tags: ['productivity', 'AI', 'programming-tips']
+layout: 'PostLayout'
+summary: 'I used to treat Claude like a search engine. Then I started treating it like a coworker — and everything changed about how I build software.'
+images:
+  ['https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1574&q=80']
+---
+
+![Claude as a Coworker](https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1574&q=80)
+
+I've written about [Cursor vs Claude Code](../blog/cursor-vs-claude-code) and [using ChatGPT effectively as a programmer](../blog/using-chatgpt-effectively-as-a-programmer). But there's a mental shift I haven't talked about — one that made a bigger difference than any prompt trick or tool setting.
+
+I stopped thinking of Claude as a tool I use. I started thinking of it as a coworker I collaborate with.
+
+It sounds like a small reframe. It's not.
+
+---
+
+## The Tool Mindset vs. The Coworker Mindset
+
+When you treat an AI as a tool, you issue commands. You expect it to do exactly what you said and nothing more. You get frustrated when it "misunderstands." You optimize prompts like you're writing regexes.
+
+When you treat it as a coworker, something different happens. You share context. You explain the *why*, not just the *what*. You let it push back. You have actual back-and-forth conversations before touching any code.
+
+The output quality difference between these two approaches is not subtle. It's night and day.
+
+---
+
+## What Changed When I Made the Shift
+
+### 1. I Started Giving It the Full Picture Upfront
+
+Old approach:
+```
+Write a function to parse RSS feeds.
+```
+
+New approach:
+```
+I'm building a Next.js blog that pulls in feeds from external sources.
+The feed parser needs to handle both RSS 2.0 and Atom formats. 
+It should fail gracefully — if a feed is malformed, log the error 
+and return an empty array rather than crashing. I use TypeScript. 
+Here's the existing FeedItem type we're working with...
+```
+
+The first prompt gets you a function. The second gets you something that actually fits into your project.
+
+A coworker wouldn't start coding without understanding the system they're working in. Neither should Claude.
+
+### 2. I Let It Ask Me Questions
+
+This one took me a while to figure out. If I'm working on something complex, I now say:
+
+```
+Before you write any code, ask me everything you need to know 
+to do this well.
+```
+
+The questions Claude asks are genuinely useful. They surface assumptions I hadn't thought about. Sometimes the questions themselves reveal that I hadn't thought the problem through clearly enough. That's valuable — better to find out before writing code than after.
+
+### 3. I Disagree With It
+
+Early on I'd accept whatever Claude gave me. After all, it's the AI — it must know better, right?
+
+No. Claude has opinions, and some of them are wrong for your specific situation. Now when I get a response I'm not sure about, I push back:
+
+```
+I don't think using useReducer here is the right call. 
+The state transitions are simple and this will just add complexity. 
+Can you explain why you went that direction?
+```
+
+Sometimes it defends the choice well and I learn something. More often it agrees, explains where it was coming from, and gives me a simpler version. Either way, the conversation produces better code than silent acceptance would have.
+
+### 4. I Treat It Like Pair Programming
+
+The best sessions I have with Claude aren't "give me this feature" — they're extended back-and-forths where we're actually thinking through a problem together.
+
+Here's what that looks like in practice:
+
+**Me:** I want to add a reading progress indicator to my blog posts. Thinking of a thin bar at the top of the screen. What's the simplest way to do this in Next.js?
+
+**Claude:** Here are two approaches — a scroll event listener vs. Intersection Observer. For a reading progress bar, scroll listener is simpler but you'll want to throttle it. Intersection Observer is more precise but overkill here. Want me to implement the scroll listener approach?
+
+**Me:** Yes, but make sure it resets when the route changes and doesn't break on mobile.
+
+**Claude:** Good catch on route changes — I'll use useEffect cleanup. For mobile, the viewport height calculation is tricky because of the browser chrome. Here's how I'd handle it...
+
+That's pair programming. We're thinking together, not command-and-execute.
+
+---
+
+## The Patterns That Work
+
+After months of this, I have a set of patterns that consistently produce good results:
+
+### "Here's what I'm building, here's the context, here's the constraint"
+
+The three-part brief. Never skip the context. The constraint is where most people fall down — if you don't tell Claude what matters to you (performance, readability, minimal dependencies, backwards compatibility), it'll make those decisions for you. Sometimes that's fine. Often it's not.
+
+### "Walk me through your approach before you code"
+
+For anything non-trivial, ask for the plan first. This prevents the frustration of getting 100 lines of code that went in the wrong direction. It's much easier to correct a plan than to redirect an implementation.
+
+### "What are the trade-offs here?"
+
+Whenever Claude suggests an approach, ask about trade-offs. This surfaces alternatives you might not have considered and forces Claude to be explicit about the assumptions baked into its recommendation. 
+
+I learned this from [The Pragmatic Programmer](../blog/the-pragmatic-programmer) — understanding trade-offs is what separates engineers from coders.
+
+### "What could go wrong with this?"
+
+Ask Claude to stress-test its own output. It's remarkably good at this. Edge cases, race conditions, failure modes — it'll find things you'd catch in code review but save you the round-trip.
+
+---
+
+## What Claude Is Actually Good At (And What It's Not)
+
+Being honest about this matters if you want the collaboration to work.
+
+**Strong:**
+- Implementing things you've already designed
+- Boilerplate that you know the shape of but don't want to write
+- Explaining unfamiliar code or libraries
+- Writing tests once you've defined what you're testing
+- Finding bugs in focused, well-scoped code
+
+**Weaker:**
+- Deciding what to build — that's still your job
+- Understanding your users and business requirements
+- Making architectural decisions for systems it hasn't seen in full
+- Anything requiring organizational or political context
+
+The good coworkers I've had are ones who know their strengths and work within them. Claude is the same. When I give it tasks that play to its strengths, the output is excellent. When I ask it to make high-level product decisions, I get technically correct answers that miss the point.
+
+---
+
+## A Real Example: Building a Feature Together
+
+Last month I needed to add a newsletter subscription flow to this blog. Here's how I approached it:
+
+**First message:**
+```
+I want to add a newsletter subscription feature to my Next.js blog.
+Context: It's a static site (App Router), currently deployed on Vercel.
+I want to use Resend for email delivery — I already have an account.
+Constraints: No new backend infrastructure. Use API routes. 
+Double opt-in is required for compliance. Keep the UI minimal.
+
+Before writing anything, tell me your proposed architecture.
+```
+
+Claude came back with a clear plan: API route for subscription, Resend for sending the confirmation email, a separate confirmation endpoint that verifies a signed token, and a simple form component.
+
+I pushed back on the token signing approach — I didn't want to add a JWT library for one feature. Claude suggested using a short-lived hash with a timestamp instead. Simpler, no new dependency.
+
+We went back and forth twice more on error states and loading behavior before I said "okay, implement it."
+
+The implementation that came out required almost no changes. Because we'd already had the design conversation, Claude knew exactly what I wanted.
+
+---
+
+## The One Thing That Will Improve Your Results More Than Anything Else
+
+Context. Give more of it than you think is necessary.
+
+I know this sounds obvious. But most developers — including me, for a long time — under-share. We're used to writing terse bug reports and Stack Overflow questions where brevity is valued. We apply the same habit to AI collaboration and wonder why the output doesn't fit our project.
+
+Claude can't see your codebase, your team conventions, your deployment environment, or the six decisions you made last week that constrain what you can do today. Every piece of that context you share makes the collaboration better.
+
+The cognitive overhead feels like extra work upfront. It saves you much more work in revision.
+
+---
+
+## My Honest Take
+
+Treating Claude as a coworker rather than a tool made me measurably more productive. Not because Claude got better (though it has), but because I got better at working with it.
+
+The developers who will get the most out of AI in the next few years aren't the ones who find the best prompts. They're the ones who learn to collaborate — to share context, push back, iterate, and bring genuine judgment to the partnership.
+
+A coworker makes you better. A tool you operate. Claude can be either. Choose wisely.
+
+For more on the AI coding workflow, check out my pieces on [Cursor vs Claude Code](../blog/cursor-vs-claude-code) and [how to effectively use Cursor](../blog/10x-with-cursor).
