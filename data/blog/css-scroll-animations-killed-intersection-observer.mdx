@@ -1,0 +1,133 @@
+---
+title: 'CSS Scroll-Driven Animations Killed IntersectionObserver'
+date: '2026-07-20'
+lastmod: '2026-07-20'
+tags: ['css', 'javascript', 'frontend', 'programming-tips']
+layout: 'PostLayout'
+summary: 'The most common JS scroll pattern — IntersectionObserver + class toggle — is now pure CSS. Here is why you should delete that code.'
+images:
+  ['https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&w=1755&q=80']
+---
+
+![CSS Scroll Animations](https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&w=1755&q=80)
+
+If you've been building websites for more than a year, you've written this code. An IntersectionObserver, a callback that adds a class when an element enters the viewport, and a CSS transition triggered by that class.
+
+```js
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry) => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible')
+    }
+  })
+})
+
+document.querySelectorAll('.fade-in').forEach((el) => observer.observe(el))
+```
+
+It works. It's become muscle memory. And as of 2026, it's unnecessary for most use cases.
+
+---
+
+## What Changed
+
+CSS scroll-driven animations landed as Baseline in late 2024 and have been shipping in all major browsers since. The idea is simple: instead of JS listening for scroll position and triggering animations, you let the CSS animation itself be driven by scroll position — no JavaScript, no observers, no event listeners.
+
+Two new values on `animation-timeline` are what make this work:
+
+- **`scroll()`** — ties the animation to the scroll position of a scrollable container
+- **`view()`** — ties the animation to an element's visibility within the viewport
+
+The second one is what replaces IntersectionObserver for 90% of cases.
+
+---
+
+## Fade In on Scroll — No JS Required
+
+```css
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in {
+  animation: fade-up linear both;
+  animation-timeline: view();
+  animation-range: entry 0% entry 30%;
+}
+```
+
+That's it. `animation-timeline: view()` tells the browser to drive this animation based on the element's position in the viewport. `animation-range: entry 0% entry 30%` means: play the animation while the element is entering the viewport, from 0% visible to 30% visible.
+
+No JS. No observer. No cleanup needed.
+
+---
+
+## Progress Bar as You Scroll
+
+The other classic use case — a reading progress bar at the top of the page:
+
+```css
+@keyframes grow {
+  from { width: 0% }
+  to { width: 100% }
+}
+
+.progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  background: #0070f3;
+  animation: grow linear;
+  animation-timeline: scroll(root);
+}
+```
+
+`scroll(root)` drives the animation based on the page scroll position. As you scroll down, the bar grows. Reverse scroll, it shrinks. That whole thing used to take 20+ lines of JS.
+
+---
+
+## `animation-range` Controls When It Plays
+
+The `animation-range` property is where the power is. It accepts values in the timeline coordinate system:
+
+- `entry` — while the element is entering the viewport
+- `exit` — while it's leaving
+- `cover` — while any part of it is visible
+- `contain` — while it's fully contained in the viewport
+
+Combining these lets you do things like: start the animation when 20% of the element is visible, finish it when 80% is visible.
+
+```css
+animation-range: entry 20% entry 80%;
+```
+
+---
+
+## When You Still Need IntersectionObserver
+
+CSS scroll-driven animations are declarative. That's their strength and their limit.
+
+You still need IntersectionObserver (or JS) when:
+
+- **You're making a network request when an element becomes visible** — lazy loading images or triggering an API call
+- **You need to fire an event once** — IntersectionObserver can `unobserve()` after the first intersection; CSS animations replay
+- **You need to react differently based on how much of the element is visible** — multiple thresholds with different logic
+- **You need to support older browsers** — [check caniuse](https://caniuse.com/css-scroll-driven-animations), coverage is good but not universal
+
+For pure visual effects triggered by scroll position? CSS handles it better now.
+
+---
+
+## The Real Win
+
+The main argument for switching isn't code length — it's that CSS animations are handled off the main thread by the browser's compositor. JavaScript scroll handlers and even IntersectionObserver callbacks run on the main thread. Scroll-jank from JS-driven animations has always been a real risk; CSS scroll-driven animations eliminate it structurally.
+
+Cleaner code that also performs better. That's the rare kind of browser upgrade worth actually adopting.
